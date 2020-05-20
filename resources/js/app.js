@@ -8,6 +8,67 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueRouter from 'vue-router'
+
+
+import {routes} from './routes/routes.js'
+
+import {Form, HasError, AlertError} from 'vform'
+import moment from 'moment'
+
+import VueProgressBar from 'vue-progressbar'
+
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '10px'
+});
+
+window.Fire = new Vue();
+
+
+window.Form = Form;
+
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+
+
+Vue.use(VueRouter);
+
+// Sweet alert 2
+import Swal from 'sweetalert2'
+
+window.Swal = Swal;
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+    }
+});
+
+window.Toast = Toast;
+
+Vue.filter('capitilize', function (value) {
+    if (!value) return '';
+    value = value.toString();
+    return value.charAt(0).toUpperCase() + value.slice(1);
+});
+
+Vue.filter('cleanTime', function (created) {
+    return moment(created).format('MMMM Do YYYY, h:mm:ss a');
+});
+
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+});
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -29,5 +90,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
-
+    router
 });
