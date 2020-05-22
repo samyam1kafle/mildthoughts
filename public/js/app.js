@@ -2135,355 +2135,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/followers.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Backend/User/followers.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  },
-  created: function created() {
-    console.log('Component mounted.');
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/following.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Backend/User/following.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/index.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Backend/User/index.vue?vue&type=script&lang=js& ***!
@@ -3240,6 +2891,79 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3251,16 +2975,82 @@ __webpack_require__.r(__webpack_exports__);
         'password': '',
         'role_id': ''
       }),
-      user: {}
+      user: {},
+      followers: {},
+      followings: {},
+      followMode: false
     };
   },
   methods: {
+    follower: function follower() {
+      this.followMode = false; // follower model to be shown
+
+      $('#followmodel').modal('show');
+    },
+    following: function following() {
+      this.followMode = true; // following model to be shown
+
+      $('#followmodel').modal('show');
+    },
+    followUser: function followUser(id) {
+      var _this = this;
+
+      axios.put('api/follow/' + id).then(function (response) {
+        _this.$Progress.start();
+
+        $("#followmodel").modal('show').trigger("change");
+        Fire.$emit('ProfileEvent');
+        Swal.fire({
+          icon: 'success',
+          text: 'Successfully followed the user'
+        });
+
+        _this.$Progress.finish();
+      })["catch"](function () {
+        Swal.fire({
+          icon: 'error',
+          text: 'Something went wrong please try again after some time.'
+        });
+
+        _this.$Progress.fail();
+      });
+    },
+    unfollowUser: function unfollowUser(id) {
+      var _this2 = this;
+
+      axios.put('api/unfollow/' + id).then(function () {
+        _this2.$Progress.start();
+
+        $("#followmodel").modal('show').trigger("change"); // $('#').modal('hide');
+
+        Fire.$emit('ProfileEvent');
+        Swal.fire({
+          icon: 'success',
+          title: 'UnFollowed',
+          text: 'Successfully'
+        });
+
+        _this2.$Progress.finish();
+      })["catch"](function () {
+        Swal.fire({
+          icon: 'error',
+          title: 'Unsuccessful',
+          text: 'There occurred some problem while followed this user'
+        });
+
+        _this2.$Progress.fail();
+      });
+    },
+    getUsersImage: function getUsersImage(image) {
+      var photo = 'Backend/ProfileImages/' + image;
+      return photo;
+    },
     getProfileImage: function getProfileImage() {
       var photo = this.form.display_image.length > 200 ? this.form.display_image : 'Backend/ProfileImages/' + this.form.display_image;
       return photo;
     },
     updateInfo: function updateInfo() {
-      var _this = this;
+      var _this3 = this;
 
       this.$Progress.start();
 
@@ -3276,20 +3066,20 @@ __webpack_require__.r(__webpack_exports__);
           text: 'Profile Updated Successfully!'
         });
 
-        _this.$Progress.finish();
+        _this3.$Progress.finish();
       })["catch"](function () {
-        _this.$Progress.fail();
+        _this3.$Progress.fail();
       });
     },
     updatePhoto: function updatePhoto(event) {
-      var _this2 = this;
+      var _this4 = this;
 
       var profile = event.target.files[0];
       var reader = new FileReader();
 
       if (profile['size'] < 2111775) {
         reader.onloadend = function (profile) {
-          _this2.form.display_image = reader.result;
+          _this4.form.display_image = reader.result;
         };
 
         reader.readAsDataURL(profile);
@@ -3302,24 +3092,26 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     loadData: function loadData() {
-      var _this3 = this;
+      var _this5 = this;
 
       axios.get('api/profile').then(function (_ref) {
         var data = _ref.data;
 
-        _this3.form.fill(data);
+        _this5.form.fill(data);
 
-        _this3.user = data;
+        _this5.user = data;
+        _this5.followers = _this5.user.followers;
+        _this5.followings = _this5.user.followings;
       });
       this.form.password = '';
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this6 = this;
 
     this.loadData();
     Fire.$on('ProfileEvent', function () {
-      _this4.loadData();
+      _this6.loadData();
     });
   }
 });
@@ -64195,822 +63987,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/followers.vue?vue&type=template&id=adbc7c12&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Backend/User/followers.vue?vue&type=template&id=adbc7c12& ***!
-  \*************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "card-body" }, [
-      _c(
-        "ul",
-        {
-          staticClass: "nav nav-tabs",
-          attrs: { id: "custom-content-above-tab", role: "tablist" }
-        },
-        [
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "nav-link",
-                  attrs: {
-                    tag: "a",
-                    to: { name: "Followers" },
-                    "active-class": "active",
-                    id: "custom-content-above-home-tab",
-                    "data-toggle": "pill",
-                    href: "#custom-content-above-home",
-                    role: "tab",
-                    "aria-controls": "custom-content-above-home",
-                    "aria-selected": "false"
-                  }
-                },
-                [_vm._v("Followers\n                ")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "nav-link",
-                  attrs: {
-                    tag: "a",
-                    to: { name: "Following" },
-                    "active-class": "active",
-                    id: "custom-content-above-profile-tab",
-                    "data-toggle": "pill",
-                    href: "#custom-content-above-profile",
-                    role: "tab",
-                    "aria-controls": "custom-content-above-profile",
-                    "aria-selected": "false"
-                  }
-                },
-                [_vm._v("Following\n                ")]
-              )
-            ],
-            1
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _vm._m(0)
-    ]),
-    _vm._v(" "),
-    _c("section", { staticClass: "content" })
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "tab-content",
-        attrs: { id: "custom-content-above-tabContent" }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "tab-pane fade active open",
-            attrs: {
-              id: "custom-content-above-home",
-              role: "tabpanel",
-              "aria-labelledby": "custom-content-above-home-tab"
-            }
-          },
-          [
-            _c("div", { staticClass: "card card-solid" }, [
-              _c("div", { staticClass: "card-body pb-0" }, [
-                _c("div", { staticClass: "row d-flex align-items-stretch" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
-                    },
-                    [
-                      _c("div", { staticClass: "card bg-light" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "card-header text-muted border-bottom-0"
-                          },
-                          [
-                            _vm._v(
-                              "\n                                        Digital Strategist\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-body pt-0" }, [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-7" }, [
-                              _c("h2", { staticClass: "lead" }, [
-                                _c("b", [_vm._v("Nicole Pearson")])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted text-sm" }, [
-                                _c("b", [_vm._v("About: ")]),
-                                _vm._v(
-                                  " Web Designer / UX /\n                                                    Graphic\n                                                    Artist / Coffee Lover "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "ml-4 mb-0 fa-ul text-muted" },
-                                [
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-building"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      " Address: Demo\n                                                        Street\n                                                        123, Demo City 04312, NJ\n                                                    "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-phone"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      "\n                                                        Phone #: + 800 - 12 12 23 52\n                                                    "
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-5 text-center" }, [
-                              _c("img", {
-                                staticClass: "img-circle img-fluid",
-                                attrs: { src: "", alt: "" }
-                              })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-footer" }, [
-                          _c("div", { staticClass: "text-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm bg-teal",
-                                attrs: { href: "#" }
-                              },
-                              [_c("i", { staticClass: "fas fa-comments" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-primary",
-                                attrs: { href: "#" }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-user" }),
-                                _vm._v(
-                                  " View Profile\n                                            "
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c(
-                  "nav",
-                  { attrs: { "aria-label": "Contacts Page Navigation" } },
-                  [
-                    _c(
-                      "ul",
-                      { staticClass: "pagination justify-content-center m-0" },
-                      [
-                        _c("li", { staticClass: "page-item active" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("2")]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "tab-pane fade",
-            attrs: {
-              id: "custom-content-above-profile",
-              role: "tabpanel",
-              "aria-labelledby": "custom-content-above-profile-tab"
-            }
-          },
-          [
-            _c("div", { staticClass: "card card-solid" }, [
-              _c("div", { staticClass: "card-body pb-0" }, [
-                _c("div", { staticClass: "row d-flex align-items-stretch" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
-                    },
-                    [
-                      _c("div", { staticClass: "card bg-light" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "card-header text-muted border-bottom-0"
-                          },
-                          [
-                            _vm._v(
-                              "\n                                        Digital Strategist\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-body pt-0" }, [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-7" }, [
-                              _c("h2", { staticClass: "lead" }, [
-                                _c("b", [_vm._v("Nicole Pearson")])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted text-sm" }, [
-                                _c("b", [_vm._v("About: ")]),
-                                _vm._v(
-                                  " Web Designer / UX /\n                                                    Graphic\n                                                    Artist / Coffee Lover "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "ml-4 mb-0 fa-ul text-muted" },
-                                [
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-building"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      " Address: Demo\n                                                        Street\n                                                        123, Demo City 04312, NJ\n                                                    "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-phone"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      "\n                                                        Phone #: + 800 - 12 12 23 52\n                                                    "
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-5 text-center" }, [
-                              _c("img", {
-                                staticClass: "img-circle img-fluid",
-                                attrs: { src: "", alt: "" }
-                              })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-footer" }, [
-                          _c("div", { staticClass: "text-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm bg-teal",
-                                attrs: { href: "#" }
-                              },
-                              [_c("i", { staticClass: "fas fa-comments" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-primary",
-                                attrs: { href: "#" }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-user" }),
-                                _vm._v(
-                                  " View Profile\n                                            "
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c(
-                  "nav",
-                  { attrs: { "aria-label": "Contacts Page Navigation" } },
-                  [
-                    _c(
-                      "ul",
-                      { staticClass: "pagination justify-content-center m-0" },
-                      [
-                        _c("li", { staticClass: "page-item active" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("2")]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/following.vue?vue&type=template&id=753e3273&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Backend/User/following.vue?vue&type=template&id=753e3273& ***!
-  \*************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "card-body" }, [
-      _c(
-        "ul",
-        {
-          staticClass: "nav nav-tabs",
-          attrs: { id: "custom-content-above-tab", role: "tablist" }
-        },
-        [
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "nav-link active",
-                  attrs: {
-                    tag: "a",
-                    to: { name: "Followers" },
-                    id: "custom-content-above-home-tab",
-                    "data-toggle": "pill",
-                    href: "#custom-content-above-home",
-                    role: "tab",
-                    "aria-controls": "custom-content-above-home",
-                    "aria-selected": "false"
-                  }
-                },
-                [_vm._v("Followers")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "nav-link",
-                  attrs: {
-                    tag: "a",
-                    to: { name: "Following" },
-                    id: "custom-content-above-profile-tab",
-                    "data-toggle": "pill",
-                    href: "#custom-content-above-profile",
-                    role: "tab",
-                    "aria-controls": "custom-content-above-profile",
-                    "aria-selected": "false"
-                  }
-                },
-                [_vm._v("Following\n                ")]
-              )
-            ],
-            1
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _vm._m(0)
-    ]),
-    _vm._v(" "),
-    _c("section", { staticClass: "content" })
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "tab-content",
-        attrs: { id: "custom-content-above-tabContent" }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "tab-pane fade active show",
-            attrs: {
-              id: "custom-content-above-home",
-              role: "tabpanel",
-              "aria-labelledby": "custom-content-above-home-tab"
-            }
-          },
-          [
-            _c("div", { staticClass: "card card-solid" }, [
-              _c("div", { staticClass: "card-body pb-0" }, [
-                _c("div", { staticClass: "row d-flex align-items-stretch" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
-                    },
-                    [
-                      _c("div", { staticClass: "card bg-light" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "card-header text-muted border-bottom-0"
-                          },
-                          [
-                            _vm._v(
-                              "\n                                        Digital Strategist\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-body pt-0" }, [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-7" }, [
-                              _c("h2", { staticClass: "lead" }, [
-                                _c("b", [_vm._v("Nicole Pearson")])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted text-sm" }, [
-                                _c("b", [_vm._v("About: ")]),
-                                _vm._v(
-                                  " Web Designer / UX /\n                                                    Graphic\n                                                    Artist / Coffee Lover "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "ml-4 mb-0 fa-ul text-muted" },
-                                [
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-building"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      " Address: Demo\n                                                        Street\n                                                        123, Demo City 04312, NJ\n                                                    "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-phone"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      "\n                                                        Phone #: + 800 - 12 12 23 52\n                                                    "
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-5 text-center" }, [
-                              _c("img", {
-                                staticClass: "img-circle img-fluid",
-                                attrs: { src: "", alt: "" }
-                              })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-footer" }, [
-                          _c("div", { staticClass: "text-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm bg-teal",
-                                attrs: { href: "#" }
-                              },
-                              [_c("i", { staticClass: "fas fa-comments" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-primary",
-                                attrs: { href: "#" }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-user" }),
-                                _vm._v(
-                                  " View Profile\n                                            "
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c(
-                  "nav",
-                  { attrs: { "aria-label": "Contacts Page Navigation" } },
-                  [
-                    _c(
-                      "ul",
-                      { staticClass: "pagination justify-content-center m-0" },
-                      [
-                        _c("li", { staticClass: "page-item active" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("2")]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "tab-pane fade",
-            attrs: {
-              id: "custom-content-above-profile",
-              role: "tabpanel",
-              "aria-labelledby": "custom-content-above-profile-tab"
-            }
-          },
-          [
-            _c("div", { staticClass: "card card-solid" }, [
-              _c("div", { staticClass: "card-body pb-0" }, [
-                _c("div", { staticClass: "row d-flex align-items-stretch" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
-                    },
-                    [
-                      _c("div", { staticClass: "card bg-light" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "card-header text-muted border-bottom-0"
-                          },
-                          [
-                            _vm._v(
-                              "\n                                        Digital Strategist\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-body pt-0" }, [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-7" }, [
-                              _c("h2", { staticClass: "lead" }, [
-                                _c("b", [_vm._v("Nicole Pearson")])
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-muted text-sm" }, [
-                                _c("b", [_vm._v("About: ")]),
-                                _vm._v(
-                                  " Web Designer / UX /\n                                                    Graphic\n                                                    Artist / Coffee Lover "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "ml-4 mb-0 fa-ul text-muted" },
-                                [
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-building"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      " Address: Demo\n                                                        Street\n                                                        123, Demo City 04312, NJ\n                                                    "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", { staticClass: "small" }, [
-                                    _c("span", { staticClass: "fa-li" }, [
-                                      _c("i", {
-                                        staticClass: "fas fa-lg fa-phone"
-                                      })
-                                    ]),
-                                    _vm._v(
-                                      "\n                                                        Phone #: + 800 - 12 12 23 52\n                                                    "
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-5 text-center" }, [
-                              _c("img", {
-                                staticClass: "img-circle img-fluid",
-                                attrs: { src: "", alt: "" }
-                              })
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-footer" }, [
-                          _c("div", { staticClass: "text-right" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm bg-teal",
-                                attrs: { href: "#" }
-                              },
-                              [_c("i", { staticClass: "fas fa-comments" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-primary",
-                                attrs: { href: "#" }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-user" }),
-                                _vm._v(
-                                  " View Profile\n                                            "
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c(
-                  "nav",
-                  { attrs: { "aria-label": "Contacts Page Navigation" } },
-                  [
-                    _c(
-                      "ul",
-                      { staticClass: "pagination justify-content-center m-0" },
-                      [
-                        _c("li", { staticClass: "page-item active" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "a",
-                            { staticClass: "page-link", attrs: { href: "#" } },
-                            [_vm._v("2")]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/index.vue?vue&type=template&id=54a5d534&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Backend/User/index.vue?vue&type=template&id=54a5d534& ***!
@@ -65830,63 +64806,47 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-4 border-right" }, [
-                _c(
-                  "div",
-                  { staticClass: "description-block" },
-                  [
-                    _c("h5", { staticClass: "description-header" }, [
-                      _vm._v(_vm._s(_vm.user.followers_count))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticStyle: { cursor: "pointer", color: "black" },
-                        attrs: {
-                          tag: "a",
-                          type: "button",
-                          to: { name: "Followers" }
-                        }
-                      },
-                      [
-                        _c("span", { staticClass: "description-text" }, [
-                          _vm._v("FOLLOWERS")
-                        ])
-                      ]
-                    )
-                  ],
-                  1
-                )
+                _c("div", { staticClass: "description-block" }, [
+                  _c("h5", { staticClass: "description-header" }, [
+                    _vm._v(_vm._s(_vm.user.followers_count))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { cursor: "pointer", color: "black" },
+                      attrs: { type: "button" },
+                      on: { click: _vm.follower }
+                    },
+                    [
+                      _c("span", { staticClass: "description-text" }, [
+                        _vm._v("FOLLOWERS")
+                      ])
+                    ]
+                  )
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "description-block" },
-                  [
-                    _c("h5", { staticClass: "description-header" }, [
-                      _vm._v(_vm._s(_vm.user.followings_count))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticStyle: { cursor: "pointer", color: "black" },
-                        attrs: {
-                          tag: "a",
-                          to: { name: "Following" },
-                          type: "button"
-                        }
-                      },
-                      [
-                        _c("span", { staticClass: "description-text" }, [
-                          _vm._v("FOLLOWING")
-                        ])
-                      ]
-                    )
-                  ],
-                  1
-                )
+                _c("div", { staticClass: "description-block" }, [
+                  _c("h5", { staticClass: "description-header" }, [
+                    _vm._v(_vm._s(_vm.user.followings_count))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { cursor: "pointer", color: "black" },
+                      attrs: { type: "button" },
+                      on: { click: _vm.following }
+                    },
+                    [
+                      _c("span", { staticClass: "description-text" }, [
+                        _vm._v("FOLLOWING")
+                      ])
+                    ]
+                  )
+                ])
               ])
             ])
           ])
@@ -66116,7 +65076,191 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "followmodel",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "followmodelCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm.followMode == false
+                  ? _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "followmodelLongTitle" }
+                      },
+                      [_vm._v("followers\n                        Details")]
+                    )
+                  : _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "followmodelLongTitle" }
+                      },
+                      [_vm._v("Following Details")]
+                    ),
+                _vm._v(" "),
+                _vm._m(4)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("table", { staticClass: "table table-bordered" }, [
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", [_vm._v("Name")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Display Image")]),
+                          _vm._v(" "),
+                          this.followMode == false
+                            ? _c("th", [_vm._v("Followed on")])
+                            : _c("th", [_vm._v("Following From")]),
+                          _vm._v(" "),
+                          this.followMode == false
+                            ? _c("th", { staticStyle: { width: "40px" } }, [
+                                _vm._v("Follow Back")
+                              ])
+                            : _c("th", [_vm._v("Unfollow User")])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        [
+                          _vm._l(_vm.followings, function(follow) {
+                            return _vm.followMode == true
+                              ? _c("tr", { key: follow.id }, [
+                                  _c("td", [_vm._v(_vm._s(follow.name))]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("img", {
+                                      attrs: {
+                                        src: _vm.getUsersImage(
+                                          follow.display_image
+                                        ),
+                                        alt: "Image",
+                                        width: "40px"
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(
+                                          _vm._f("cleanTime")(follow.created_at)
+                                        ) +
+                                        "\n                                    "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.unfollowUser(follow.id)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-user-minus red"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.followers, function(follower) {
+                            return _vm.followMode == false
+                              ? _c("tr", { key: follower.id }, [
+                                  _c("td", [_vm._v(_vm._s(follower.name))]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("img", {
+                                      attrs: {
+                                        src: _vm.getUsersImage(
+                                          follower.display_image
+                                        ),
+                                        alt: "Image",
+                                        width: "40px"
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(
+                                          _vm._f("cleanTime")(
+                                            follower.created_at
+                                          )
+                                        ) +
+                                        "\n                                    "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.followUser(follower.id)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-user-plus blue"
+                                        })
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("br")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(5)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -66376,6 +65520,58 @@ var staticRenderFns = [
         _c("small", [_vm._v("(Leave empty if you don't want to update)")])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer clearfix" }, [
+      _c("ul", { staticClass: "pagination pagination-sm m-0 float-right" }, [
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("«")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("1")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("»")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger btn-sm",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -81745,144 +80941,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Backend/User/followers.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/Backend/User/followers.vue ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _followers_vue_vue_type_template_id_adbc7c12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./followers.vue?vue&type=template&id=adbc7c12& */ "./resources/js/components/Backend/User/followers.vue?vue&type=template&id=adbc7c12&");
-/* harmony import */ var _followers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./followers.vue?vue&type=script&lang=js& */ "./resources/js/components/Backend/User/followers.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _followers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _followers_vue_vue_type_template_id_adbc7c12___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _followers_vue_vue_type_template_id_adbc7c12___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Backend/User/followers.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Backend/User/followers.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/Backend/User/followers.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_followers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./followers.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/followers.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_followers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Backend/User/followers.vue?vue&type=template&id=adbc7c12&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/Backend/User/followers.vue?vue&type=template&id=adbc7c12& ***!
-  \*******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followers_vue_vue_type_template_id_adbc7c12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./followers.vue?vue&type=template&id=adbc7c12& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/followers.vue?vue&type=template&id=adbc7c12&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followers_vue_vue_type_template_id_adbc7c12___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_followers_vue_vue_type_template_id_adbc7c12___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Backend/User/following.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/Backend/User/following.vue ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _following_vue_vue_type_template_id_753e3273___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./following.vue?vue&type=template&id=753e3273& */ "./resources/js/components/Backend/User/following.vue?vue&type=template&id=753e3273&");
-/* harmony import */ var _following_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./following.vue?vue&type=script&lang=js& */ "./resources/js/components/Backend/User/following.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _following_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _following_vue_vue_type_template_id_753e3273___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _following_vue_vue_type_template_id_753e3273___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Backend/User/following.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Backend/User/following.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/Backend/User/following.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_following_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./following.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/following.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_following_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Backend/User/following.vue?vue&type=template&id=753e3273&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/Backend/User/following.vue?vue&type=template&id=753e3273& ***!
-  \*******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_following_vue_vue_type_template_id_753e3273___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./following.vue?vue&type=template&id=753e3273& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Backend/User/following.vue?vue&type=template&id=753e3273&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_following_vue_vue_type_template_id_753e3273___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_following_vue_vue_type_template_id_753e3273___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/Backend/User/index.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/Backend/User/index.vue ***!
@@ -82172,11 +81230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Backend_dashboard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Backend/dashboard.vue */ "./resources/js/components/Backend/dashboard.vue");
 /* harmony import */ var _components_Backend_Roles_index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Backend/Roles/index.vue */ "./resources/js/components/Backend/Roles/index.vue");
 /* harmony import */ var _components_Backend_User_index_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Backend/User/index.vue */ "./resources/js/components/Backend/User/index.vue");
-/* harmony import */ var _components_Backend_User_followers_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Backend/User/followers.vue */ "./resources/js/components/Backend/User/followers.vue");
-/* harmony import */ var _components_Backend_User_following_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Backend/User/following.vue */ "./resources/js/components/Backend/User/following.vue");
-/* harmony import */ var _components_Backend_profile_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Backend/profile.vue */ "./resources/js/components/Backend/profile.vue");
-
-
+/* harmony import */ var _components_Backend_profile_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Backend/profile.vue */ "./resources/js/components/Backend/profile.vue");
 
 
 
@@ -82194,16 +81248,8 @@ var routes = [{
   component: _components_Backend_User_index_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: 'Users'
 }, {
-  path: '/follower',
-  component: _components_Backend_User_followers_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-  name: 'Followers'
-}, {
-  path: '/following',
-  component: _components_Backend_User_following_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-  name: 'Following'
-}, {
   path: '/profile',
-  component: _components_Backend_profile_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  component: _components_Backend_profile_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   name: 'BackendProfile'
 }];
 
