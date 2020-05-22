@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,8 +167,6 @@ return [
          */
 
 
-
-
         /*
          * Application Service Providers...
          */
@@ -179,6 +177,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+//        /*Follow Unfollow package*/
+//        Overtrue\LaravelFollow\FollowServiceProvider::class,
 
     ],
 

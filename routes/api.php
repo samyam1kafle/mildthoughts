@@ -23,3 +23,12 @@ Route::apiResources([
     'roles' => 'API\Rolescontroller',
     'users' => 'API\UsersController'
 ]);
+Route::put('follow/{id}', 'API\UsersController@followUser');
+Route::put('unfollow/{id}', 'API\UsersController@unfollowUser');
+Route::get('followed/{id}', 'API\UsersController@followedUser');
+
+Route::get('profile','API\UsersController@profile');
+Route::put('profile','API\UsersController@updateProfileInfo');
+
+
+

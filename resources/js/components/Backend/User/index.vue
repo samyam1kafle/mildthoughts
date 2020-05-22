@@ -86,33 +86,40 @@
                                         <h3 class="profile-username text-center">{{viewid.name}}</h3>
 
                                         <p class="text-muted text-center">{{viewid.email}}<br>
-                                        <small v-if="viewid.email_verified_at">(Email Verified)</small>
-                                        <small v-else>(Email Not Verified)</small>
+                                            <small v-if="viewid.email_verified_at">(Email Verified)</small>
+                                            <small v-else>(Email Not Verified)</small>
                                         </p>
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
-                                                <b>Followers</b> <a class="float-right">0</a>
+                                                <b>Followers</b> <a class="float-right">{{viewid.followers_count}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Following</b> <a class="float-right">0</a>
+                                                <b>Following</b> <a class="float-right">{{viewid.followings_count}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Total Post</b> <a class="float-right">0</a>
+                                                <b>Total Post</b> <a class="float-right">12</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Joined</b> <a class="float-right">{{viewid.created_at | cleanTime}}</a>
+                                                <b>Joined</b> <a class="float-right">{{viewid.created_at |
+                                                cleanTime}}</a>
                                             </li>
                                         </ul>
-
-                                        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                                        <form @submit.prevent="follow ? unfollowUser(viewid.id) : followUser(viewid.id)">
+                                            <button type="submit" class="btn btn-primary btn-block"
+                                                    v-if="follow == false"><b>Follow</b>
+                                            </button>
+                                            <button type="submit" class="btn btn-outline-danger btn-block"
+                                                    v-else><b>UnFollow</b>
+                                            </button>
+                                        </form>
                                     </div>
 
                                     <!-- /.card -->
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -189,7 +196,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button v-if="!editMode" type="Submit" class="btn btn-primary">Create Role</button>
+                                    <button v-if="!editMode" type="Submit" class="btn btn-primary">Add User</button>
                                     <button v-else type="Submit" class="btn btn-primary">Update Details</button>
                                 </div>
                             </div>
@@ -221,18 +228,74 @@
                 users: {},
                 roles: {},
                 viewid: '',
+                follow: false,
                 editMode: false
             }
         },
         methods: {
+            followUser(id) {
+                axios.put('api/follow/' + id).then(() => {
+                    this.$Progress.start();
+                    $('#' + id).modal('hide');
+                    Fire.$emit('userEvent');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Followed',
+                        text: 'Successfully followed the user',
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unsuccessful',
+                        text: 'There occurred some problem while followed this user',
+                    });
+                    this.$Progress.fail();
+                });
+            },
+            unfollowUser(id) {
+                axios.put('api/unfollow/' + id).then(() => {
+                    this.$Progress.start();
+                    $('#' + id).modal('hide');
+                    Fire.$emit('userEvent');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'UnFollowed',
+                        text: 'Successfully',
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unsuccessful',
+                        text: 'There occurred some problem while followed this user',
+                    });
+                    this.$Progress.fail();
+                });
+            },
             getProfileImage(image) {
                 let photo = 'Backend/ProfileImages/' + image;
                 return photo;
             },
             viewDetail(user) {
+                this.$Progress.start();
                 this.viewid = user;
                 const Usermodel = this.viewid.id;
-                $('#' + Usermodel).modal('show');
+                axios.get('api/followed/' + Usermodel).then((response) => {
+                    if (response.data.following == false) {
+                        this.follow = false;
+                    } else {
+                        this.follow = true;
+                    }
+                    $('#' + Usermodel).modal('show');
+                }).catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unsuccessful',
+                        text: 'There occurred some problem while followed this user',
+                    });
+                    this.$Progress.fail();
+                });
 
             },
             deleteUser(id) {

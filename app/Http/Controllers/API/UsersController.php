@@ -6,11 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Roles;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +25,96 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->orderBy('created_at', 'desc')->get();
+        $users = User::with('roles')->where('id', '!=', auth('api')->id())
+            ->with(['followings', 'followers'])->withCount(['followings', 'followers'])->orderBy('created_at', 'desc')->get();
         $roles = Roles::all();
 
         return response()->json(['users' => $users, 'roles' => $roles]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function followUser(Request $request, $id)
+    {
+        $follower = auth('api')->user();
+        $following = User::findOrFail($id);
+        $follower->follow($following);
+        return response()->json(['success'], 200);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unfollowUser($id)
+    {
+        $follower = auth('api')->user();
+        $unfollow = User::findOrFail($id);
+        $follower->unfollow($unfollow);
+        return response()->json(['success'], 200);
+    }
+
+    //    Profile Function
+    public function profile()
+    {
+        $user_id = auth('api')->id();
+
+        $user = User::with('roles', 'followings', 'followers')->withCount(['followings', 'followers'])->findOrFail($user_id);
+
+        return $user;
+    }
+
+    // Update Profile info
+    public function updateProfileInfo(Request $request)
+    {
+        $user = auth('api')->user();
+
+        $this->validate($request, [
+            'name' => 'required|string|max:20',
+            'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
+            'password' => 'sometimes|required|min:6',
+        ]);
+
+        $old_img = $user->display_image;
+
+        if ($request->display_image != $old_img) {
+            if ($old_img != null) {
+                unlink(public_path('Backend/ProfileImages/') . $old_img);
+            }
+            $name = time() . '.' . explode('/', mime_content_type($request->display_image))[1];
+
+            Image::make($request->display_image)->resize('400', '400')->save(public_path('Backend/ProfileImages/') . $name);
+            $request->merge(['display_image' => $name]);
+        }
+        if ($request->password != '') {
+            $request->merge(['password' => Hash::make($request->password)]);
+        }
+
+        $user->update($request->all());
+
+        return response()->json(['message' => 'Updated Successfully'], 200);
+
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function followedUser($id)
+    {
+        $follower = auth('api')->user();
+        $following = User::findOrFail($id);
+        $follow = $follower->isFollowing($following);
+        return response()->json(['following' => $follow]);
     }
 
     /**
@@ -97,7 +190,7 @@ class UsersController extends Controller
 
         $user->update($request->all());
 
-        return response()->json(['success' => 'Updated successfully'],200);
+        return response()->json(['success' => 'Updated successfully'], 200);
     }
 
     /**
@@ -114,6 +207,6 @@ class UsersController extends Controller
             unlink(public_path('Backend/ProfileImages/') . $image);
         }
         $user->delete();
-        return response()->json(['message' => 'successful'],200);
+        return response()->json(['message' => 'successful'], 200);
     }
 }
