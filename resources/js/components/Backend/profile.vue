@@ -28,10 +28,9 @@
                                 <div class="description-block">
 
                                     <h5 class="description-header">{{user.followers_count}}</h5>
-                                    <router-link tag="a" type="button" :to="{name: 'Followers'}"
-                                                 style="cursor: pointer; color: black;">
+                                    <a type="button" style="cursor: pointer; color: black;" @click="follower">
                                         <span class="description-text">FOLLOWERS</span>
-                                    </router-link>
+                                    </a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -39,10 +38,10 @@
                             <div class="col-sm-4">
                                 <div class="description-block">
                                     <h5 class="description-header">{{user.followings_count}}</h5>
-                                    <router-link tag="a" :to="{name: 'Following'}" type="button"
-                                                 style="cursor: pointer; color: black">
+                                    <a type="button" @click="following"
+                                       style="cursor: pointer; color: black">
                                         <span class="description-text">FOLLOWING</span>
-                                    </router-link>
+                                    </a>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -261,6 +260,80 @@
                 <!-- /.nav-tabs-custom -->
             </div>
         </div>
+        <!--Profile Model-->
+
+        <div class="modal fade" id="followmodel" tabindex="-1" role="dialog"
+             aria-labelledby="followmodelCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="followmodelLongTitle" v-if="followMode == false">followers
+                            Details</h5>
+                        <h5 class="modal-title" id="followmodelLongTitle" v-else>Following Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Display Image</th>
+                                        <th v-if="this.followMode == false">Followed on</th>
+                                        <th v-else>Following From</th>
+                                        <th style="width: 40px" v-if="this.followMode == false">Follow Back</th>
+                                        <th v-else>Unfollow User</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-if="followMode == true" v-for="follow in followings" :key="follow.id">
+                                        <td>{{follow.name}}</td>
+                                        <td><img :src="getUsersImage(follow.display_image)" alt="Image" width="40px">
+                                        </td>
+                                        <td>
+                                            {{follow.created_at | cleanTime}}
+                                        </td>
+                                        <td><a type="button" @click="unfollowUser(follow.id)"><i
+                                                class="fas fa-user-minus red"></i></a></td>
+                                    </tr>
+                                    <tr v-if="followMode == false" v-for="follower in followers" :key="follower.id">
+                                        <td>{{follower.name}}</td>
+                                        <td><img :src="getUsersImage(follower.display_image)" alt="Image" width="40px">
+                                        </td>
+                                        <td>
+                                            {{follower.created_at | cleanTime}}
+                                        </td>
+                                        <td><a type="button" @click="followUser(follower.id)"><i
+                                                class="fas fa-user-plus blue"></i></a></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <br>
+                            </div>
+                            <!--<div class="callout callout-info"-->
+                            <!--v-if="((followMode == true) && (followings == emptyObject))">-->
+                            <!--<h5>You have not followed anyone feel free to explore more users.</h5>-->
+                            <!--</div>-->
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            <li class="page-item"><a class="page-link" href="#">«</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">»</a></li>
+                        </ul>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -279,10 +352,63 @@
                     'role_id': ''
                 }),
                 user: {},
+                followers: {},
+                followings: {},
+                followMode: false
             }
         },
         methods: {
-
+            follower() {
+                this.followMode = false; // follower model to be shown
+                $('#followmodel').modal('show');
+            },
+            following() {
+                this.followMode = true; // following model to be shown
+                $('#followmodel').modal('show');
+            },
+            followUser(id) {
+                axios.put('api/follow/' + id).then((response) => {
+                    this.$Progress.start();
+                    $("#followmodel").modal('show').trigger("change");
+                    Fire.$emit('ProfileEvent');
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Successfully followed the user',
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Something went wrong please try again after some time.',
+                    });
+                    this.$Progress.fail();
+                });
+            },
+            unfollowUser(id) {
+                axios.put('api/unfollow/' + id).then(() => {
+                    this.$Progress.start();
+                    $("#followmodel").modal('show').trigger("change");
+                    // $('#').modal('hide');
+                    Fire.$emit('ProfileEvent');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'UnFollowed',
+                        text: 'Successfully',
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Unsuccessful',
+                        text: 'There occurred some problem while followed this user',
+                    });
+                    this.$Progress.fail();
+                });
+            },
+            getUsersImage(image) {
+                let photo = 'Backend/ProfileImages/' + image;
+                return photo;
+            },
             getProfileImage() {
                 let photo = (this.form.display_image.length > 200) ? this.form.display_image : 'Backend/ProfileImages/' + this.form.display_image;
                 return photo;
@@ -326,6 +452,9 @@
                 axios.get('api/profile').then(({data}) => {
                     this.form.fill(data);
                     this.user = data;
+                    this.followers = this.user.followers;
+                    this.followings = this.user.followings;
+
                 });
                 this.form.password = '';
             }

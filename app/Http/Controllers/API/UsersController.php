@@ -42,7 +42,12 @@ class UsersController extends Controller
     {
         $follower = auth('api')->user();
         $following = User::findOrFail($id);
-        $follower->follow($following);
+        $follow = $follower->isFollowing($following);
+        if($follow){
+            return response()->json(['message'=>'You already Follow this user'],409);
+        }else{
+            $follower->follow($following);
+        }
         return response()->json(['success'], 200);
     }
 
@@ -56,8 +61,14 @@ class UsersController extends Controller
     {
         $follower = auth('api')->user();
         $unfollow = User::findOrFail($id);
-        $follower->unfollow($unfollow);
-        return response()->json(['success'], 200);
+
+        $unfollowed = $follower->isFollowing($unfollow);
+        if($unfollowed){
+            $follower->unfollow($unfollow);
+            return response()->json(['success'], 200);
+        }else{
+            return response()->json(['error'=>'You don\'t follow this user'],409);
+        }
     }
 
     //    Profile Function
