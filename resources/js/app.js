@@ -64,6 +64,11 @@ Vue.filter('cleanTime', function (created) {
     return moment(created).format('MMMM Do YYYY, h:mm:ss a');
 });
 
+Vue.filter('notificationTime', function (time) {
+    // return moment(time).startOf('hour').fromNow();
+    return moment(time).calendar();
+});
+
 const router = new VueRouter({
     routes,
     mode: 'history'
@@ -81,6 +86,7 @@ const router = new VueRouter({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('notification', require('./components/NotificationMarkup/notification.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

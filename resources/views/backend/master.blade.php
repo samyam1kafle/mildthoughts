@@ -47,34 +47,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-
-            <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="fas fa-bullhorn"></i>
-                    <span class="badge badge-warning navbar-brand">1</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                </div>
-            </li>
+            <notification :userid="{{auth()->id()}}"
+                          :unreads="{{auth()->user()->unreadNotifications}}"></notification>
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -93,7 +67,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{asset('Backend/ProfileImages/'. auth()->user()->display_image)}}" class="img-circle elevation-2"
+                    <img src="{{asset('Backend/ProfileImages/'. auth()->user()->display_image)}}"
+                         class="img-circle elevation-2"
                          alt="User Image">
                 </div>
                 <div class="info">
@@ -210,5 +185,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/notifications.js')}}"></script>
 </body>
 </html>
