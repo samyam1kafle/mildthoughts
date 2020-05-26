@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <notification :userid="{{auth()->id()}}"
-                          :allnotifications="{{auth()->user()->notifications}}"
+                          :allnotifications="{{auth()->user()->notifications->sortByDesc('created_at')->take(5)}}"
                           :unreads="{{count(auth()->user()->unreadNotifications)}}"></notification>
         </ul>
     </nav>
@@ -81,8 +81,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <router-link :to="{ name: 'Dashboard' }" class="nav-link" tag="a" active-class="active">
                             <i class="nav-icon fas fa-tachometer-alt cyan"></i>
@@ -113,6 +111,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <p>Roles</p>
                                 </router-link>
                             </li>
+
+                            <li class="nav-item">
+                                <router-link :to="{name: 'Thoughts-Categories'}" class="nav-link" tag="a"
+                                             active-class="active">
+                                    <i class="fas fa-quote-right indigo nav-icon"></i>
+                                    <p>Thoughts Category</p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-book-open pink"></i>
+                            <p>
+                                Post Management
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'Thoughts'}" class="nav-link" tag="a" active-class="active">
+                                    <i class="fas fa-brain purple nav-icon"></i>
+                                    <p>Thoughts</p>
+                                </router-link>
+                            </li>
+
                         </ul>
                     </li>
                     <li class="nav-item">

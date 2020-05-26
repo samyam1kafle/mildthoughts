@@ -9,6 +9,7 @@
                          :unfollowed_time="singleNotification.created_at">
 
             </un-follower>
+            <div class="dropdown-divider"></div>
         </div>
         <div v-else>
             <new-follower v-if="(type == 'follower')" :follower="singleNotification.data.follower"
@@ -18,6 +19,7 @@
                          :unfollowed_time="singleNotification.created_at">
 
             </un-follower>
+            <div class="dropdown-divider"></div>
         </div>
 
     </div>

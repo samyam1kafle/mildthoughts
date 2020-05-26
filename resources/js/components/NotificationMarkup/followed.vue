@@ -9,8 +9,6 @@
             following you.
             <small>{{followed_time | notificationTime}}</small>
         </div>
-
-        <hr>
     </a>
 
 </template>

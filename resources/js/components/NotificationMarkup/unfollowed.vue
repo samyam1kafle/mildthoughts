@@ -9,7 +9,6 @@
             <strong> {{unfollower.name}} </strong>Unfollowed you.
             <small>{{unfollowed_time | notificationTime}}</small>
         </div>
-        <hr>
     </a>
 
 </template>

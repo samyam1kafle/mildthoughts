@@ -9,14 +9,19 @@
 
             <notification-item v-for="allnotification in allNotifications" :key="allnotification.id"
                                :singleNotification="allnotification"></notification-item>
+
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">See All
                 Notifications</a>
             <div class="dropdown-divider"></div>
             <a href="#"
                @click="markNotificationsAsRead(user)"
-               class="dropdown-item dropdown-footer" v-if="(unreadNotifications.length !== 0)">Mark all as read</a>
-            <div class="dropdown-divider"></div>
+               class="dropdown-item dropdown-footer" v-if="(unreadNotifications !== 0)">Mark all as read</a>
+            <div class="dropdown-divider"
+                 v-if="(allNotifications.length == 0 || allNotifications.length == null)"></div>
+            <a href="#"
+               class="dropdown-item dropdown-footer"
+               v-if="(allNotifications.length == 0 || allNotifications.length == null)">No any notifications</a>
         </div>
     </li>
 </template>
@@ -40,7 +45,6 @@
             loadData() {
                 Echo.private('App.User.' + this.userid)
                     .notification((notification) => {
-                            console.log(notification.data);
                             let full_type = notification.type;
                             let type = full_type.split('\\').pop();
                             if (type == 'follower') {
@@ -76,9 +80,10 @@
             },
 
             markNotificationsAsRead(id) {
-                if (this.unreadNotifications.length !== '0') {
-                    axios.get('api/markAsRead/' + id).then(() => {
-                        this.unreadNotifications = unreads;
+                if (this.allNotifications.length !== '0') {
+                    axios.get('api/markAsRead/' + id).then((response) => {
+                        this.unreadNotifications = 0;
+                        this.allNotifications = response.data.notifications;
                         Toast.fire({
                             icon: 'success',
                             title: 'All Notifications Are Marked As Read.'
@@ -86,7 +91,7 @@
                     }).catch(() => {
                         Toast.fire({
                             icon: 'error',
-                            title: 'Something Went Wrong Please try Again.'
+                            title: "You Don't have any Notifications to mark as read"
                         })
                     });
                 }
