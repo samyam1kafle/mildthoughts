@@ -393,7 +393,13 @@
                 axios.get('api/users').then((response) => {
                     this.users = response.data.users;
                     this.roles = response.data.roles;
-                }).catch();
+                }).catch(()=>{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'There Occurred Some Error While Fetching The Data.',
+                    });
+                });
             },
             createUserModel() {
                 this.editMode = false;

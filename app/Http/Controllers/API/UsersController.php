@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
+use App\Notifications\follower;
+use App\Notifications\unfollower;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +34,7 @@ class UsersController extends Controller
         return response()->json(['users' => $users, 'roles' => $roles]);
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -43,12 +46,13 @@ class UsersController extends Controller
         $follower = auth('api')->user();
         $following = User::findOrFail($id);
         $follow = $follower->isFollowing($following);
-        if($follow){
-            return response()->json(['message'=>'You already Follow this user'],409);
-        }else{
+        if ($follow) {
+            return response()->json(['message' => 'You already Follow this user'], 409);
+        } else {
             $follower->follow($following);
+            $following->notify(new follower($follower));
+            return response()->json(['success'], 200);
         }
-        return response()->json(['success'], 200);
     }
 
     /**
@@ -63,11 +67,12 @@ class UsersController extends Controller
         $unfollow = User::findOrFail($id);
 
         $unfollowed = $follower->isFollowing($unfollow);
-        if($unfollowed){
+        if ($unfollowed) {
             $follower->unfollow($unfollow);
+            $unfollow->notify(new unfollower($follower));
             return response()->json(['success'], 200);
-        }else{
-            return response()->json(['error'=>'You don\'t follow this user'],409);
+        } else {
+            return response()->json(['error' => 'You don\'t follow this user'], 409);
         }
     }
 

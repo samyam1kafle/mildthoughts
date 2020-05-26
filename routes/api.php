@@ -21,14 +21,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResources([
     'roles' => 'API\Rolescontroller',
-    'users' => 'API\UsersController'
+    'users' => 'API\UsersController',
+    'category' => 'API\ThoughtsCategoryController'
 ]);
 Route::put('follow/{id}', 'API\UsersController@followUser');
 Route::put('unfollow/{id}', 'API\UsersController@unfollowUser');
 Route::get('followed/{id}', 'API\UsersController@followedUser');
 
-Route::get('profile','API\UsersController@profile');
-Route::put('profile','API\UsersController@updateProfileInfo');
+Route::get('profile', 'API\UsersController@profile');
+Route::put('profile', 'API\UsersController@updateProfileInfo');
 
+
+//Route::middleware('api')->get('markAsRead/{id}', 'API\UsersController@markAsRead');
+Route::middleware('api')->get('markAsRead/{id}', function ($id) {
+    $user = \App\User::findOrFail($id);
+    $user->unreadNotifications->markAsRead();
+
+    $newRead = $user->Notifications->sortByDesc('created_at')->take(5);
+
+
+    return response()->json(['notifications' => $newRead], 200);
+});
 
 
