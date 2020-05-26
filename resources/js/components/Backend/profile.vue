@@ -340,6 +340,8 @@
 </template>
 
 <script>
+    import {userEvent} from '../../app.js'
+
     export default {
         data() {
             return {
@@ -418,14 +420,16 @@
                 if (this.form.password == "") {
                     this.form.password = undefined;
                 }
-                this.form.put('api/profile').then(() => {
+                this.form.put('api/profile').then((response) => {
+                    let userData = response.data.userdata;
                     Fire.$emit('ProfileEvent');
                     Swal.fire({
                         icon: 'success',
                         title: 'Success',
                         text: 'Profile Updated Successfully!',
                     });
-                    this.$Progress.finish();
+                    userEvent.$emit('userUpdated',userData);
+                    this.$Progress.finish();s
                 }).catch(() => {
                     this.$Progress.fail();
                 });

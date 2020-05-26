@@ -87,6 +87,11 @@ const router = new VueRouter({
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('notification', require('./components/NotificationMarkup/notification.vue').default);
+Vue.component('userDetails', require('./components/Backend/User/masterUserDetail.vue').default);
+
+/*New Vue Instance for data transmission*/
+
+export const userEvent = new Vue();
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

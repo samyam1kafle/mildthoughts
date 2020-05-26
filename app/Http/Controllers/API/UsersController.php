@@ -113,8 +113,9 @@ class UsersController extends Controller
         }
 
         $user->update($request->all());
+        $data = $user;
 
-        return response()->json(['message' => 'Updated Successfully'], 200);
+        return response()->json(['userdata' => $data], 200);
 
 
     }
