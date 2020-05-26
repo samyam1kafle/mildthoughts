@@ -48,7 +48,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <notification :userid="{{auth()->id()}}"
-                          :unreads="{{auth()->user()->unreadNotifications}}"></notification>
+                          :allnotifications="{{auth()->user()->notifications}}"
+                          :unreads="{{count(auth()->user()->unreadNotifications)}}"></notification>
         </ul>
     </nav>
     <!-- /.navbar -->

@@ -1,7 +1,25 @@
 <template>
     <div>
-        <new-follower v-if="type == 'follower'" :follower="unreads.data.follower"
-                      :followed_time="unreads.created_at"></new-follower>
+        <div v-if="(singleNotification.read_at == undefined || singleNotification.read_at == null)"
+             style="background: #E4E9F2">
+            <new-follower v-if="(type == 'follower')" :follower="singleNotification.data.follower"
+                          :followed_time="singleNotification.created_at"></new-follower>
+
+            <un-follower v-if="(type == 'unfollower')" :unfollower="singleNotification.data.unfollower"
+                         :unfollowed_time="singleNotification.created_at">
+
+            </un-follower>
+        </div>
+        <div v-else>
+            <new-follower v-if="(type == 'follower')" :follower="singleNotification.data.follower"
+                          :followed_time="singleNotification.created_at"></new-follower>
+
+            <un-follower v-if="(type == 'unfollower')" :unfollower="singleNotification.data.unfollower"
+                         :unfollowed_time="singleNotification.created_at">
+
+            </un-follower>
+        </div>
+
     </div>
 
 
@@ -9,21 +27,22 @@
 
 <script>
     import newFollower from './followed.vue'
+    import unFollower from './unfollowed.vue'
 
     export default {
-        props: ['unreads'],
+        props: ['singleNotification'],
         components: {
-            newFollower
+            newFollower,
+            unFollower
         },
         data() {
             return {
-                notificationType: this.unreads.type,
+                notificationType: this.singleNotification.type,
                 type: ''
             }
         },
         methods: {
             notificationsType() {
-                // let newNotificationType
                 let string = this.notificationType;
                 let head = string.split('\\').pop();
                 this.type = head;
