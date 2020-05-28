@@ -22,7 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResources([
     'roles' => 'API\Rolescontroller',
     'users' => 'API\UsersController',
-    'category' => 'API\ThoughtsCategoryController'
+    'category' => 'API\ThoughtsCategoryController',
+    'thoughts' => 'API\ThoughtsController'
 ]);
 Route::put('follow/{id}', 'API\UsersController@followUser');
 Route::put('unfollow/{id}', 'API\UsersController@unfollowUser');

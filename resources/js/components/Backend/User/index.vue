@@ -98,7 +98,7 @@
                                                 <b>Following</b> <a class="float-right">{{viewid.followings_count}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Total Post</b> <a class="float-right">12</a>
+                                                <b>Total Thoughts Posted</b> <a class="float-right">{{viewid.thoughts_count}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Joined</b> <a class="float-right">{{viewid.created_at |
@@ -393,7 +393,7 @@
                 axios.get('api/users').then((response) => {
                     this.users = response.data.users;
                     this.roles = response.data.roles;
-                }).catch(()=>{
+                }).catch(() => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',

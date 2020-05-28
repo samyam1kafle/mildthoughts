@@ -10,4 +10,8 @@ class ThoughtsCategory extends Model
         'category_name', 'description'
     ];
 
+    public function thoughts(){
+        return $this->hasMany('App\Models\Thoughts');
+    }
+
 }
