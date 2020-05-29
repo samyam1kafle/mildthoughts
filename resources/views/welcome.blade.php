@@ -155,7 +155,9 @@
                         <div class="header-top-navigation">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="">home</a></li>
+                                    <li class="active">
+                                        <router-link :to="{name: 'Index'}" tag="a" active-class="active">home</router-link>
+                                    </li>
                                     @if(auth()->user())
                                         <li class="notification-trigger"><a class="msg-trigger-btn"
                                                                             href="#b">notification</a>
@@ -171,7 +173,7 @@
                                                         <!-- profile picture end -->
                                                         <div class="profile-thumb">
                                                             <figure class="profile-thumb-middle">
-                                                                <img src="{{asset('')}}Frontend/assets/images/profile/profile-small-3.jpg"
+                                                                <img src="{{asset('Frontend/assets/images/profile/profile-small-3.jpg')}}"
                                                                      alt="profile picture">
                                                             </figure>
                                                         </div>
@@ -246,7 +248,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li><a href="{{route('home')}}">Dashboard</a></li>
+                                        <li><a href="{{route('admin')}}">Dashboard</a></li>
                                     @endif
                                 </ul>
                             </nav>
@@ -331,9 +333,9 @@
                                                 </div>
                                             </li>
                                             <li class="btn-group">
-                                                <router-link :to="{ name: 'login' }" tag="a" active-class="active">
+                                                <a href="{{ route('login') }}">
                                                     Login/Signup
-                                                </router-link>
+                                                </a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -542,13 +544,8 @@
             </div>
         </div>
     </header>
-    <!-- header area end -->
-    @if(auth()->user())
-        <home-index :userdetail="{{auth()->user()}}" :followings="{{auth()->user()->followings}}"></home-index>
-    @else
-        <home-index userdetail="null"></home-index>
-@endif
-<!-- Scroll to top start -->
+
+    <!-- Scroll to top start -->
     <div class="scroll-top not-visible">
         <i class="bi bi-finger-index"></i>
     </div>

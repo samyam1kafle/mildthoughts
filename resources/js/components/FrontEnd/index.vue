@@ -222,7 +222,12 @@
                                 <!-- profile picture end -->
 
                                 <div class="posted-author">
-                                    <h6 class="author"><a href="profile.html">{{post.user.name}}</a></h6>
+                                    <h6 class="author">
+                                        <router-link :to="{name: 'FrontProfile' , params: {id: post.user.id}}" tag="a"
+                                                     active-class="active">{{post.user.name}}
+                                        </router-link>
+                                    </h6>
+
                                     <span class="post-time">{{post.created_at | notificationTime}}</span>
                                 </div>
 
@@ -409,11 +414,10 @@
 
 <script>
     export default {
-        props: ['userdetail', 'followings'],
         data() {
             return {
-                user: this.userdetail,
-                following: this.followings,
+                user: {},
+                followings: [],
                 followingUsers: {},
                 thoughts: {}
             }
@@ -440,7 +444,6 @@
                 this.followings.forEach((value) => {
                     thought.push(value.id);
                 });
-
                 axios.get('thoughts/', {
                     params: {
                         query: thought
@@ -455,12 +458,26 @@
                         text: 'There occurred some problem loading the feed.Please refresh the page.',
                     });
                 });
+            },
+            authUser() {
+                axios.get('user/').then((response) => {
+                    this.user = response.data.userdetail;
+                    this.followings = response.data.followings;
+                    if(this.user !== 'null'){
+                        this.followerThoughts();
+                    }
+                }).catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'There occurred some problem loading the feed.Please try again.',
+                    });
+                });
             }
         },
         created() {
-            if (this.user != 'null') {
-                this.followerThoughts();
-            }
+            this.authUser();
+
         }
     }
 </script>

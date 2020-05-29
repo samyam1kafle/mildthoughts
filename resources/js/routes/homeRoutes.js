@@ -1,5 +1,6 @@
-import LoginRegister from '../components/FrontEnd/loginSignup.vue'
-
-export default  [
-    {path: '/Login-Signup', component: LoginRegister , name: 'login'}
+import Profile from '../components/FrontEnd/profile.vue'
+import Home from '../components/FrontEnd/index.vue'
+export default [
+    {path: '/', component: Home ,name: 'Index'},
+    {path: '/user/profile', component: Profile ,name: 'FrontProfile'}
 ];

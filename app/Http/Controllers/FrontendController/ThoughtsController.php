@@ -14,6 +14,18 @@ class ThoughtsController extends Controller
         $this->middleware('web');
     }
 
+    public function user(Request $request){
+        $logged = auth()->check();
+        if($logged){
+            $userdetail = auth()->user();
+            $followings = auth()->user()->followings;
+            return response()->json(['userdetail'=>$userdetail,'followings'=>$followings],200);
+        }else{
+            return response()->json(['userdetail'=>'null'],200);
+        }
+
+    }
+
     public function thoughts(Request $request)
     {
         $following = $request->query->all();
@@ -26,6 +38,7 @@ class ThoughtsController extends Controller
                 $followingUserData[] = $ind;
             }
         }
+
         foreach ($followingThoughts as $sorting) {
             foreach ($sorting as $sort) {
                 $latestThoughts[] = $sort;
@@ -39,5 +52,9 @@ class ThoughtsController extends Controller
             $thoughtData[] = $thoughts;
         }
         return response()->json(['following' => $followingUserData, 'thoughts' => $thoughtData]);
+    }
+
+    public function loginSignup(){
+        return view('Frontend/login-signup');
     }
 }

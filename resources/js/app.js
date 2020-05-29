@@ -21,7 +21,7 @@ import VueProgressBar from 'vue-progressbar'
 
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
-Vue.use( CKEditor );
+Vue.use(CKEditor);
 
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',
@@ -77,7 +77,7 @@ Vue.filter('notificationTime', function (time) {
 const router = new VueRouter({
     routes: [
         ...homeroutes,
-        ...routess
+        ...routess,
     ],
     mode: 'history'
 });
