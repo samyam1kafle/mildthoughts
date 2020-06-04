@@ -11,12 +11,17 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router'
 
 
-import {routes} from './routes/routes.js'
+import routess from './routes/routes.js'
+import homeroutes from './routes/homeRoutes.js'
 
 import {Form, HasError, AlertError} from 'vform'
 import moment from 'moment'
 
 import VueProgressBar from 'vue-progressbar'
+
+import CKEditor from '@ckeditor/ckeditor5-vue';
+
+Vue.use(CKEditor);
 
 Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',
@@ -70,9 +75,17 @@ Vue.filter('notificationTime', function (time) {
 });
 
 const router = new VueRouter({
-    routes,
+    routes: [
+        ...homeroutes,
+        ...routess,
+    ],
     mode: 'history'
 });
+
+// const homeRoutes = new VueRouter({
+//     homerouter,
+//     mode: 'history'
+// });
 
 /**
  * The following block of code may be used to automatically register your
@@ -88,6 +101,7 @@ const router = new VueRouter({
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('notification', require('./components/NotificationMarkup/notification.vue').default);
 Vue.component('userDetails', require('./components/Backend/User/masterUserDetail.vue').default);
+Vue.component('homeIndex', require('./components/FrontEnd/index.vue').default);
 
 /*New Vue Instance for data transmission*/
 
@@ -101,5 +115,5 @@ export const userEvent = new Vue();
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
 });

@@ -18,8 +18,8 @@
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header">0</h5>
-                                    <span class="description-text">Posts</span>
+                                    <h5 class="description-header">{{user.thoughts_count}}</h5>
+                                    <span class="description-text">Thoughts</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -243,6 +243,7 @@
                                         </div>
                                     </div>
 
+
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
                                             <button type="submit" @click.prevent="updateInfo" class="btn btn-success">
@@ -428,8 +429,9 @@
                         title: 'Success',
                         text: 'Profile Updated Successfully!',
                     });
-                    userEvent.$emit('userUpdated',userData);
-                    this.$Progress.finish();s
+                    userEvent.$emit('userUpdated', userData);
+                    this.$Progress.finish();
+                    s
                 }).catch(() => {
                     this.$Progress.fail();
                 });

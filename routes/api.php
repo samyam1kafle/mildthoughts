@@ -14,15 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('auth')->get('/dashboard', function () {
+    return view('backend/master');
+});
 
 Route::apiResources([
     'roles' => 'API\Rolescontroller',
     'users' => 'API\UsersController',
-    'category' => 'API\ThoughtsCategoryController'
+    'category' => 'API\ThoughtsCategoryController',
+    'thoughts' => 'API\ThoughtsController'
 ]);
 Route::put('follow/{id}', 'API\UsersController@followUser');
 Route::put('unfollow/{id}', 'API\UsersController@unfollowUser');
@@ -42,5 +47,8 @@ Route::middleware('api')->get('markAsRead/{id}', function ($id) {
 
     return response()->json(['notifications' => $newRead], 200);
 });
+
+
+
 
 

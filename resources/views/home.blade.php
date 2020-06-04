@@ -1,4 +1,4 @@
-@extends('backend.master')
+@extends('welcome')
 
 @section('content')
 <div class="container">

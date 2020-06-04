@@ -28,7 +28,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::with('roles')->where('id', '!=', auth('api')->id())
-            ->with(['followings', 'followers'])->withCount(['followings', 'followers'])->orderBy('created_at', 'desc')->get();
+            ->with(['followings', 'followers'])->withCount(['followings', 'followers','thoughts'])->orderBy('created_at', 'desc')->get();
         $roles = Roles::all();
 
         return response()->json(['users' => $users, 'roles' => $roles]);
@@ -81,7 +81,7 @@ class UsersController extends Controller
     {
         $user_id = auth('api')->id();
 
-        $user = User::with('roles', 'followings', 'followers')->withCount(['followings', 'followers'])->findOrFail($user_id);
+        $user = User::with('roles', 'followings', 'followers')->withCount(['followings', 'followers','thoughts'])->findOrFail($user_id);
 
         return $user;
     }
