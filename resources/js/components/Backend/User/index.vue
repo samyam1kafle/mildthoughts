@@ -248,7 +248,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Unsuccessful',
-                        text: 'There occurred some problem while followed this user',
+                        text: 'There occurred some problem while following this user',
                     });
                     this.$Progress.fail();
                 });
@@ -268,7 +268,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Unsuccessful',
-                        text: 'There occurred some problem while followed this user',
+                        text: 'There occurred some problem while Unfollowing this user',
                     });
                     this.$Progress.fail();
                 });

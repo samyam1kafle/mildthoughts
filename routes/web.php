@@ -13,15 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Frontend Routes*/
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', function () {
-    return view('backend/master');
-})->name('admin');
+Route::get('admin', 'HomeController@backend')->name('admin')->where('{path}', '([A-z\d\-\/_.]+)?');
 
 Auth::routes();
+
+Route::get('profile/{id}','HomeController@profileInfo');
+
+Route::get('Auth_profile','HomeController@authProfileInfo');
 
 Route::get('/login-signup', 'FrontendController\ThoughtsController@loginSignup')->name('login-signup');
 
@@ -32,5 +36,11 @@ Route::get('/', 'HomeController@index')->name('home');
 
 
 Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d\-\/_.]+)?');
+
+/*Frontend Routes*/
+
+
+
+
 
 

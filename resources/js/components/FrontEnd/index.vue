@@ -13,18 +13,23 @@
                                             <img :src="getCoverImage()"
                                                  alt="">
                                         </a>
-                                        <a href="profile.html" v-if="user != 'null'" class="profile-thumb-2">
+
+                                        <router-link tag="a" :to="{name: 'UserProfile'}"
+                                                     active-class="active" v-if=" user !='null'
+                                      " class="profile-thumb-2">
                                             <img :src="getUserImage(user.display_image)"
                                                  alt="Display Image">
-                                        </a>
-                                        <a href="profile.html" v-else class="profile-thumb-2">
+                                        </router-link>
+                                        <a href="#" v-else class="profile-thumb-2">
                                             <img :src="getAnonymousImage()"
                                                  alt="Display Image">
                                         </a>
                                     </figure>
                                     <div class="profile-desc text-center">
-                                        <h6 class="author" v-if="user != 'null'"><a href="profile.html"
-                                        >{{user.name}}</a>
+                                        <h6 class="author" v-if="user != 'null'">
+                                            <router-link active-class="active" tag="a" :to="{name: 'UserProfile'}"
+                                            >{{user.name}}
+                                            </router-link>
                                         </h6>
                                         <h6 class="author" v-else><a href="profile.html"
                                         >Anonymous</a>
@@ -207,7 +212,7 @@
                         <!-- share box end -->
 
                         <!-- post status start -->
-                        <div class="card" v-for="post in thoughts">
+                        <div class="card" v-if="user.followings.length > 0" v-for="post in thoughts">
                             <!-- post title start -->
                             <div class="post-title d-flex align-items-center">
                                 <!-- profile picture end -->
@@ -223,9 +228,10 @@
 
                                 <div class="posted-author">
                                     <h6 class="author">
-                                        <router-link :to="{name: 'FrontProfile' , params: {id: post.user.id}}" tag="a"
+                                        <router-link :to="{name: 'FrontProfile' , query: {id: post.user.id}}" tag="a"
                                                      active-class="active">{{post.user.name}}
                                         </router-link>
+
                                     </h6>
 
                                     <span class="post-time">{{post.created_at | notificationTime}}</span>
@@ -263,12 +269,21 @@
                                         </a>
                                     </figure>
                                 </div>
-                                <div class="post-meta">
-                                    <button class="post-meta-like">
-                                        <i class="bi bi-heart-beat"></i>
-                                        <span>You and 201 people like this</span>
-                                        <strong>201</strong>
-                                    </button>
+                                <div class="post-meta col-lg-12">
+                                    <div class="col-sm-8">
+                                        <ul class="comment-share-meta">
+                                            <li>
+                                                <button @click="likeUnlike(post.id)" class="post-meta-like">
+                                                    <i class="bi bi-heart-beat"></i>
+                                                </button>
+                                                <button class="post-share">
+                                                    <span>201 people like this</span>
+                                                </button>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
                                     <ul class="comment-share-meta">
                                         <li>
                                             <button class="post-comment">
@@ -283,9 +298,25 @@
                                             </button>
                                         </li>
                                     </ul>
+                                                                        <!--<button class="post-meta-like">-->
+                                    <!--<i class="bi bi-heart-beat"></i>-->
+                                    <!--<span>201 people like this</span>-->
+                                    <!--</button>-->
+
                                 </div>
                             </div>
                         </div>
+                        <div class="card" v-else>
+                            <div class="post-content">
+                                <p class="post-desc">
+                                    You have not followed any user please follow some user to see their
+                                    post.
+                                    <strong>Feel Free To Explore The World Of thoughts.</strong>
+                                </p>
+
+                            </div>
+                        </div>
+
                         <!-- post status end -->
 
 
@@ -417,7 +448,7 @@
         data() {
             return {
                 user: {},
-                followings: [],
+                followings: {},
                 followingUsers: {},
                 thoughts: {}
             }
@@ -452,10 +483,9 @@
                     this.followingUsers = response.data.following;
                     this.thoughts = response.data.thoughts;
                 }).catch(() => {
-                    Swal.fire({
+                    Toast.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'There occurred some problem loading the feed.Please refresh the page.',
+                        title: 'There occurred an error while liking the Thought.'
                     });
                 });
             },
@@ -463,19 +493,28 @@
                 axios.get('user/').then((response) => {
                     this.user = response.data.userdetail;
                     this.followings = response.data.followings;
-                    if(this.user !== 'null'){
+                    if (this.user !== 'null' && this.user.followings.length > 0) {
                         this.followerThoughts();
                     }
                 }).catch(() => {
-                    Swal.fire({
+                    Toast.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: 'There occurred some problem loading the feed.Please try again.',
+                        title: 'There occurred an error while loading the feed.'
+                    });
+                });
+            },
+            likeUnlike(postId) {
+                axios.put('api/like_unlike/' + postId).then((response)=>{
+                    console.log(response);
+                }).catch(()=>{
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'There occurred an error while liking the Thought.'
                     });
                 });
             }
         },
-        created() {
+        mounted() {
             this.authUser();
 
         }

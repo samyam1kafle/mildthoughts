@@ -177,8 +177,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
-//        /*Follow Unfollow package*/
-//        Overtrue\LaravelFollow\FollowServiceProvider::class,
 
     ],
 

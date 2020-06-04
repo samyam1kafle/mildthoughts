@@ -19,9 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth')->get('/dashboard', function () {
-    return view('backend/master');
-});
 
 Route::apiResources([
     'roles' => 'API\Rolescontroller',
@@ -29,12 +26,23 @@ Route::apiResources([
     'category' => 'API\ThoughtsCategoryController',
     'thoughts' => 'API\ThoughtsController'
 ]);
+
+/*Like Unlike /Follow unfollow Routes*/
+
+Route::put('/like_unlike/{id}','API\Frontend\LikesUnlikesController@likeUnlike');
+
 Route::put('follow/{id}', 'API\UsersController@followUser');
 Route::put('unfollow/{id}', 'API\UsersController@unfollowUser');
 Route::get('followed/{id}', 'API\UsersController@followedUser');
 
+/*Like Unlike /Follow unfollow Routes*/
+
 Route::get('profile', 'API\UsersController@profile');
 Route::put('profile', 'API\UsersController@updateProfileInfo');
+
+
+
+
 
 
 //Route::middleware('api')->get('markAsRead/{id}', 'API\UsersController@markAsRead');

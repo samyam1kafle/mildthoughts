@@ -343,23 +343,15 @@
                 return photo;
             },
             viewProfile() {
-                axios.get('profile/' + this.id).then((response) => {
+                axios.get('Auth_profile').then((response) => {
                     this.user = response.data.user_data;
                     this.thoughts = response.data.thoughts;
                 }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There occurred an error while loading the users profile.'
-                    });
+
                 });
             },
         },
-        computed:{
-            id(){
-             return this.$route.query.id;
-            },
-        },
-        mounted() {
+        created() {
             this.viewProfile();
         }
     }
