@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-lg-2 col-md-3 d-none d-md-block">
                             <div class="profile-edit-panel">
-                                <button class="edit-btn">edit profile</button>
+                                <button class="edit-btn">Follow {{user.name}}</button>
                             </div>
                         </div>
                     </div>
@@ -291,12 +291,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="post-meta">
-                                    <button class="post-meta-like">
-                                        <i class="bi bi-heart-beat"></i>
-                                        <span>You and 207 people like this</span>
-                                        <strong>207</strong>
-                                    </button>
+                                <div class="post-meta col-lg-12">
+                                    <div class="col-sm-8">
+                                        <ul class="comment-share-meta">
+                                            <li>
+                                                <button class="post-meta-like">
+                                                    <i class="bi bi-heart-beat"></i>
+                                                </button>
+                                                <button class="post-share">
+                                                    <span>201 people like this</span>
+                                                </button>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
                                     <ul class="comment-share-meta">
                                         <li>
                                             <button class="post-comment">
@@ -311,7 +320,13 @@
                                             </button>
                                         </li>
                                     </ul>
+                                    <!--<button class="post-meta-like">-->
+                                    <!--<i class="bi bi-heart-beat"></i>-->
+                                    <!--<span>201 people like this</span>-->
+                                    <!--</button>-->
+
                                 </div>
+
                             </div>
                         </div>
                         <!-- post status end -->

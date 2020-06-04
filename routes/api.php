@@ -38,14 +38,9 @@ Route::get('followed/{id}', 'API\UsersController@followedUser');
 /*Like Unlike /Follow unfollow Routes*/
 
 Route::get('profile', 'API\UsersController@profile');
+
 Route::put('profile', 'API\UsersController@updateProfileInfo');
 
-
-
-
-
-
-//Route::middleware('api')->get('markAsRead/{id}', 'API\UsersController@markAsRead');
 Route::middleware('api')->get('markAsRead/{id}', function ($id) {
     $user = \App\User::findOrFail($id);
     $user->unreadNotifications->markAsRead();

@@ -37,6 +37,7 @@ class HomeController extends Controller
     {
         $data = User::with('thoughts', 'roles', 'followers', 'followings')->withCount(['followers', 'followings'])->find($id);
         $thoughts = $data->thoughts;
+        $Thought_in_order = [];
         if (count($thoughts) > 0) {
             foreach ($thoughts as $thought) {
                 $indThought[] = Thoughts::with('user', 'category')->find($thought->id);

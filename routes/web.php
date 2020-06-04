@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 /*Frontend Routes*/
 
+
+/*Main Routes For index of frontend and backend*/
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,10 +24,16 @@ Route::get('/', function () {
 Route::get('admin', 'HomeController@backend')->name('admin')->where('{path}', '([A-z\d\-\/_.]+)?');
 
 Auth::routes();
+/*Main Routes For index of frontend and backend*/
 
-Route::get('profile/{id}','HomeController@profileInfo');
 
-Route::get('Auth_profile','HomeController@authProfileInfo');
+/*Profile Routes*/
+
+Route::get('profile/{id}', 'HomeController@profileInfo');
+
+Route::get('Auth_profile', 'HomeController@authProfileInfo');
+
+/*Profile Routes*/
 
 Route::get('/login-signup', 'FrontendController\ThoughtsController@loginSignup')->name('login-signup');
 

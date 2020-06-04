@@ -4502,81 +4502,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
       followings: {},
       followingUsers: {},
-      thoughts: {}
+      thoughts: {},
+      authorYouMayKnow: {}
     };
   },
   methods: {
@@ -4623,6 +4556,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('user/').then(function (response) {
         _this2.user = response.data.userdetail;
         _this2.followings = response.data.followings;
+        _this2.authorYouMayKnow = response.data.Author;
 
         if (_this2.user !== 'null' && _this2.user.followings.length > 0) {
           _this2.followerThoughts();
@@ -4661,6 +4595,21 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -76047,7 +75996,86 @@ var render = function() {
             2
           ),
           _vm._v(" "),
-          _vm._m(7)
+          _c("div", { staticClass: "col-lg-3 order-3" }, [
+            _c("aside", { staticClass: "widget-area" }, [
+              _c("div", { staticClass: "card widget-item" }, [
+                _c("h4", { staticClass: "widget-title" }, [
+                  _vm._v("Authors You may like")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "widget-body" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "like-page-list-wrapper" },
+                    _vm._l(_vm.authorYouMayKnow.slice(0, 5), function(author) {
+                      return _c(
+                        "li",
+                        { key: author.id, staticClass: "unorder-list" },
+                        [
+                          _c("div", { staticClass: "profile-thumb" }, [
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c(
+                                "figure",
+                                { staticClass: "profile-thumb-small" },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: _vm.getUserImage(
+                                        author.display_image
+                                      ),
+                                      alt: "profile picture"
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "unorder-list-info" }, [
+                            _c(
+                              "h3",
+                              { staticClass: "list-title" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: author.id }
+                                      },
+                                      tag: "a",
+                                      "active-class": "active"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(author.name) +
+                                        "\n                                                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "list-subtitle" }, [
+                              _c("a", { attrs: { href: "#" } }, [
+                                _vm._v(_vm._s(author.email))
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(7, true)
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ])
         ])
       ])
     ])
@@ -76339,144 +76367,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-3 order-3" }, [
-      _c("aside", { staticClass: "widget-area" }, [
-        _c("div", { staticClass: "card widget-item" }, [
-          _c("h4", { staticClass: "widget-title" }, [_vm._v("Friends Zone")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "widget-body" }, [
-            _c("ul", { staticClass: "like-page-list-wrapper" }, [
-              _c("li", { staticClass: "unorder-list" }, [
-                _c("div", { staticClass: "profile-thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("figure", { staticClass: "profile-thumb-small" }, [
-                      _c("img", { attrs: { src: "", alt: "profile picture" } })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "unorder-list-info" }, [
-                  _c("h3", { staticClass: "list-title" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Ammeya Jakson")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "list-subtitle" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("10 mutual")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("button", { staticClass: "like-button" }, [
-                  _c("img", {
-                    staticClass: "heart",
-                    attrs: { src: "", alt: "" }
-                  }),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "heart-color",
-                    attrs: { src: "", alt: "" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "unorder-list" }, [
-                _c("div", { staticClass: "profile-thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("figure", { staticClass: "profile-thumb-small" }, [
-                      _c("img", { attrs: { src: "", alt: "profile picture" } })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "unorder-list-info" }, [
-                  _c("h3", { staticClass: "list-title" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Jashon Muri")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "list-subtitle" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("2 mutual")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("button", { staticClass: "like-button active" }, [
-                  _c("img", {
-                    staticClass: "heart",
-                    attrs: { src: "", alt: "" }
-                  }),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "heart-color",
-                    attrs: { src: "", alt: "" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "unorder-list" }, [
-                _c("div", { staticClass: "profile-thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("figure", { staticClass: "profile-thumb-small" }, [
-                      _c("img", { attrs: { src: "", alt: "profile picture" } })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "unorder-list-info" }, [
-                  _c("h3", { staticClass: "list-title" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Rolin Theitar")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "list-subtitle" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("drama")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("button", { staticClass: "like-button" }, [
-                  _c("img", {
-                    staticClass: "heart",
-                    attrs: { src: "", alt: "" }
-                  }),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "heart-color",
-                    attrs: { src: "", alt: "" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "unorder-list" }, [
-                _c("div", { staticClass: "profile-thumb" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("figure", { staticClass: "profile-thumb-small" }, [
-                      _c("img", { attrs: { src: "", alt: "profile picture" } })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "unorder-list-info" }, [
-                  _c("h3", { staticClass: "list-title" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Active Mind")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "list-subtitle" }, [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("fitness")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("button", { staticClass: "like-button" }, [
-                  _c("img", {
-                    staticClass: "heart",
-                    attrs: { src: "", alt: "" }
-                  }),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "heart-color",
-                    attrs: { src: "", alt: "" }
-                  })
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("button", { staticClass: "like-button" }, [
+      _c("img", { staticClass: "heart", attrs: { src: "", alt: "" } }),
+      _vm._v(" "),
+      _c("img", { staticClass: "heart-color", attrs: { src: "", alt: "" } })
     ])
   }
 ]
@@ -76532,7 +76426,13 @@ var render = function() {
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
-            _vm._m(1)
+            _c("div", { staticClass: "col-lg-2 col-md-3 d-none d-md-block" }, [
+              _c("div", { staticClass: "profile-edit-panel" }, [
+                _c("button", { staticClass: "edit-btn" }, [
+                  _vm._v("Follow " + _vm._s(_vm.user.name))
+                ])
+              ])
+            ])
           ])
         ])
       ]),
@@ -76614,9 +76514,9 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(2)
                 ])
               ]),
               _vm._v(" "),
@@ -76661,7 +76561,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(4, true)
+                      _vm._m(3, true)
                     ]
                   ),
                   _vm._v(" "),
@@ -76708,7 +76608,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(5, true)
+                    _vm._m(4, true)
                   ])
                 ])
               })
@@ -76754,16 +76654,6 @@ var staticRenderFns = [
             ])
           ])
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-2 col-md-3 d-none d-md-block" }, [
-      _c("div", { staticClass: "profile-edit-panel" }, [
-        _c("button", { staticClass: "edit-btn" }, [_vm._v("edit profile")])
       ])
     ])
   },
@@ -76923,13 +76813,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-meta" }, [
-      _c("button", { staticClass: "post-meta-like" }, [
-        _c("i", { staticClass: "bi bi-heart-beat" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("You and 207 people like this")]),
-        _vm._v(" "),
-        _c("strong", [_vm._v("207")])
+    return _c("div", { staticClass: "post-meta col-lg-12" }, [
+      _c("div", { staticClass: "col-sm-8" }, [
+        _c("ul", { staticClass: "comment-share-meta" }, [
+          _c("li", [
+            _c("button", { staticClass: "post-meta-like" }, [
+              _c("i", { staticClass: "bi bi-heart-beat" })
+            ]),
+            _vm._v(" "),
+            _c("button", { staticClass: "post-share" }, [
+              _c("span", [_vm._v("201 people like this")])
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("ul", { staticClass: "comment-share-meta" }, [
