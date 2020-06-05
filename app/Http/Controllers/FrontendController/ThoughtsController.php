@@ -36,6 +36,7 @@ class ThoughtsController extends Controller
                 }
 
             }
+            $arr = array_slice($arr,0,5);
 
             /*Author you may know*/
             return response()->json(['userdetail' => $userdetail, 'followings' => $followings, 'Author' => $arr], 200);

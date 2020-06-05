@@ -35,7 +35,10 @@ class HomeController extends Controller
 
     public function profileInfo($id)
     {
+        $userLogged = auth()->user();
         $data = User::with('thoughts', 'roles', 'followers', 'followings')->withCount(['followers', 'followings'])->find($id);
+        $followingOrNot = $userLogged->isFollowing($data);
+
         $thoughts = $data->thoughts;
         $Thought_in_order = [];
         if (count($thoughts) > 0) {
@@ -46,7 +49,7 @@ class HomeController extends Controller
             $Thought_in_order = $indThought->sortByDesc('created_at');
             $Thought_in_order = $Thought_in_order->values()->all();
         }
-        return response()->json(['user_data' => $data, 'thoughts' => $Thought_in_order]);
+        return response()->json(['user_data' => $data, 'thoughts' => $Thought_in_order,'isFollowing'=>$followingOrNot]);
     }
 
     public function authProfileInfo()

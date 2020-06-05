@@ -4502,6 +4502,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4937,14 +4944,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
-      thoughts: {}
+      thoughts: {},
+      isFollowing: false
     };
   },
   methods: {
+    followUser: function followUser(id) {
+      var _this = this;
+
+      axios.put('api/follow/' + id).then(function (response) {
+        _this.$Progress.start();
+
+        Fire.$emit('ProfileEvent');
+        Toast.fire({
+          icon: 'success',
+          title: 'You started following ' + _this.user.name
+        });
+
+        _this.$Progress.finish();
+      })["catch"](function () {
+        Toast.fire({
+          icon: 'error',
+          title: 'There was a problem following' + _this.user.name
+        });
+
+        _this.$Progress.fail();
+      });
+    },
+    unfollowUser: function unfollowUser(id) {
+      var _this2 = this;
+
+      axios.put('api/unfollow/' + id).then(function () {
+        _this2.$Progress.start();
+
+        Fire.$emit('ProfileEvent');
+        Toast.fire({
+          icon: 'info',
+          title: 'You un-followed ' + _this2.user.name + 'successfully.'
+        });
+
+        _this2.$Progress.finish();
+      })["catch"](function () {
+        Toast.fire({
+          icon: 'error',
+          title: 'There was a problem while un-following' + _this2.user.name
+        });
+
+        _this2.$Progress.fail();
+      });
+    },
     getThoughtImage: function getThoughtImage(image) {
       var photo = 'Backend/ThoughtsImages/' + image;
       return photo;
@@ -4954,11 +5007,12 @@ __webpack_require__.r(__webpack_exports__);
       return photo;
     },
     viewProfile: function viewProfile() {
-      var _this = this;
+      var _this3 = this;
 
       axios.get('profile/' + this.id).then(function (response) {
-        _this.user = response.data.user_data;
-        _this.thoughts = response.data.thoughts;
+        _this3.user = response.data.user_data;
+        _this3.thoughts = response.data.thoughts;
+        _this3.isFollowing = response.data.isFollowing;
       })["catch"](function () {
         Toast.fire({
           icon: 'error',
@@ -4973,7 +5027,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this4 = this;
+
     this.viewProfile();
+    Fire.$on('ProfileEvent', function () {
+      _this4.viewProfile();
+    });
   }
 });
 
@@ -76007,29 +76066,47 @@ var render = function() {
                   _c(
                     "ul",
                     { staticClass: "like-page-list-wrapper" },
-                    _vm._l(_vm.authorYouMayKnow.slice(0, 5), function(author) {
+                    _vm._l(_vm.authorYouMayKnow, function(author) {
                       return _c(
                         "li",
                         { key: author.id, staticClass: "unorder-list" },
                         [
-                          _c("div", { staticClass: "profile-thumb" }, [
-                            _c("a", { attrs: { href: "#" } }, [
+                          _c(
+                            "div",
+                            { staticClass: "profile-thumb" },
+                            [
                               _c(
-                                "figure",
-                                { staticClass: "profile-thumb-small" },
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: {
+                                      name: "FrontProfile",
+                                      query: { id: author.id }
+                                    },
+                                    tag: "a",
+                                    "active-class": "active"
+                                  }
+                                },
                                 [
-                                  _c("img", {
-                                    attrs: {
-                                      src: _vm.getUserImage(
-                                        author.display_image
-                                      ),
-                                      alt: "profile picture"
-                                    }
-                                  })
+                                  _c(
+                                    "figure",
+                                    { staticClass: "profile-thumb-small" },
+                                    [
+                                      _c("img", {
+                                        attrs: {
+                                          src: _vm.getUserImage(
+                                            author.display_image
+                                          ),
+                                          alt: "profile picture"
+                                        }
+                                      })
+                                    ]
+                                  )
                                 ]
                               )
-                            ])
-                          ]),
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c("div", { staticClass: "unorder-list-info" }, [
                             _c(
@@ -76059,11 +76136,32 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            _c("p", { staticClass: "list-subtitle" }, [
-                              _c("a", { attrs: { href: "#" } }, [
-                                _vm._v(_vm._s(author.email))
-                              ])
-                            ])
+                            _c(
+                              "p",
+                              { staticClass: "list-subtitle" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: author.id }
+                                      },
+                                      tag: "a",
+                                      "active-class": "active"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(author.email) +
+                                        "\n                                                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
                           ]),
                           _vm._v(" "),
                           _vm._m(7, true)
@@ -76428,9 +76526,31 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-2 col-md-3 d-none d-md-block" }, [
               _c("div", { staticClass: "profile-edit-panel" }, [
-                _c("button", { staticClass: "edit-btn" }, [
-                  _vm._v("Follow " + _vm._s(_vm.user.name))
-                ])
+                !_vm.isFollowing
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "edit-btn",
+                        on: {
+                          click: function($event) {
+                            return _vm.followUser(_vm.user.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Follow " + _vm._s(_vm.user.name))]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "edit-btn",
+                        on: {
+                          click: function($event) {
+                            return _vm.unfollowUser(_vm.user.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Un-follow " + _vm._s(_vm.user.name))]
+                    )
               ])
             ])
           ])

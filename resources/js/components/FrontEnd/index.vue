@@ -330,16 +330,18 @@
                                 <h4 class="widget-title">Authors You may like</h4>
                                 <div class="widget-body">
                                     <ul class="like-page-list-wrapper">
-                                        <li class="unorder-list" v-for="author in authorYouMayKnow.slice(0,5)"
+                                        <li class="unorder-list" v-for="author in authorYouMayKnow"
                                             :key="author.id">
                                             <!-- profile picture end -->
                                             <div class="profile-thumb">
-                                                <a href="#">
+                                                <router-link :to="{name: 'FrontProfile' , query: {id: author.id}}"
+                                                             tag="a"
+                                                             active-class="active">
                                                     <figure class="profile-thumb-small">
                                                         <img :src="getUserImage(author.display_image)"
                                                              alt="profile picture">
                                                     </figure>
-                                                </a>
+                                                </router-link>
                                             </div>
                                             <!-- profile picture end -->
 
@@ -351,7 +353,12 @@
                                                             active-class="active">{{author.name}}
                                                     </router-link>
                                                 </h3>
-                                                <p class="list-subtitle"><a href="#">{{author.email}}</a></p>
+                                                <p class="list-subtitle">
+                                                    <router-link :to="{name: 'FrontProfile' , query: {id: author.id}}"
+                                                                 tag="a"
+                                                                 active-class="active">{{author.email}}
+                                                    </router-link>
+                                                </p>
                                             </div>
                                             <button class="like-button">
                                                 <img class="heart"

@@ -35,7 +35,8 @@
                         </div>
                         <div class="col-lg-2 col-md-3 d-none d-md-block">
                             <div class="profile-edit-panel">
-                                <button class="edit-btn">Follow {{user.name}}</button>
+                                <button v-if="!isFollowing" @click="followUser(user.id)" class="edit-btn">Follow {{user.name}}</button>
+                                <button v-else @click="unfollowUser(user.id)" class="edit-btn">Un-follow {{user.name}}</button>
                             </div>
                         </div>
                     </div>
@@ -345,10 +346,46 @@
         data() {
             return {
                 user: {},
-                thoughts: {}
+                thoughts: {},
+                isFollowing: false
             }
         },
         methods: {
+            followUser(id) {
+                axios.put('api/follow/' + id).then((response) => {
+                    this.$Progress.start();
+                    Fire.$emit('ProfileEvent');
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'You started following ' + this.user.name
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'There was a problem following' + this.user.name
+                    });
+                    this.$Progress.fail();
+                });
+            },
+            unfollowUser(id) {
+                axios.put('api/unfollow/' + id).then(() => {
+                    this.$Progress.start();
+                    Fire.$emit('ProfileEvent');
+                    Toast.fire({
+                        icon: 'info',
+                        title: 'You un-followed ' + this.user.name + 'successfully.'
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'There was a problem while un-following' + this.user.name
+                    });
+                    this.$Progress.fail();
+                });
+            },
+
             getThoughtImage(image) {
                 let photo = 'Backend/ThoughtsImages/' + image;
                 return photo;
@@ -361,6 +398,7 @@
                 axios.get('profile/' + this.id).then((response) => {
                     this.user = response.data.user_data;
                     this.thoughts = response.data.thoughts;
+                    this.isFollowing = response.data.isFollowing;
                 }).catch(() => {
                     Toast.fire({
                         icon: 'error',
@@ -369,13 +407,16 @@
                 });
             },
         },
-        computed:{
-            id(){
-             return this.$route.query.id;
+        computed: {
+            id() {
+                return this.$route.query.id;
             },
         },
         mounted() {
             this.viewProfile();
+            Fire.$on('ProfileEvent', () => {
+                this.viewProfile();
+            })
         }
     }
 </script>
