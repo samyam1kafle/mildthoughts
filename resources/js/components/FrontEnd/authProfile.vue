@@ -22,22 +22,30 @@
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li class="active"><a href="#">timeline</a></li>
-                                            <li><a href="about.html">about</a></li>
-                                            <li><a href="photos.html">photos</a></li>
-                                            <li><a href="friends.html">friends</a></li>
-                                            <li><a href="about.html">more</a></li>
-                                            <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
+                                            <li>
+                                                <router-link tag="a" :to="{name: 'FrontProfile' , query: {id: user.id}}"
+                                                             active-class="active">timeline
+                                                </router-link>
+                                            </li>
+                                            <li>
+                                                <router-link :to="{name: 'UserFollowers' , query: {id: user.id}}"
+                                                             tag="a"
+                                                             active-class="active">Followers
+                                                </router-link>
+                                            </li>
+                                            <li>
+                                                <router-link tag="a"
+                                                             :to="{name: 'UserFollowings' , query: {id: user.id}}"
+                                                             active-class="active">Following
+                                                </router-link>
+                                            </li>
+                                            <li><a href="">Settings</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-3 d-none d-md-block">
-                            <div class="profile-edit-panel">
-                                <button class="edit-btn">edit profile</button>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

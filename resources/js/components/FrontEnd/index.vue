@@ -45,109 +45,20 @@
 
                             <!-- widget single item start -->
                             <div class="card widget-item">
-                                <h4 class="widget-title">page you may like</h4>
+                                <h4 class="widget-title">Browse Through Categories Tags</h4>
                                 <div class="widget-body">
                                     <ul class="like-page-list-wrapper">
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src=""
-                                                             alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
+                                        <li class="unorder-list" v-for="tag in tags">
 
                                             <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Travel The World</a></h3>
-                                                <p class="list-subtitle"><a href="#">adventure</a></p>
+                                                <h3 class="list-title">
+                                                    <i class="fa fa-tags"></i>
+                                                    <a href="#">{{tag.category_name}}</a>
+                                                </h3>
                                             </div>
-                                            <button class="like-button active">
-                                                <img class="heart"
-                                                     src=""
-                                                     alt="">
-                                                <img class="heart-color"
-                                                     src=""
-                                                     alt="">
-                                            </button>
-                                        </li>
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src=""
-                                                             alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
 
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Foodcort Nirala</a></h3>
-                                                <p class="list-subtitle"><a href="#">food</a></p>
-                                            </div>
-                                            <button class="like-button">
-                                                <img class="heart"
-                                                     src=""
-                                                     alt="">
-                                                <img class="heart-color"
-                                                     src=""
-                                                     alt="">
-                                            </button>
                                         </li>
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src=""
-                                                             alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
 
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Rolin Theitar</a></h3>
-                                                <p class="list-subtitle"><a href="#">drama</a></p>
-                                            </div>
-                                            <button class="like-button">
-                                                <img class="heart"
-                                                     src=""
-                                                     alt="">
-                                                <img class="heart-color"
-                                                     src=""
-                                                     alt="">
-                                            </button>
-                                        </li>
-                                        <li class="unorder-list">
-                                            <!-- profile picture end -->
-                                            <div class="profile-thumb">
-                                                <a href="#">
-                                                    <figure class="profile-thumb-small">
-                                                        <img src=""
-                                                             alt="profile picture">
-                                                    </figure>
-                                                </a>
-                                            </div>
-                                            <!-- profile picture end -->
-
-                                            <div class="unorder-list-info">
-                                                <h3 class="list-title"><a href="#">Active Mind</a></h3>
-                                                <p class="list-subtitle"><a href="#">fitness</a></p>
-                                            </div>
-                                            <button class="like-button">
-                                                <img class="heart"
-                                                     src=""
-                                                     alt="">
-                                                <img class="heart-color"
-                                                     src=""
-                                                     alt="">
-                                            </button>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -258,6 +169,13 @@
                             </div>
                             <!-- post title start -->
                             <div class="post-content">
+                                <strong><i class="fas fa-pen"> </i> Title: {{post.title}}</strong>
+                                <hr>
+                                <strong><i class="fa fa-tag"> </i> Tag: {{post.category.category_name}}</strong>
+
+
+                                <hr>
+
                                 <p class="post-desc">
                                     {{post.thought}}
                                 </p>
@@ -274,7 +192,7 @@
                                         <ul class="comment-share-meta">
                                             <li>
                                                 <button @click="likeUnlike(post.id)" class="post-meta-like">
-                                                    <i class="bi bi-heart-beat"></i>
+                                                    <i class="fa fa-star"></i>
                                                 </button>
                                                 <button class="post-share">
                                                     <span>201 people like this</span>
@@ -360,14 +278,7 @@
                                                     </router-link>
                                                 </p>
                                             </div>
-                                            <button class="like-button">
-                                                <img class="heart"
-                                                     src=""
-                                                     alt="">
-                                                <img class="heart-color"
-                                                     src=""
-                                                     alt="">
-                                            </button>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -390,7 +301,8 @@
                 followings: {},
                 followingUsers: {},
                 thoughts: {},
-                authorYouMayKnow: {}
+                authorYouMayKnow: {},
+                tags: {},
             }
         },
         methods: {
@@ -422,6 +334,7 @@
                 }).then((response) => {
                     this.followingUsers = response.data.following;
                     this.thoughts = response.data.thoughts;
+                    this.tags = response.data.thoughtTags;
                 }).catch(() => {
                     Toast.fire({
                         icon: 'error',

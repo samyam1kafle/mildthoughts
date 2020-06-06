@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
 use App\Models\Thoughts;
+use App\Models\ThoughtsCategory;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,7 @@ class ThoughtsController extends Controller
         $followingUserData = [];
         $latestThoughts = [];
         $thoughtData = [];
+        $tags = ThoughtsCategory::all();
         foreach ($following as $thoughts) {
             foreach ($thoughts as $userThoughts) {
                 $ind = User::with('thoughts', 'followers', 'followings', 'roles')->find($userThoughts);
@@ -80,7 +82,7 @@ class ThoughtsController extends Controller
             }
         }
 
-        return response()->json(['following' => $followingUserData, 'thoughts' => $thoughtData]);
+        return response()->json(['following' => $followingUserData, 'thoughts' => $thoughtData,'thoughtTags'=>$tags]);
     }
 
     public function loginSignup()

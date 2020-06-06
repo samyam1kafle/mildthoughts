@@ -1,0 +1,204 @@
+<template>
+    <main>
+
+        <div class="main-wrapper">
+            <div class="profile-banner-large bg-img" data-bg="assets/images/banner/profile-banner.jpg"
+                 style="background-image: url('../../../../public/Frontend/assets/images/banner/profile-banner.jpg');">
+            </div>
+            <div class="profile-menu-area bg-white">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-3">
+                            <div class="profile-picture-box">
+                                <figure class="profile-picture">
+                                    <a href="#">
+                                        <img :src="getUserImage(user.display_image)" alt="profile picture">
+                                    </a>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 offset-lg-1">
+                            <div class="profile-menu-wrapper">
+                                <div class="main-menu-inner header-top-navigation">
+                                    <nav>
+                                        <ul class="main-menu">
+                                            <li>
+                                                <router-link tag="a" :to="{name: 'FrontProfile' , query: {id: user.id}}"
+                                                             active-class="active">timeline
+                                                </router-link>
+                                            </li>
+                                            <li>
+                                                <router-link :to="{name: 'UserFollowers' , query: {id: user.id}}"
+                                                             tag="a"
+                                                             active-class="active">Followers
+                                                </router-link>
+                                            </li>
+                                            <li>
+                                                <router-link tag="a"
+                                                             :to="{name: 'UserFollowings' , query: {id: user.id}}"
+                                                             active-class="active">Following
+                                                </router-link>
+                                            </li>
+                                            <li><a href="">Settings</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 d-none d-md-block">
+                            <div class="profile-edit-panel">
+                                <button v-if="!isFollowing" @click="followUser(user.id)" class="edit-btn">Follow
+                                    {{user.name}}
+                                </button>
+                                <button v-else @click="unfollowUser(user.id)" class="edit-btn">Un-follow {{user.name}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-secondary">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="secondary-menu-wrapper secondary-menu-2 bg-white">
+
+                                <div class="filter-menu">
+                                    <button class="active" data-filter="*">Followers ({{user.followers_count}})</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="friends-section mt-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="content-box friends-zone">
+                                <div class="row mt--20 friends-list" style="position: relative; height: 1150px;">
+                                    <div v-for="followers in user.followers" :key="followers.id"
+                                         class="col-lg-3 col-sm-6 recently request"
+                                         style="left: 0px; top: 0px;">
+                                        <div class="friend-list-view">
+                                            <!-- profile picture end -->
+                                            <div class="profile-thumb">
+                                                <router-link :to="{name: 'FrontProfile' , query: {id: followers.id}}"
+                                                             tag="a"
+                                                             active-class="active">
+                                                    <figure class="profile-thumb-middle">
+                                                        <img :src="getUserImage(followers.display_image)"
+                                                             alt="profile picture">
+                                                    </figure>
+                                                </router-link>
+                                            </div>
+                                            <!-- profile picture end -->
+
+                                            <div class="posted-author">
+                                                <h6 class="author">
+                                                    <router-link
+                                                            :to="{name: 'FrontProfile' , query: {id: followers.id}}"
+                                                            tag="a"
+                                                            active-class="active">{{followers.name}}
+                                                    </router-link>
+                                                </h6>
+                                                <button disabled v-if="!isFollowing" class="add-frnd">User not
+                                                    followed
+                                                </button>
+                                                <button disabled v-else class="add-frnd">User Followed</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                user: {},
+                thoughts: {},
+                isFollowing: false
+            }
+        },
+        methods: {
+            followUser(id) {
+                axios.put('api/follow/' + id).then((response) => {
+                    this.$Progress.start();
+                    Fire.$emit('ProfileEvent');
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'You started following ' + this.user.name
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'There was a problem following' + this.user.name
+                    });
+                    this.$Progress.fail();
+                });
+            },
+            unfollowUser(id) {
+                axios.put('api/unfollow/' + id).then(() => {
+                    this.$Progress.start();
+                    Fire.$emit('ProfileEvent');
+                    Toast.fire({
+                        icon: 'info',
+                        title: 'You un-followed ' + this.user.name + 'successfully.'
+                    });
+                    this.$Progress.finish();
+                }).catch(() => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'There was a problem while un-following' + this.user.name
+                    });
+                    this.$Progress.fail();
+                });
+            },
+
+            getThoughtImage(image) {
+                let photo = 'Backend/ThoughtsImages/' + image;
+                return photo;
+            },
+            getUserImage(image) {
+                let photo = 'Backend/ProfileImages/' + image;
+                return photo;
+            },
+            viewProfile() {
+                axios.get('profile/' + this.id).then((response) => {
+                    this.user = response.data.user_data;
+                    this.thoughts = response.data.thoughts;
+                    this.isFollowing = response.data.isFollowing;
+                }).catch(() => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'There occurred an error while loading the users profile.'
+                    });
+                });
+            },
+        },
+        computed: {
+            id() {
+                return this.$route.query.id;
+            },
+        },
+        mounted() {
+            this.viewProfile();
+            Fire.$on('ProfileEvent', () => {
+                this.viewProfile();
+            })
+        }
+    }
+</script>

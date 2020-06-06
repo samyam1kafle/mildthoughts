@@ -22,12 +22,24 @@
                                 <div class="main-menu-inner header-top-navigation">
                                     <nav>
                                         <ul class="main-menu">
-                                            <li class="active"><a href="#">timeline</a></li>
-                                            <li><a href="about.html">about</a></li>
-                                            <li><a href="photos.html">photos</a></li>
-                                            <li><a href="friends.html">friends</a></li>
-                                            <li><a href="about.html">more</a></li>
-                                            <!-- <li class="d-inline-block d-md-none"><a href="profile.html">edit profile</a></li> -->
+                                            <li>
+                                                <router-link tag="a" :to="{name: 'FrontProfile' , query: {id: user.id}}"
+                                                             active-class="active">timeline
+                                                </router-link>
+                                            </li>
+                                            <li>
+                                                <router-link :to="{name: 'UserFollowers' , query: {id: user.id}}"
+                                                             tag="a"
+                                                             active-class="active">Followers
+                                                </router-link>
+                                            </li>
+                                            <li>
+                                                <router-link tag="a"
+                                                             :to="{name: 'UserFollowings' , query: {id: user.id}}"
+                                                             active-class="active">Following
+                                                </router-link>
+                                            </li>
+                                            <li><a href="">Settings</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -35,8 +47,11 @@
                         </div>
                         <div class="col-lg-2 col-md-3 d-none d-md-block">
                             <div class="profile-edit-panel">
-                                <button v-if="!isFollowing" @click="followUser(user.id)" class="edit-btn">Follow {{user.name}}</button>
-                                <button v-else @click="unfollowUser(user.id)" class="edit-btn">Un-follow {{user.name}}</button>
+                                <button v-if="!isFollowing" @click="followUser(user.id)" class="edit-btn">Follow
+                                    {{user.name}}
+                                </button>
+                                <button v-else @click="unfollowUser(user.id)" class="edit-btn">Un-follow {{user.name}}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -52,18 +67,22 @@
                                 <div class="widget-body">
                                     <div class="about-author">
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-heart-beat"></i>{{user.roles.role}}</a></li>
+                                            <li><a href="#"><i class="fas fa-pen"></i>{{user.roles.role}}</a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-envelop"></i>{{user.email}}</a></li>
+                                            <li><a href="#"><i class="fa fa-brain"></i>Thoughts ({{user.thoughts.length}})</a>
+                                            </li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-heart-beat"></i>Follower :
-                                                {{user.followers_count}}</a></li>
+                                            <li><a href="#"><i class="fa fa-envelope"></i>{{user.email}}</a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-heart-beat"></i>Following:
-                                                {{user.followings_count}}</a></li>
+                                            <li><a href="#"><i class="fa fa-heart"></i>
+                                                Followers ({{user.followers_count}})</a></li>
+                                        </ul>
+                                        <ul class="author-into-list">
+                                            <li><a href="#"><i class="fa fa-heartbeat"></i>
+                                                Followings ({{user.followings_count}})</a></li>
                                         </ul>
 
                                     </div>
@@ -71,103 +90,7 @@
                             </div>
 
 
-                            <!--&lt;!&ndash; widget single item start &ndash;&gt;-->
-                            <!--<div class="card widget-item">-->
-                            <!--<h4 class="widget-title">page you may like</h4>-->
-                            <!--<div class="widget-body">-->
-                            <!--<ul class="like-page-list-wrapper">-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-33.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
 
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Travel The World</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">adventure</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button active">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-30.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Foodcort Nirala</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">food</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-5.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Rolin Theitar</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">drama</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-29.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Active Mind</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">fitness</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--</ul>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; widget single item end &ndash;&gt;-->
                         </aside>
                     </div>
 
@@ -297,7 +220,8 @@
                                         <ul class="comment-share-meta">
                                             <li>
                                                 <button class="post-meta-like">
-                                                    <i class="bi bi-heart-beat"></i>
+                                                    <i class="fa fa-star"></i>
+
                                                 </button>
                                                 <button class="post-share">
                                                     <span>201 people like this</span>

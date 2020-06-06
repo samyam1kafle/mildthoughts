@@ -26,12 +26,16 @@ class ThoughtsController extends Controller
     public function index()
     {
         $userThought = auth('api')->user()->thoughts;
-        foreach ($userThought as $user) {
-            $thoughtModel = Thoughts::with('category')->orderBy('id', 'desc')
-                ->find($user->id);
-            $arr[] = $thoughtModel;
+        $arr = [];
+        if(count($userThought) > 0){
+            foreach ($userThought as $user) {
+                $thoughtModel = Thoughts::with('category')->orderBy('id', 'desc')
+                    ->find($user->id);
+                $arr[] = $thoughtModel;
+            }
         }
         $thoughtCategory = ThoughtsCategory::all();
+
         return response()->json(['userThought' => $arr, 'thoughtCategories' => $thoughtCategory]);
     }
 
