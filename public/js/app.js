@@ -77733,144 +77733,162 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-lg-6 order-1 order-lg-2" },
-            _vm._l(_vm.thoughts, function(post) {
-              return _vm.user.followings.length > 0
-                ? _c("div", { key: post.id, staticClass: "card mt-1" }, [
-                    _c(
-                      "div",
-                      { staticClass: "post-title d-flex align-items-center" },
-                      [
-                        _c("div", { staticClass: "profile-thumb" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c(
-                              "figure",
-                              { staticClass: "profile-thumb-middle" },
-                              [
-                                _c("img", {
-                                  attrs: {
-                                    src: _vm.getUserImage(
-                                      post.user.display_image
-                                    ),
-                                    alt: "profile picture"
-                                  }
-                                })
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "posted-author" }, [
-                          _c(
-                            "h6",
-                            { staticClass: "author" },
-                            [
+            [
+              _vm._l(_vm.thoughts, function(post) {
+                return _vm.thoughts.length > 0
+                  ? _c("div", { key: post.id, staticClass: "card mt-1" }, [
+                      _c(
+                        "div",
+                        { staticClass: "post-title d-flex align-items-center" },
+                        [
+                          _c("div", { staticClass: "profile-thumb" }, [
+                            _c("a", { attrs: { href: "#" } }, [
                               _c(
-                                "router-link",
-                                {
-                                  attrs: {
-                                    to: {
-                                      name: "FrontProfile",
-                                      query: { id: post.user.id }
-                                    },
-                                    tag: "a",
-                                    "active-class": "active"
-                                  }
-                                },
+                                "figure",
+                                { staticClass: "profile-thumb-middle" },
                                 [
-                                  _vm._v(
-                                    _vm._s(post.user.name) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "post-time" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("notificationTime")(post.created_at)
-                              )
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0, true)
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "post-content" }, [
-                      _c("strong", [
-                        _c("i", { staticClass: "fas fa-pen" }),
-                        _vm._v(" Title: " + _vm._s(post.title))
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("strong", [
-                        _c("i", { staticClass: "fa fa-tag" }),
-                        _vm._v(" Tag: " + _vm._s(post.category.category_name))
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "post-desc" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(post.thought) +
-                            "\n                            "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      post.image != null
-                        ? _c("div", { staticClass: "post-thumb-gallery" }, [
-                            _c(
-                              "figure",
-                              { staticClass: "post-thumb img-popup" },
-                              [
-                                _c("a", { attrs: { href: "" } }, [
                                   _c("img", {
                                     attrs: {
-                                      src: _vm.getPostImage(post.image),
-                                      alt: "post image"
+                                      src: _vm.getUserImage(
+                                        post.user.display_image
+                                      ),
+                                      alt: "profile picture"
                                     }
                                   })
-                                ])
-                              ]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "post-meta col-lg-12" }, [
-                        _c("div", { staticClass: "col-sm-8" }, [
-                          _c("ul", { staticClass: "comment-share-meta" }, [
-                            _c("li", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "post-meta-like",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.likeUnlike(post.id)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "fa fa-star" })]
-                              ),
-                              _vm._v(" "),
-                              _vm._m(1, true)
+                                ]
+                              )
                             ])
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "posted-author" }, [
+                            _c(
+                              "h6",
+                              { staticClass: "author" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: post.user.id }
+                                      },
+                                      tag: "a",
+                                      "active-class": "active"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(post.user.name) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "post-time" }, [
+                              _vm._v(
+                                _vm._s(
+                                  _vm._f("notificationTime")(post.created_at)
+                                )
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0, true)
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-content" }, [
+                        _c("strong", [
+                          _c("i", { staticClass: "fas fa-pen" }),
+                          _vm._v(" Title: " + _vm._s(post.title))
                         ]),
                         _vm._v(" "),
-                        _vm._m(2, true)
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c("strong", [
+                          _c("i", { staticClass: "fa fa-tag" }),
+                          _vm._v(" Tag: " + _vm._s(post.category.category_name))
+                        ]),
+                        _vm._v(" "),
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "post-desc" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(post.thought) +
+                              "\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        post.image != null
+                          ? _c("div", { staticClass: "post-thumb-gallery" }, [
+                              _c(
+                                "figure",
+                                { staticClass: "post-thumb img-popup" },
+                                [
+                                  _c("a", { attrs: { href: "" } }, [
+                                    _c("img", {
+                                      attrs: {
+                                        src: _vm.getPostImage(post.image),
+                                        alt: "post image"
+                                      }
+                                    })
+                                  ])
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "post-meta col-lg-12" }, [
+                          _c("div", { staticClass: "col-sm-8" }, [
+                            _c("ul", { staticClass: "comment-share-meta" }, [
+                              _c("li", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "post-meta-like",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.likeUnlike(post.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-star" })]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(1, true)
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2, true)
+                        ])
                       ])
                     ])
-                  ])
-                : _c("div", { staticClass: "card" }, [_vm._m(3)])
-            }),
-            0
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.thoughts.length == 0,
+                      expression: "thoughts.length == 0"
+                    }
+                  ],
+                  staticClass: "card mt-2"
+                },
+                [_vm._m(3)]
+              )
+            ],
+            2
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3 order-3" }, [
@@ -78055,7 +78073,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "post-content" }, [
       _c("p", { staticClass: "post-desc" }, [
         _vm._v(
-          "\n                                You have not followed any user please follow some user to see their\n                                post.\n                                "
+          "\n                                You have not followed any user please follow some user to see their\n                                Thoughts.\n                                "
         ),
         _c("strong", [_vm._v("Feel Free To Explore The World Of thoughts.")])
       ])
