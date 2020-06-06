@@ -2,53 +2,19 @@
     <main>
         <div class="main-wrapper pt-80">
             <div class="container">
+                <div class="callout callout-info mt-2">
+                    <strong>You are currently viewing thoughts under {{Tagscategory.category_name}} tags.</strong>
+                </div>
+            </div>
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-3 order-2 order-lg-1">
                         <aside class="widget-area">
-                            <!-- widget single item start -->
-                            <div class="card card-profile widget-item p-0">
-                                <div class="profile-banner">
-                                    <figure class="profile-banner-small">
-                                        <a href="profile.html">
-                                            <img :src="getCoverImage()"
-                                                 alt="">
-                                        </a>
-
-                                        <router-link tag="a" :to="{name: 'UserProfile'}"
-                                                     active-class="active" v-if=" user !='null'
-                                      " class="profile-thumb-2">
-                                            <img :src="getUserImage(user.display_image)"
-                                                 alt="Display Image">
-                                        </router-link>
-                                        <a href="#" v-else class="profile-thumb-2">
-                                            <img :src="getAnonymousImage()"
-                                                 alt="Display Image">
-                                        </a>
-                                    </figure>
-                                    <div class="profile-desc text-center">
-                                        <h6 class="author" v-if="user != 'null'">
-                                            <router-link active-class="active" tag="a" :to="{name: 'UserProfile'}"
-                                            >{{user.name}}
-                                            </router-link>
-                                        </h6>
-                                        <h6 class="author" v-else><a href="profile.html"
-                                        >Anonymous</a>
-                                        </h6>
-                                        <p v-if="user != 'null'"><strong>Joined Date/Time : </strong>
-                                            {{user.created_at | cleanTime}}</p>
-                                        <p v-else><strong>Be a part of our family.</strong><br>
-                                            Register Now</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- widget single item start -->
-
-                            <!-- widget single item start -->
                             <div class="card widget-item">
                                 <h4 class="widget-title">Browse Through Categories Tags</h4>
                                 <div class="widget-body">
                                     <ul class="like-page-list-wrapper">
-                                        <li class="unorder-list" v-for="tag in tags">
+                                        <li class="unorder-list" v-for="tag in tags" :key="tag.id">
 
                                             <div class="unorder-list-info">
                                                 <h3 class="list-title">
@@ -64,32 +30,30 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- widget single item end -->
                         </aside>
                     </div>
-
                     <div class="col-lg-6 order-1 order-lg-2">
 
-                        <!-- post status start -->
-                        <div class="card mt-1" v-if="((user.followings.length) > 0)" v-for="post in thoughts"
-                             :key="post.id">
-                            <!-- post title start -->
+                        <!-- Browse By Tags start -->
+                        <div class="card mt-1" v-for="post in thoughts" :key="post.id">
+
                             <div class="post-title d-flex align-items-center">
                                 <!-- profile picture end -->
                                 <div class="profile-thumb">
-                                    <a href="#">
+                                    <router-link tag="a" :to="{name: 'FrontProfile' , query: {id: post.user.id}}"
+                                                 active-class="active">
                                         <figure class="profile-thumb-middle">
                                             <img :src="getUserImage(post.user.display_image)"
                                                  alt="profile picture">
                                         </figure>
-                                    </a>
+                                    </router-link>
                                 </div>
                                 <!-- profile picture end -->
 
                                 <div class="posted-author">
                                     <h6 class="author">
                                         <router-link :to="{name: 'FrontProfile' , query: {id: post.user.id}}" tag="a"
-                                                     active-class="active">{{post.user.name}}
+                                                     active-class="active"><u>{{post.user.name}}</u>
                                         </router-link>
 
                                     </h6>
@@ -97,31 +61,10 @@
                                     <span class="post-time">{{post.created_at | notificationTime}}</span>
                                 </div>
 
-                                <div class="post-settings-bar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <div class="post-settings arrow-shape">
-                                        <ul>
-                                            <li>
-                                                <button>copy link to adda</button>
-                                            </li>
-                                            <li>
-                                                <button>edit post</button>
-                                            </li>
-                                            <li>
-                                                <button>embed adda</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
-                            <!-- post title start -->
+                            <!-- Browse By Tags start -->
                             <div class="post-content">
                                 <strong><i class="fas fa-pen"> </i> Title: {{post.title}}</strong>
-                                <hr>
-                                <strong><i class="fa fa-tag"> </i> Tag: {{post.category.category_name}}</strong>
-
 
                                 <hr>
 
@@ -140,7 +83,7 @@
                                     <div class="col-sm-8">
                                         <ul class="comment-share-meta">
                                             <li>
-                                                <button @click="likeUnlike(post.id)" class="post-meta-like">
+                                                <button class="post-meta-like">
                                                     <i class="fa fa-star"></i>
                                                 </button>
                                                 <button class="post-share">
@@ -165,26 +108,13 @@
                                             </button>
                                         </li>
                                     </ul>
-                                    <!--<button class="post-meta-like">-->
-                                    <!--<i class="bi bi-heart-beat"></i>-->
-                                    <!--<span>201 people like this</span>-->
-                                    <!--</button>-->
 
                                 </div>
                             </div>
                         </div>
-                        <div class="card" v-else>
-                            <div class="post-content">
-                                <p class="post-desc">
-                                    You have not followed any user please follow some user to see their
-                                    post.
-                                    <strong>Feel Free To Explore The World Of thoughts.</strong>
-                                </p>
 
-                            </div>
-                        </div>
 
-                        <!-- post status end -->
+                        <!-- Browse By Tags end -->
 
 
                     </div>
@@ -192,13 +122,12 @@
                     <div class="col-lg-3 order-3">
                         <aside class="widget-area">
 
-                            <!-- widget single item start -->
+                            <!-- Author You May Know -->
                             <div class="card widget-item">
                                 <h4 class="widget-title">Authors You may like</h4>
                                 <div class="widget-body">
                                     <ul class="like-page-list-wrapper">
-                                        <li class="unorder-list" v-for="author in authorYouMayKnow"
-                                            :key="author.id">
+                                        <li class="unorder-list" v-for="author in authorYouMayKnow" :key="author.id">
                                             <!-- profile picture end -->
                                             <div class="profile-thumb">
                                                 <router-link :to="{name: 'FrontProfile' , query: {id: author.id}}"
@@ -232,7 +161,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- widget single item end -->
+                            <!-- Author You May Know -->
                         </aside>
                     </div>
                 </div>
@@ -246,12 +175,10 @@
     export default {
         data() {
             return {
-                user: {},
-                followings: {},
-                followingUsers: {},
-                thoughts: {},
-                authorYouMayKnow: {},
                 tags: {},
+                authorYouMayKnow: {},
+                thoughts: {},
+                Tagscategory: {},
             }
         },
         methods: {
@@ -263,62 +190,32 @@
                 let photo = 'Backend/ProfileImages/' + image;
                 return photo;
             },
-            getCoverImage() {
-                let cp = 'images/cover.jpg';
-                return cp;
-            },
-            getAnonymousImage() {
-                let anonypp = 'images/user.png';
-                return anonypp;
-            },
-            followerThoughts() {
-                let thought = [];
-                this.followings.forEach((value) => {
-                    thought.push(value.id);
-                });
-                axios.get('thoughts/', {
-                    params: {
-                        query: thought
-                    }
-                }).then((response) => {
-                    this.followingUsers = response.data.following;
-                    this.thoughts = response.data.thoughts;
+            getDataByTags() {
+                axios.get('tags/' + this.id).then((response) => {
+                    this.authorYouMayKnow = response.data.authorYouMayKnow;
                     this.tags = response.data.tags;
+                    this.thoughts = response.data.thoughts;
+                    this.Tagscategory = response.data.tagscategory;
                 }).catch(() => {
                     Toast.fire({
                         icon: 'error',
-                        title: 'There occurred an error while liking the Thought.'
-                    });
-                });
-            },
-            authUser() {
-                axios.get('user/').then((response) => {
-                    this.user = response.data.userdetail;
-                    this.followings = response.data.followings;
-                    this.authorYouMayKnow = response.data.Author;
-                    if (this.user !== 'null') {
-                        this.followerThoughts();
-                    }
-                }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There occurred an error while loading the feed.'
-                    });
-                });
-            },
-            likeUnlike(postId) {
-                axios.put('api/like_unlike/' + postId).then((response) => {
-                    console.log(response);
-                }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There occurred an error while liking the Thought.'
+                        title: 'There occurred an error while loading the Tags Page .'
                     });
                 });
             }
         },
+        computed: {
+            id() {
+                return this.$route.query.id;
+            }
+        },
+        watch: {
+            id() {
+                this.getDataByTags();
+            }
+        },
         mounted() {
-            this.authUser();
+            this.getDataByTags();
         }
     }
 </script>

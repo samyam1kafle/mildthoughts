@@ -39,20 +39,13 @@
                                                              active-class="active">Following
                                                 </router-link>
                                             </li>
+                                            <!--<li><a href="">Settings</a></li>-->
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-3 d-none d-md-block">
-                            <div class="profile-edit-panel" v-if="!self_profile" v-show="!self_profile">
-                                <button v-if="!isFollowing" @click="followUser(user.id)" class="edit-btn">Follow
-                                    {{user.name}}
-                                </button>
-                                <button v-else @click="unfollowUser(user.id)" class="edit-btn">Un-follow {{user.name}}
-                                </button>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -66,23 +59,18 @@
                                 <div class="widget-body">
                                     <div class="about-author">
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="fas fa-pen"></i>{{user.roles.role}}</a></li>
+                                            <li><a href="#"><i class="bi bi-heart-beat"></i>{{user.roles.role}}</a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="fa fa-brain"></i>Thoughts
-                                                ({{user.thoughts.length}})</a>
-                                            </li>
+                                            <li><a href="#"><i class="bi bi-envelop"></i>{{user.email}}</a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="fa fa-envelope"></i>{{user.email}}</a></li>
+                                            <li><a href="#"><i class="bi bi-heart-beat"></i>Follower :
+                                                {{user.followers_count}}</a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="fa fa-heart"></i>
-                                                Followers ({{user.followers_count}})</a></li>
-                                        </ul>
-                                        <ul class="author-into-list">
-                                            <li><a href="#"><i class="fa fa-heartbeat"></i>
-                                                Followings ({{user.followings_count}})</a></li>
+                                            <li><a href="#"><i class="bi bi-heart-beat"></i>Following:
+                                                {{user.followings_count}}</a></li>
                                         </ul>
 
                                     </div>
@@ -94,14 +82,13 @@
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2">
-                        <div class="card card-small alert alert-primary" v-if="self_profile">
-                            <div class="share-box-inner" role="alert">
-                                <i class="fa fa-info">
-                                ) To manage your profile please visit Your dashboard !
-                            </i>
 
+                        <div class="card card-small alert alert-primary">
+                            <div class="share-box-inner" role="alert">
+                                To post or update your profile please visit Your dashboard !
                             </div>
                         </div>
+
                         <!-- post status start -->
                         <div class="card" v-for="thought in thoughts">
                             <!-- post title start -->
@@ -156,22 +143,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="post-meta col-lg-12">
-                                    <div class="col-sm-8">
-                                        <ul class="comment-share-meta">
-                                            <li>
-                                                <button class="post-meta-like">
-                                                    <i class="fa fa-star"></i>
-
-                                                </button>
-                                                <button class="post-share">
-                                                    <span>201 people like this</span>
-                                                </button>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
+                                <div class="post-meta">
+                                    <button class="post-meta-like">
+                                        <i class="bi bi-heart-beat"></i>
+                                        <span>You and 207 people like this</span>
+                                        <strong>207</strong>
+                                    </button>
                                     <ul class="comment-share-meta">
                                         <li>
                                             <button class="post-comment">
@@ -186,9 +163,7 @@
                                             </button>
                                         </li>
                                     </ul>
-
                                 </div>
-
                             </div>
                         </div>
                         <!-- post status end -->
@@ -207,47 +182,10 @@
         data() {
             return {
                 user: {},
-                thoughts: {},
-                isFollowing: false,
-                self_profile: false,
+                thoughts: {}
             }
         },
         methods: {
-            followUser(id) {
-                axios.put('api/follow/' + id).then((response) => {
-                    this.$Progress.start();
-                    Fire.$emit('ProfileEvent');
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'You started following ' + this.user.name
-                    });
-                    this.$Progress.finish();
-                }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There was a problem following' + this.user.name
-                    });
-                    this.$Progress.fail();
-                });
-            },
-            unfollowUser(id) {
-                axios.put('api/unfollow/' + id).then(() => {
-                    this.$Progress.start();
-                    Fire.$emit('ProfileEvent');
-                    Toast.fire({
-                        icon: 'info',
-                        title: 'You un-followed ' + this.user.name + 'successfully.'
-                    });
-                    this.$Progress.finish();
-                }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There was a problem while un-following' + this.user.name
-                    });
-                    this.$Progress.fail();
-                });
-            },
-
             getThoughtImage(image) {
                 let photo = 'Backend/ThoughtsImages/' + image;
                 return photo;
@@ -257,29 +195,16 @@
                 return photo;
             },
             viewProfile() {
-                axios.get('profile/' + this.id).then((response) => {
+                axios.get('Auth_profile').then((response) => {
                     this.user = response.data.user_data;
                     this.thoughts = response.data.thoughts;
-                    this.isFollowing = response.data.isFollowing;
-                    this.self_profile = response.data.own_profile;
                 }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There occurred an error while loading the users profile.'
-                    });
+
                 });
             },
         },
-        computed: {
-            id() {
-                return this.$route.query.id;
-            },
-        },
-        mounted() {
+        created() {
             this.viewProfile();
-            Fire.$on('ProfileEvent', () => {
-                this.viewProfile();
-            })
         }
     }
 </script>

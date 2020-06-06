@@ -10,7 +10,7 @@
                         <h5 class="widget-user-desc">{{user.roles.role}}</h5>
                     </div>
                     <div class="widget-user-image" style="top: 47px;">
-                        <img class="img-circle elevation-5" :src="getProfileImage()"
+                        <img v-if="user.display_image != null" class="img-circle elevation-5" :src="getProfileImage()"
                              alt="User Avatar" style="width: 104px; height:100px">
 
                     </div>

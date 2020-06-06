@@ -11,7 +11,7 @@ class ThoughtsCategory extends Model
     ];
 
     public function thoughts(){
-        return $this->hasMany('App\Models\Thoughts');
+        return $this->hasMany('App\Models\Thoughts','thoughtCategory_id');
     }
 
 }
