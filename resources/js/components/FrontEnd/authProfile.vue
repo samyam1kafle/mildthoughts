@@ -39,7 +39,7 @@
                                                              active-class="active">Following
                                                 </router-link>
                                             </li>
-                                            <li><a href="">Settings</a></li>
+                                            <!--<li><a href="">Settings</a></li>-->
                                         </ul>
                                     </nav>
                                 </div>
@@ -78,172 +78,16 @@
                             </div>
 
 
-                            <!--&lt;!&ndash; widget single item start &ndash;&gt;-->
-                            <!--<div class="card widget-item">-->
-                            <!--<h4 class="widget-title">page you may like</h4>-->
-                            <!--<div class="widget-body">-->
-                            <!--<ul class="like-page-list-wrapper">-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-33.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Travel The World</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">adventure</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button active">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-30.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Foodcort Nirala</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">food</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-5.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Rolin Theitar</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">drama</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--<li class="unorder-list">-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-                            <!--<div class="profile-thumb">-->
-                            <!--<a href="#">-->
-                            <!--<figure class="profile-thumb-small">-->
-                            <!--<img src="assets/images/profile/profile-small-29.jpg"-->
-                            <!--alt="profile picture">-->
-                            <!--</figure>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; profile picture end &ndash;&gt;-->
-
-                            <!--<div class="unorder-list-info">-->
-                            <!--<h3 class="list-title"><a href="#">Active Mind</a></h3>-->
-                            <!--<p class="list-subtitle"><a href="#">fitness</a></p>-->
-                            <!--</div>-->
-                            <!--<button class="like-button">-->
-                            <!--<img class="heart" src="assets/images/icons/heart.png" alt="">-->
-                            <!--<img class="heart-color" src="assets/images/icons/heart-color.png"-->
-                            <!--alt="">-->
-                            <!--</button>-->
-                            <!--</li>-->
-                            <!--</ul>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--&lt;!&ndash; widget single item end &ndash;&gt;-->
                         </aside>
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2">
-                        <!-- share box start -->
-                        <div class="card card-small">
-                            <div class="share-box-inner">
-                                <!-- profile picture end -->
-                                <div class="profile-thumb">
-                                    <a href="#">
-                                        <figure class="profile-thumb-middle">
-                                            <img :src="getUserImage(user.display_image)" alt="profile picture">
-                                        </figure>
-                                    </a>
-                                </div>
-                                <!-- profile picture end -->
 
-                                <!-- share content box start -->
-                                <div class="share-content-box w-100">
-                                    <form class="share-text-box">
-                                        <textarea name="share" class="share-text-field" aria-disabled="true"
-                                                  placeholder="Say Something" data-toggle="modal" data-target="#textbox"
-                                                  id="email"></textarea>
-                                        <button class="btn-share" type="submit">share</button>
-                                    </form>
-                                </div>
-                                <!-- share content box end -->
-                                <!-- Modal start -->
-                                <div class="modal fade" id="textbox" aria-labelledby="textbox">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Share Your Mood</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body custom-scroll ps">
-                                                <textarea name="share" class="share-field-big custom-scroll ps"
-                                                          placeholder="Say Something"><div class="ps__rail-x"
-                                                                                           style="left: 0px; bottom: 3px;"><div
-                                                        class="ps__thumb-x" tabindex="0"
-                                                        style="left: 0px; width: 0px;"></div></div><div
-                                                        class="ps__rail-y" style="top: 0px; right: 2px;"><div
-                                                        class="ps__thumb-y" tabindex="0"
-                                                        style="top: 0px; height: 0px;"></div></div></textarea>
-                                                <div class="ps__rail-x" style="left: 0px; bottom: 3px;">
-                                                    <div class="ps__thumb-x" tabindex="0"
-                                                         style="left: 0px; width: 0px;"></div>
-                                                </div>
-                                                <div class="ps__rail-y" style="top: 0px; right: 2px;">
-                                                    <div class="ps__thumb-y" tabindex="0"
-                                                         style="top: 0px; height: 0px;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="post-share-btn" data-dismiss="modal">
-                                                    cancel
-                                                </button>
-                                                <button type="button" class="post-share-btn">post</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal end -->
+                        <div class="card card-small alert alert-primary">
+                            <div class="share-box-inner" role="alert">
+                                To post or update your profile please visit Your dashboard !
                             </div>
                         </div>
-                        <!-- share box end -->
 
                         <!-- post status start -->
                         <div class="card" v-for="thought in thoughts">

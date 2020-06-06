@@ -140,50 +140,7 @@
                                 <h1 class="create-acc text-center">Create An Account</h1>
                                 <div class="signup-inner text-center">
                                     <h3 class="title">Welcome to {{ config('app.name', 'Mild Thoughts') }}</h3>
-                                    <form class="signup-inner--form">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <input type="email" class="single-field" placeholder="Email">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="single-field" placeholder="First Name">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="single-field" placeholder="Last Name">
-                                            </div>
-                                            <div class="col-12">
-                                                <input type="password" class="single-field" placeholder="Password">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <select class="nice-select" name="sortby">
-                                                    <option value="trending">Gender</option>
-                                                    <option value="sales">Male</option>
-                                                    <option value="sales">Female</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <select class="nice-select" name="sortby">
-                                                    <option value="trending">Age</option>
-                                                    <option value="sales">18+</option>
-                                                    <option value="sales">18-</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12">
-                                                <select class="nice-select" name="sortby">
-                                                    <option value="trending">Country</option>
-                                                    <option value="sales">Bangladesh</option>
-                                                    <option value="sales">Noakhali</option>
-                                                    <option value="sales">Australia</option>
-                                                    <option value="sales">China</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12">
-                                                <button class="submit-btn">Create Account</button>
-                                            </div>
-                                        </div>
-                                        <h6 class="terms-condition">I have read & accepted the <a href="#">terms of
-                                                use</a></h6>
-                                    </form>
+                                    <frontend-register></frontend-register>
                                 </div>
                             </div>
                         </div>

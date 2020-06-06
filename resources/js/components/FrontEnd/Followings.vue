@@ -28,7 +28,8 @@
                                                 </router-link>
                                             </li>
                                             <li>
-                                                <router-link :to="{name: 'UserFollowers' , query: {id: user.id}}" tag="a"
+                                                <router-link :to="{name: 'UserFollowers' , query: {id: user.id}}"
+                                                             tag="a"
                                                              active-class="active">Followers
                                                 </router-link>
                                             </li>
@@ -38,7 +39,7 @@
                                                              active-class="active">Following
                                                 </router-link>
                                             </li>
-                                            <li><a href="">Settings</a></li>
+                                            <!--<li><a href="">Settings</a></li>-->
 
                                         </ul>
                                     </nav>
@@ -46,7 +47,7 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3 d-none d-md-block">
-                            <div class="profile-edit-panel">
+                            <div class="profile-edit-panel" v-show="!self_profile">
                                 <button v-if="!isFollowing" @click="followUser(user.id)" class="edit-btn">Follow
                                     {{user.name}}
                                 </button>
@@ -64,9 +65,23 @@
                             <div class="secondary-menu-wrapper secondary-menu-2 bg-white">
 
                                 <div class="filter-menu">
-                                    <button class="active" data-filter="*">Followings ({{user.followings_count}})</button>
+                                    <button class="active" data-filter="*">Followings ({{user.followings_count}})
+                                    </button>
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-small alert alert-primary" v-if="self_profile">
+                                <div class="share-box-inner" role="alert">
+                                    <i class="fa fa-info">
+                                        ) To manage your profile please visit Your dashboard !
+                                    </i></div>
                             </div>
                         </div>
                     </div>
@@ -104,10 +119,26 @@
                                                             active-class="active">{{followings.name}}
                                                     </router-link>
                                                 </h6>
-                                                <button disabled v-if="!isFollowing" class="add-frnd">User not
-                                                    followed
-                                                </button>
-                                                <button disabled v-else class="add-frnd">User Followed</button>
+                                                <div v-if="!self_profile">
+                                                    <button disabled v-if="!isFollowing" class="add-frnd">User not
+                                                        followed
+                                                    </button>
+                                                    <button disabled v-else v-show="(followings.id != auth_id)"
+                                                            class="add-frnd">User Followed
+                                                    </button>
+                                                    <button disabled v-show="(followings.id == auth_id)"
+                                                            class="add-frnd">Own Profile
+                                                    </button>
+                                                </div>
+                                                <div v-show="self_profile">
+                                                    <router-link
+                                                            :to="{name: 'FrontProfile' , query: {id: followings.id}}"
+                                                            tag="button"
+                                                            active-class="active"
+                                                            class="add-frnd"><strong>Visit Profile</strong>
+                                                    </router-link>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +160,9 @@
             return {
                 user: {},
                 thoughts: {},
-                isFollowing: false
+                isFollowing: false,
+                auth_id: '',
+                self_profile: false
             }
         },
         methods: {
@@ -181,6 +214,8 @@
                     this.user = response.data.user_data;
                     this.thoughts = response.data.thoughts;
                     this.isFollowing = response.data.isFollowing;
+                    this.auth_id = response.data.auth_id;
+                    this.self_profile = response.data.own_profile;
                 }).catch(() => {
                     Toast.fire({
                         icon: 'error',

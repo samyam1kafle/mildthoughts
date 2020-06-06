@@ -26,6 +26,9 @@ Route::get('admin', 'HomeController@backend')->name('admin')->where('{path}', '(
 Auth::routes();
 /*Main Routes For index of frontend and backend*/
 
+/*Browse By Tags Routes*/
+Route::get('tags/{id}','FrontendController\ThoughtsController@DataByTags');
+/*Browse By Tags Routes*/
 
 /*Profile Routes*/
 
@@ -44,6 +47,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 
 Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d\-\/_.]+)?');
+
+
 
 /*Frontend Routes*/
 

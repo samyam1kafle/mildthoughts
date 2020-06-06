@@ -39,14 +39,13 @@
                                                              active-class="active">Following
                                                 </router-link>
                                             </li>
-                                            <li><a href="">Settings</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3 d-none d-md-block">
-                            <div class="profile-edit-panel">
+                            <div class="profile-edit-panel" v-if="!self_profile" v-show="!self_profile">
                                 <button v-if="!isFollowing" @click="followUser(user.id)" class="edit-btn">Follow
                                     {{user.name}}
                                 </button>
@@ -70,7 +69,8 @@
                                             <li><a href="#"><i class="fas fa-pen"></i>{{user.roles.role}}</a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="fa fa-brain"></i>Thoughts ({{user.thoughts.length}})</a>
+                                            <li><a href="#"><i class="fa fa-brain"></i>Thoughts
+                                                ({{user.thoughts.length}})</a>
                                             </li>
                                         </ul>
                                         <ul class="author-into-list">
@@ -90,77 +90,18 @@
                             </div>
 
 
-
                         </aside>
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2">
-                        <!-- share box start -->
-                        <div class="card card-small">
-                            <div class="share-box-inner">
-                                <!-- profile picture end -->
-                                <div class="profile-thumb">
-                                    <a href="#">
-                                        <figure class="profile-thumb-middle">
-                                            <img :src="getUserImage(user.display_image)" alt="profile picture">
-                                        </figure>
-                                    </a>
-                                </div>
-                                <!-- profile picture end -->
+                        <div class="card card-small alert alert-primary" v-if="self_profile">
+                            <div class="share-box-inner" role="alert">
+                                <i class="fa fa-info">
+                                ) To manage your profile please visit Your dashboard !
+                            </i>
 
-                                <!-- share content box start -->
-                                <div class="share-content-box w-100">
-                                    <form class="share-text-box">
-                                        <textarea name="share" class="share-text-field" aria-disabled="true"
-                                                  placeholder="Say Something" data-toggle="modal" data-target="#textbox"
-                                                  id="email"></textarea>
-                                        <button class="btn-share" type="submit">share</button>
-                                    </form>
-                                </div>
-                                <!-- share content box end -->
-                                <!-- Modal start -->
-                                <div class="modal fade" id="textbox" aria-labelledby="textbox">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Share Your Mood</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body custom-scroll ps">
-                                                <textarea name="share" class="share-field-big custom-scroll ps"
-                                                          placeholder="Say Something"><div class="ps__rail-x"
-                                                                                           style="left: 0px; bottom: 3px;"><div
-                                                        class="ps__thumb-x" tabindex="0"
-                                                        style="left: 0px; width: 0px;"></div></div><div
-                                                        class="ps__rail-y" style="top: 0px; right: 2px;"><div
-                                                        class="ps__thumb-y" tabindex="0"
-                                                        style="top: 0px; height: 0px;"></div></div></textarea>
-                                                <div class="ps__rail-x" style="left: 0px; bottom: 3px;">
-                                                    <div class="ps__thumb-x" tabindex="0"
-                                                         style="left: 0px; width: 0px;"></div>
-                                                </div>
-                                                <div class="ps__rail-y" style="top: 0px; right: 2px;">
-                                                    <div class="ps__thumb-y" tabindex="0"
-                                                         style="top: 0px; height: 0px;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="post-share-btn" data-dismiss="modal">
-                                                    cancel
-                                                </button>
-                                                <button type="button" class="post-share-btn">post</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal end -->
                             </div>
                         </div>
-                        <!-- share box end -->
-
                         <!-- post status start -->
                         <div class="card" v-for="thought in thoughts">
                             <!-- post title start -->
@@ -245,10 +186,6 @@
                                             </button>
                                         </li>
                                     </ul>
-                                    <!--<button class="post-meta-like">-->
-                                    <!--<i class="bi bi-heart-beat"></i>-->
-                                    <!--<span>201 people like this</span>-->
-                                    <!--</button>-->
 
                                 </div>
 
@@ -271,7 +208,8 @@
             return {
                 user: {},
                 thoughts: {},
-                isFollowing: false
+                isFollowing: false,
+                self_profile: false,
             }
         },
         methods: {
@@ -323,6 +261,7 @@
                     this.user = response.data.user_data;
                     this.thoughts = response.data.thoughts;
                     this.isFollowing = response.data.isFollowing;
+                    this.self_profile = response.data.own_profile;
                 }).catch(() => {
                     Toast.fire({
                         icon: 'error',

@@ -31,14 +31,17 @@ class ThoughtsController extends Controller
             $writters = $author->where('id', '!=', auth()->id());
             if (count($followings) > 0) {
                 foreach ($writters as $author) {
-                    if(!$user->isFollowing($author)){
+                    if (!$user->isFollowing($author)) {
                         $arr[] = $author;
                     }
                 }
-
+                $arr = array_slice($arr, 0, 5);
+            } else {
+                foreach ($writters as $authors){
+                    $arr[] = $authors;
+                }
+                $arr = array_slice($arr, 0, 5);
             }
-            $arr = array_slice($arr,0,5);
-
             /*Author you may know*/
             return response()->json(['userdetail' => $userdetail, 'followings' => $followings, 'Author' => $arr], 200);
         }
@@ -55,6 +58,7 @@ class ThoughtsController extends Controller
         $latestThoughts = [];
         $thoughtData = [];
         $tags = ThoughtsCategory::all();
+
         foreach ($following as $thoughts) {
             foreach ($thoughts as $userThoughts) {
                 $ind = User::with('thoughts', 'followers', 'followings', 'roles')->find($userThoughts);
@@ -71,7 +75,7 @@ class ThoughtsController extends Controller
                 }
 
             }
-            if(count($latestThoughts) > 0){
+            if (count($latestThoughts) > 0) {
                 $collection = collect($latestThoughts);
                 $latest_thought_sorting = $collection->sortByDesc('created_at');
                 $latest_thought_sorting = $latest_thought_sorting->values()->all();
@@ -81,12 +85,51 @@ class ThoughtsController extends Controller
                 }
             }
         }
-
-        return response()->json(['following' => $followingUserData, 'thoughts' => $thoughtData,'thoughtTags'=>$tags]);
+        return response()->json(['following' => $followingUserData, 'thoughts' => $thoughtData, 'tags' => $tags]);
     }
 
     public function loginSignup()
     {
         return view('Frontend/login-signup');
+    }
+
+    public function DataByTags($id)
+    {
+        $thoughtCat = ThoughtsCategory::find($id);
+        $thoughtsByTags = ThoughtsCategory::find($id)->thoughts;
+        $ThoughtsInOrder = [];
+        $tags = ThoughtsCategory::all();
+        $arr = [];
+
+        if (count($thoughtsByTags) > 0) {
+            foreach ($thoughtsByTags as $WithRelation) {
+                $thoughts = Thoughts::with('user')->find($WithRelation->id);
+                $thoughtswithRelation[] = $thoughts;
+            }
+            $inSingleArr = collect($thoughtswithRelation);
+            $inOrderSort = $inSingleArr->sortByDesc('created_at');
+            $ThoughtsInOrder = $inOrderSort->values()->all();
+        }
+        /*Author you may know*/
+        $followings = auth()->user()->followings;
+
+        $user = auth()->user();
+
+        $author = Roles::where('role', '=', 'Author')->first()->users;
+
+        $writters = $author->where('id', '!=', auth()->id());
+        if (count($followings) > 0) {
+            foreach ($writters as $author) {
+                if (!$user->isFollowing($author)) {
+                    $arr[] = $author;
+                }
+            }
+            $arr = array_slice($arr, 0, 5);
+        }
+
+        /*Author you may know*/
+
+        return response()->json(['thoughts' => $ThoughtsInOrder, 'tags' => $tags, 'authorYouMayKnow' => $arr, 'tagscategory' => $thoughtCat]);
+
     }
 }

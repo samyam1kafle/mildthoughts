@@ -3882,12 +3882,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
       thoughts: {},
-      isFollowing: false
+      isFollowing: false,
+      auth_id: '',
+      self_profile: false
     };
   },
   methods: {
@@ -3950,6 +3980,8 @@ __webpack_require__.r(__webpack_exports__);
         _this3.user = response.data.user_data;
         _this3.thoughts = response.data.thoughts;
         _this3.isFollowing = response.data.isFollowing;
+        _this3.auth_id = response.data.auth_id;
+        _this3.self_profile = response.data.own_profile;
       })["catch"](function () {
         Toast.fire({
           icon: 'error',
@@ -4109,12 +4141,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
       thoughts: {},
-      isFollowing: false
+      isFollowing: false,
+      auth_id: '',
+      self_profile: false
     };
   },
   methods: {
@@ -4177,6 +4242,8 @@ __webpack_require__.r(__webpack_exports__);
         _this3.user = response.data.user_data;
         _this3.thoughts = response.data.thoughts;
         _this3.isFollowing = response.data.isFollowing;
+        _this3.auth_id = response.data.auth_id;
+        _this3.self_profile = response.data.own_profile;
       })["catch"](function () {
         Toast.fire({
           icon: 'error',
@@ -4202,10 +4269,89 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/authProfile.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/authProfile.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: new Form({
+        email: '',
+        name: '',
+        password: '',
+        password_confirmation: ''
+      })
+    };
+  },
+  methods: {
+    createUser: function createUser() {
+      this.form.post('register').then(function () {
+        Toast.fire({
+          icon: 'success',
+          title: 'Welcome To Our Site. Please login to continue.'
+        });
+      })["catch"](function () {
+        Toast.fire({
+          icon: 'info',
+          title: 'There occurred some problem while creating your account.'
+        });
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.form.clear();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4367,6 +4513,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tags: {},
+      authorYouMayKnow: {},
+      thoughts: {},
+      Tagscategory: {}
+    };
+  },
+  methods: {
+    getPostImage: function getPostImage(image) {
+      var photo = 'Backend/ThoughtsImages/' + image;
+      return photo;
+    },
+    getUserImage: function getUserImage(image) {
+      var photo = 'Backend/ProfileImages/' + image;
+      return photo;
+    },
+    getDataByTags: function getDataByTags() {
+      var _this = this;
+
+      axios.get('tags/' + this.id).then(function (response) {
+        _this.authorYouMayKnow = response.data.authorYouMayKnow;
+        _this.tags = response.data.tags;
+        _this.thoughts = response.data.thoughts;
+        _this.Tagscategory = response.data.tagscategory;
+      })["catch"](function () {
+        Toast.fire({
+          icon: 'error',
+          title: 'There occurred an error while loading the Tags Page .'
+        });
+      });
+    }
+  },
+  computed: {
+    id: function id() {
+      return this.$route.query.id;
+    }
+  },
+  watch: {
+    id: function id() {
+      this.getDataByTags();
+    }
+  },
+  mounted: function mounted() {
+    this.getDataByTags();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/authProfile.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/authProfile.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -4831,57 +5054,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4924,7 +5096,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this.followingUsers = response.data.following;
         _this.thoughts = response.data.thoughts;
-        _this.tags = response.data.thoughtTags;
+        _this.tags = response.data.tags;
       })["catch"](function () {
         Toast.fire({
           icon: 'error',
@@ -4940,7 +5112,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.followings = response.data.followings;
         _this2.authorYouMayKnow = response.data.Author;
 
-        if (_this2.user !== 'null' && _this2.user.followings.length > 0) {
+        if (_this2.user !== 'null') {
           _this2.followerThoughts();
         }
       })["catch"](function () {
@@ -5181,75 +5353,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       user: {},
       thoughts: {},
-      isFollowing: false
+      isFollowing: false,
+      self_profile: false
     };
   },
   methods: {
@@ -5312,6 +5422,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.user = response.data.user_data;
         _this3.thoughts = response.data.thoughts;
         _this3.isFollowing = response.data.isFollowing;
+        _this3.self_profile = response.data.own_profile;
       })["catch"](function () {
         Toast.fire({
           icon: 'error',
@@ -74765,11 +74876,13 @@ var render = function() {
             "div",
             { staticClass: "widget-user-image", staticStyle: { top: "47px" } },
             [
-              _c("img", {
-                staticClass: "img-circle elevation-5",
-                staticStyle: { width: "104px", height: "100px" },
-                attrs: { src: _vm.getProfileImage(), alt: "User Avatar" }
-              })
+              _vm.user.display_image != null
+                ? _c("img", {
+                    staticClass: "img-circle elevation-5",
+                    staticStyle: { width: "104px", height: "100px" },
+                    attrs: { src: _vm.getProfileImage(), alt: "User Avatar" }
+                  })
+                : _vm._e()
             ]
           ),
           _vm._v(" "),
@@ -75722,9 +75835,7 @@ var render = function() {
                             )
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _vm._m(0)
+                        )
                       ])
                     ])
                   ]
@@ -75733,45 +75844,59 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-2 col-md-3 d-none d-md-block" }, [
-              _c("div", { staticClass: "profile-edit-panel" }, [
-                !_vm.isFollowing
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "edit-btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.followUser(_vm.user.id)
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.self_profile,
+                      expression: "!self_profile"
+                    }
+                  ],
+                  staticClass: "profile-edit-panel"
+                },
+                [
+                  !_vm.isFollowing
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "edit-btn",
+                          on: {
+                            click: function($event) {
+                              return _vm.followUser(_vm.user.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "Follow\n                                " +
-                            _vm._s(_vm.user.name) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  : _c(
-                      "button",
-                      {
-                        staticClass: "edit-btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.unfollowUser(_vm.user.id)
+                        },
+                        [
+                          _vm._v(
+                            "Follow\n                                " +
+                              _vm._s(_vm.user.name) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    : _c(
+                        "button",
+                        {
+                          staticClass: "edit-btn",
+                          on: {
+                            click: function($event) {
+                              return _vm.unfollowUser(_vm.user.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "Un-follow " +
-                            _vm._s(_vm.user.name) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-              ])
+                        },
+                        [
+                          _vm._v(
+                            "Un-follow " +
+                              _vm._s(_vm.user.name) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                ]
+              )
             ])
           ])
         ])
@@ -75801,6 +75926,22 @@ var render = function() {
                   ])
                 ]
               )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-12" }, [
+              _vm.self_profile
+                ? _c(
+                    "div",
+                    { staticClass: "card card-small alert alert-primary" },
+                    [_vm._m(0)]
+                  )
+                : _vm._e()
             ])
           ])
         ])
@@ -75892,27 +76033,99 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            !_vm.isFollowing
-                              ? _c(
-                                  "button",
+                            !_vm.self_profile
+                              ? _c("div", [
+                                  !_vm.isFollowing
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass: "add-frnd",
+                                          attrs: { disabled: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "User not\n                                                    followed\n                                                "
+                                          )
+                                        ]
+                                      )
+                                    : _c(
+                                        "button",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value:
+                                                followers.id != _vm.auth_id,
+                                              expression:
+                                                "(followers.id != auth_id)"
+                                            }
+                                          ],
+                                          staticClass: "add-frnd",
+                                          attrs: { disabled: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "User Followed\n                                                "
+                                          )
+                                        ]
+                                      ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: followers.id == _vm.auth_id,
+                                          expression:
+                                            "(followers.id == auth_id)"
+                                        }
+                                      ],
+                                      staticClass: "add-frnd",
+                                      attrs: { disabled: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Own Profile\n                                                "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.self_profile,
+                                    expression: "self_profile"
+                                  }
+                                ]
+                              },
+                              [
+                                _c(
+                                  "router-link",
                                   {
                                     staticClass: "add-frnd",
-                                    attrs: { disabled: "" }
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: followers.id }
+                                      },
+                                      tag: "button",
+                                      "active-class": "active"
+                                    }
                                   },
-                                  [
-                                    _vm._v(
-                                      "User not\n                                                followed\n                                            "
-                                    )
-                                  ]
+                                  [_c("strong", [_vm._v("Visit Profile")])]
                                 )
-                              : _c(
-                                  "button",
-                                  {
-                                    staticClass: "add-frnd",
-                                    attrs: { disabled: "" }
-                                  },
-                                  [_vm._v("User Followed")]
-                                )
+                              ],
+                              1
+                            )
                           ])
                         ])
                       ]
@@ -75933,7 +76146,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Settings")])])
+    return _c(
+      "div",
+      { staticClass: "share-box-inner", attrs: { role: "alert" } },
+      [
+        _c("i", { staticClass: "fa fa-info" }, [
+          _vm._v(
+            "\n                                    ) To manage your profile please visit Your dashboard !\n                                "
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -76067,9 +76290,7 @@ var render = function() {
                             )
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _vm._m(0)
+                        )
                       ])
                     ])
                   ]
@@ -76078,45 +76299,59 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-2 col-md-3 d-none d-md-block" }, [
-              _c("div", { staticClass: "profile-edit-panel" }, [
-                !_vm.isFollowing
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "edit-btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.followUser(_vm.user.id)
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.self_profile,
+                      expression: "!self_profile"
+                    }
+                  ],
+                  staticClass: "profile-edit-panel"
+                },
+                [
+                  !_vm.isFollowing
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "edit-btn",
+                          on: {
+                            click: function($event) {
+                              return _vm.followUser(_vm.user.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "Follow\n                                " +
-                            _vm._s(_vm.user.name) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  : _c(
-                      "button",
-                      {
-                        staticClass: "edit-btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.unfollowUser(_vm.user.id)
+                        },
+                        [
+                          _vm._v(
+                            "Follow\n                                " +
+                              _vm._s(_vm.user.name) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    : _c(
+                        "button",
+                        {
+                          staticClass: "edit-btn",
+                          on: {
+                            click: function($event) {
+                              return _vm.unfollowUser(_vm.user.id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "Un-follow " +
-                            _vm._s(_vm.user.name) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-              ])
+                        },
+                        [
+                          _vm._v(
+                            "Un-follow " +
+                              _vm._s(_vm.user.name) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                ]
+              )
             ])
           ])
         ])
@@ -76141,13 +76376,29 @@ var render = function() {
                         _vm._v(
                           "Followings (" +
                             _vm._s(_vm.user.followings_count) +
-                            ")"
+                            ")\n                                "
                         )
                       ]
                     )
                   ])
                 ]
               )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-12" }, [
+              _vm.self_profile
+                ? _c(
+                    "div",
+                    { staticClass: "card card-small alert alert-primary" },
+                    [_vm._m(0)]
+                  )
+                : _vm._e()
             ])
           ])
         ])
@@ -76239,27 +76490,99 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            !_vm.isFollowing
-                              ? _c(
-                                  "button",
+                            !_vm.self_profile
+                              ? _c("div", [
+                                  !_vm.isFollowing
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass: "add-frnd",
+                                          attrs: { disabled: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "User not\n                                                    followed\n                                                "
+                                          )
+                                        ]
+                                      )
+                                    : _c(
+                                        "button",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value:
+                                                followings.id != _vm.auth_id,
+                                              expression:
+                                                "(followings.id != auth_id)"
+                                            }
+                                          ],
+                                          staticClass: "add-frnd",
+                                          attrs: { disabled: "" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "User Followed\n                                                "
+                                          )
+                                        ]
+                                      ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: followings.id == _vm.auth_id,
+                                          expression:
+                                            "(followings.id == auth_id)"
+                                        }
+                                      ],
+                                      staticClass: "add-frnd",
+                                      attrs: { disabled: "" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Own Profile\n                                                "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.self_profile,
+                                    expression: "self_profile"
+                                  }
+                                ]
+                              },
+                              [
+                                _c(
+                                  "router-link",
                                   {
                                     staticClass: "add-frnd",
-                                    attrs: { disabled: "" }
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: followings.id }
+                                      },
+                                      tag: "button",
+                                      "active-class": "active"
+                                    }
                                   },
-                                  [
-                                    _vm._v(
-                                      "User not\n                                                followed\n                                            "
-                                    )
-                                  ]
+                                  [_c("strong", [_vm._v("Visit Profile")])]
                                 )
-                              : _c(
-                                  "button",
-                                  {
-                                    staticClass: "add-frnd",
-                                    attrs: { disabled: "" }
-                                  },
-                                  [_vm._v("User Followed")]
-                                )
+                              ],
+                              1
+                            )
                           ])
                         ])
                       ]
@@ -76280,7 +76603,579 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Settings")])])
+    return _c(
+      "div",
+      { staticClass: "share-box-inner", attrs: { role: "alert" } },
+      [
+        _c("i", { staticClass: "fa fa-info" }, [
+          _vm._v(
+            "\n                                    ) To manage your profile please visit Your dashboard !\n                                "
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      staticClass: "signup-inner--form",
+      on: {
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.createUser($event)
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.email,
+                  expression: "form.email"
+                }
+              ],
+              staticClass: "single-field",
+              class: { "is-invalid": _vm.form.errors.has("email") },
+              attrs: { placeholder: "Email", type: "email", name: "email" },
+              domProps: { value: _vm.form.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "email", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "email" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.name,
+                  expression: "form.name"
+                }
+              ],
+              staticClass: "single-field",
+              class: { "is-invalid": _vm.form.errors.has("name") },
+              attrs: { placeholder: "Username", type: "text", name: "name" },
+              domProps: { value: _vm.form.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "name" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-6" },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.password,
+                  expression: "form.password"
+                }
+              ],
+              staticClass: "single-field",
+              class: { "is-invalid": _vm.form.errors.has("password") },
+              attrs: {
+                type: "password",
+                name: "password",
+                placeholder: "Password"
+              },
+              domProps: { value: _vm.form.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "password", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "password" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-6" },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.password_confirmation,
+                  expression: "form.password_confirmation"
+                }
+              ],
+              staticClass: "single-field",
+              class: { "is-invalid": _vm.form.errors.has("password") },
+              attrs: {
+                type: "password",
+                name: "password_confirmation",
+                placeholder: "Confirm Password"
+              },
+              domProps: { value: _vm.form.password_confirmation },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.form,
+                    "password_confirmation",
+                    $event.target.value
+                  )
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "password" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("button", { staticClass: "submit-btn", attrs: { type: "submit" } }, [
+        _vm._v("Create My Account")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=template&id=50343798&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=template&id=50343798&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("div", { staticClass: "main-wrapper pt-80" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "callout callout-info mt-2" }, [
+          _c("strong", [
+            _vm._v(
+              "You are currently viewing thoughts under " +
+                _vm._s(_vm.Tagscategory.category_name) +
+                " tags."
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-3 order-2 order-lg-1" }, [
+            _c("aside", { staticClass: "widget-area" }, [
+              _c("div", { staticClass: "card widget-item" }, [
+                _c("h4", { staticClass: "widget-title" }, [
+                  _vm._v("Browse Through Categories Tags")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "widget-body" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "like-page-list-wrapper" },
+                    _vm._l(_vm.tags, function(tag) {
+                      return _c(
+                        "li",
+                        { key: tag.id, staticClass: "unorder-list" },
+                        [
+                          _c("div", { staticClass: "unorder-list-info" }, [
+                            _c(
+                              "h3",
+                              { staticClass: "list-title" },
+                              [
+                                _c("i", { staticClass: "fa fa-tags" }),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      tag: "a",
+                                      to: {
+                                        name: "ViewByTags",
+                                        query: { id: tag.id }
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                    " +
+                                        _vm._s(tag.category_name) +
+                                        "\n                                                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-lg-6 order-1 order-lg-2" },
+            _vm._l(_vm.thoughts, function(post) {
+              return _c("div", { key: post.id, staticClass: "card mt-1" }, [
+                _c(
+                  "div",
+                  { staticClass: "post-title d-flex align-items-center" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "profile-thumb" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              tag: "a",
+                              to: {
+                                name: "FrontProfile",
+                                query: { id: post.user.id }
+                              },
+                              "active-class": "active"
+                            }
+                          },
+                          [
+                            _c(
+                              "figure",
+                              { staticClass: "profile-thumb-middle" },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: _vm.getUserImage(
+                                      post.user.display_image
+                                    ),
+                                    alt: "profile picture"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "posted-author" }, [
+                      _c(
+                        "h6",
+                        { staticClass: "author" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "FrontProfile",
+                                  query: { id: post.user.id }
+                                },
+                                tag: "a",
+                                "active-class": "active"
+                              }
+                            },
+                            [_c("u", [_vm._v(_vm._s(post.user.name))])]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "post-time" }, [
+                        _vm._v(
+                          _vm._s(_vm._f("notificationTime")(post.created_at))
+                        )
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "post-content" }, [
+                  _c("strong", [
+                    _c("i", { staticClass: "fas fa-pen" }),
+                    _vm._v(" Title: " + _vm._s(post.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "post-desc" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(post.thought) +
+                        "\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  post.image != null
+                    ? _c("div", { staticClass: "post-thumb-gallery" }, [
+                        _c("figure", { staticClass: "post-thumb img-popup" }, [
+                          _c("a", { attrs: { href: "" } }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.getPostImage(post.image),
+                                alt: "post image"
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._m(0, true)
+                ])
+              ])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 order-3" }, [
+            _c("aside", { staticClass: "widget-area" }, [
+              _c("div", { staticClass: "card widget-item" }, [
+                _c("h4", { staticClass: "widget-title" }, [
+                  _vm._v("Authors You may like")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "widget-body" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "like-page-list-wrapper" },
+                    _vm._l(_vm.authorYouMayKnow, function(author) {
+                      return _c(
+                        "li",
+                        { key: author.id, staticClass: "unorder-list" },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "profile-thumb" },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: {
+                                      name: "FrontProfile",
+                                      query: { id: author.id }
+                                    },
+                                    tag: "a",
+                                    "active-class": "active"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "figure",
+                                    { staticClass: "profile-thumb-small" },
+                                    [
+                                      _c("img", {
+                                        attrs: {
+                                          src: _vm.getUserImage(
+                                            author.display_image
+                                          ),
+                                          alt: "profile picture"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "unorder-list-info" }, [
+                            _c(
+                              "h3",
+                              { staticClass: "list-title" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: author.id }
+                                      },
+                                      tag: "a",
+                                      "active-class": "active"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(author.name) +
+                                        "\n                                                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              { staticClass: "list-subtitle" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: author.id }
+                                      },
+                                      tag: "a",
+                                      "active-class": "active"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(author.email) +
+                                        "\n                                                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-meta col-lg-12" }, [
+      _c("div", { staticClass: "col-sm-8" }, [
+        _c("ul", { staticClass: "comment-share-meta" }, [
+          _c("li", [
+            _c("button", { staticClass: "post-meta-like" }, [
+              _c("i", { staticClass: "fa fa-star" })
+            ]),
+            _vm._v(" "),
+            _c("button", { staticClass: "post-share" }, [
+              _c("span", [_vm._v("201 people like this")])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "comment-share-meta" }, [
+        _c("li", [
+          _c("button", { staticClass: "post-comment" }, [
+            _c("i", { staticClass: "bi bi-chat-bubble" }),
+            _vm._v(" "),
+            _c("span", [_vm._v("41")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("button", { staticClass: "post-share" }, [
+            _c("i", { staticClass: "bi bi-share" }),
+            _vm._v(" "),
+            _c("span", [_vm._v("07")])
+          ])
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -76414,9 +77309,7 @@ var render = function() {
                             )
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _vm._m(0)
+                        )
                       ])
                     ])
                   ]
@@ -76489,26 +77382,7 @@ var render = function() {
             "div",
             { staticClass: "col-lg-6 order-1 order-lg-2" },
             [
-              _c("div", { staticClass: "card card-small" }, [
-                _c("div", { staticClass: "share-box-inner" }, [
-                  _c("div", { staticClass: "profile-thumb" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("figure", { staticClass: "profile-thumb-middle" }, [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.getUserImage(_vm.user.display_image),
-                            alt: "profile picture"
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ])
-              ]),
+              _vm._m(0),
               _vm._v(" "),
               _vm._l(_vm.thoughts, function(thought) {
                 return _c("div", { staticClass: "card" }, [
@@ -76551,7 +77425,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(3, true)
+                      _vm._m(1, true)
                     ]
                   ),
                   _vm._v(" "),
@@ -76598,7 +77472,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(4, true)
+                    _vm._m(2, true)
                   ])
                 ])
               })
@@ -76615,137 +77489,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Settings")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "share-content-box w-100" }, [
-      _c("form", { staticClass: "share-text-box" }, [
-        _c("textarea", {
-          staticClass: "share-text-field",
-          attrs: {
-            name: "share",
-            "aria-disabled": "true",
-            placeholder: "Say Something",
-            "data-toggle": "modal",
-            "data-target": "#textbox",
-            id: "email"
-          }
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn-share", attrs: { type: "submit" } }, [
-          _vm._v("share")
-        ])
+    return _c("div", { staticClass: "card card-small alert alert-primary" }, [
+      _c("div", { staticClass: "share-box-inner", attrs: { role: "alert" } }, [
+        _vm._v(
+          "\n                            To post or update your profile please visit Your dashboard !\n                        "
+        )
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { id: "textbox", "aria-labelledby": "textbox" }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header" }, [
-              _c("h5", { staticClass: "modal-title" }, [
-                _vm._v("Share Your Mood")
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "close",
-                  attrs: {
-                    type: "button",
-                    "data-dismiss": "modal",
-                    "aria-label": "Close"
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("×")
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-body custom-scroll ps" }, [
-              _c(
-                "textarea",
-                {
-                  staticClass: "share-field-big custom-scroll ps",
-                  attrs: { name: "share", placeholder: "Say Something" }
-                },
-                [
-                  _vm._v(
-                    '<div class="ps__rail-x"\n                                                                                       style="left: 0px; bottom: 3px;"><div\n                                                    class="ps__thumb-x" tabindex="0"\n                                                    style="left: 0px; width: 0px;"></div></div><div\n                                                    class="ps__rail-y" style="top: 0px; right: 2px;"><div\n                                                    class="ps__thumb-y" tabindex="0"\n                                                    style="top: 0px; height: 0px;"></div></div>'
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "ps__rail-x",
-                  staticStyle: { left: "0px", bottom: "3px" }
-                },
-                [
-                  _c("div", {
-                    staticClass: "ps__thumb-x",
-                    staticStyle: { left: "0px", width: "0px" },
-                    attrs: { tabindex: "0" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "ps__rail-y",
-                  staticStyle: { top: "0px", right: "2px" }
-                },
-                [
-                  _c("div", {
-                    staticClass: "ps__thumb-y",
-                    staticStyle: { top: "0px", height: "0px" },
-                    attrs: { tabindex: "0" }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "post-share-btn",
-                  attrs: { type: "button", "data-dismiss": "modal" }
-                },
-                [
-                  _vm._v(
-                    "\n                                                cancel\n                                            "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "post-share-btn", attrs: { type: "button" } },
-                [_vm._v("post")]
-              )
-            ])
-          ])
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -76942,13 +77692,34 @@ var render = function() {
                     _vm._l(_vm.tags, function(tag) {
                       return _c("li", { staticClass: "unorder-list" }, [
                         _c("div", { staticClass: "unorder-list-info" }, [
-                          _c("h3", { staticClass: "list-title" }, [
-                            _c("i", { staticClass: "fa fa-tags" }),
-                            _vm._v(" "),
-                            _c("a", { attrs: { href: "#" } }, [
-                              _vm._v(_vm._s(tag.category_name))
-                            ])
-                          ])
+                          _c(
+                            "h3",
+                            { staticClass: "list-title" },
+                            [
+                              _c("i", { staticClass: "fa fa-tags" }),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  attrs: {
+                                    tag: "a",
+                                    to: {
+                                      name: "ViewByTags",
+                                      query: { id: tag.id }
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                    " +
+                                      _vm._s(tag.category_name) +
+                                      "\n                                                "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ])
                       ])
                     }),
@@ -76962,174 +77733,144 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-lg-6 order-1 order-lg-2" },
-            [
-              _c("div", { staticClass: "card card-small" }, [
-                _c("div", { staticClass: "share-box-inner" }, [
-                  _c("div", { staticClass: "profile-thumb" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("figure", { staticClass: "profile-thumb-middle" }, [
-                        _vm.user != "null"
-                          ? _c("img", {
-                              attrs: {
-                                src: _vm.getUserImage(_vm.user.display_image),
-                                alt: "profile picture"
-                              }
-                            })
-                          : _c("img", {
-                              attrs: {
-                                src: _vm.getAnonymousImage(),
-                                alt: "profile picture"
-                              }
-                            })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._m(1)
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.thoughts, function(post) {
-                return _vm.user.followings.length > 0
-                  ? _c("div", { staticClass: "card" }, [
-                      _c(
-                        "div",
-                        { staticClass: "post-title d-flex align-items-center" },
-                        [
-                          _c("div", { staticClass: "profile-thumb" }, [
-                            _c("a", { attrs: { href: "#" } }, [
+            _vm._l(_vm.thoughts, function(post) {
+              return _vm.user.followings.length > 0
+                ? _c("div", { key: post.id, staticClass: "card mt-1" }, [
+                    _c(
+                      "div",
+                      { staticClass: "post-title d-flex align-items-center" },
+                      [
+                        _c("div", { staticClass: "profile-thumb" }, [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _c(
+                              "figure",
+                              { staticClass: "profile-thumb-middle" },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src: _vm.getUserImage(
+                                      post.user.display_image
+                                    ),
+                                    alt: "profile picture"
+                                  }
+                                })
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "posted-author" }, [
+                          _c(
+                            "h6",
+                            { staticClass: "author" },
+                            [
                               _c(
-                                "figure",
-                                { staticClass: "profile-thumb-middle" },
+                                "router-link",
+                                {
+                                  attrs: {
+                                    to: {
+                                      name: "FrontProfile",
+                                      query: { id: post.user.id }
+                                    },
+                                    tag: "a",
+                                    "active-class": "active"
+                                  }
+                                },
                                 [
+                                  _vm._v(
+                                    _vm._s(post.user.name) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "post-time" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("notificationTime")(post.created_at)
+                              )
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(0, true)
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "post-content" }, [
+                      _c("strong", [
+                        _c("i", { staticClass: "fas fa-pen" }),
+                        _vm._v(" Title: " + _vm._s(post.title))
+                      ]),
+                      _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c("strong", [
+                        _c("i", { staticClass: "fa fa-tag" }),
+                        _vm._v(" Tag: " + _vm._s(post.category.category_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "post-desc" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(post.thought) +
+                            "\n                            "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      post.image != null
+                        ? _c("div", { staticClass: "post-thumb-gallery" }, [
+                            _c(
+                              "figure",
+                              { staticClass: "post-thumb img-popup" },
+                              [
+                                _c("a", { attrs: { href: "" } }, [
                                   _c("img", {
                                     attrs: {
-                                      src: _vm.getUserImage(
-                                        post.user.display_image
-                                      ),
-                                      alt: "profile picture"
+                                      src: _vm.getPostImage(post.image),
+                                      alt: "post image"
                                     }
                                   })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "posted-author" }, [
-                            _c(
-                              "h6",
-                              { staticClass: "author" },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    attrs: {
-                                      to: {
-                                        name: "FrontProfile",
-                                        query: { id: post.user.id }
-                                      },
-                                      tag: "a",
-                                      "active-class": "active"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      _vm._s(post.user.name) +
-                                        "\n                                    "
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "post-time" }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("notificationTime")(post.created_at)
-                                )
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(2, true)
-                        ]
-                      ),
+                                ])
+                              ]
+                            )
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c("div", { staticClass: "post-content" }, [
-                        _c("strong", [
-                          _c("i", { staticClass: "fas fa-pen" }),
-                          _vm._v(" Title: " + _vm._s(post.title))
-                        ]),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c("strong", [
-                          _c("i", { staticClass: "fa fa-tag" }),
-                          _vm._v(" Tag: " + _vm._s(post.category.category_name))
-                        ]),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "post-desc" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(post.thought) +
-                              "\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        post.image != null
-                          ? _c("div", { staticClass: "post-thumb-gallery" }, [
+                      _c("div", { staticClass: "post-meta col-lg-12" }, [
+                        _c("div", { staticClass: "col-sm-8" }, [
+                          _c("ul", { staticClass: "comment-share-meta" }, [
+                            _c("li", [
                               _c(
-                                "figure",
-                                { staticClass: "post-thumb img-popup" },
-                                [
-                                  _c("a", { attrs: { href: "" } }, [
-                                    _c("img", {
-                                      attrs: {
-                                        src: _vm.getPostImage(post.image),
-                                        alt: "post image"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "post-meta col-lg-12" }, [
-                          _c("div", { staticClass: "col-sm-8" }, [
-                            _c("ul", { staticClass: "comment-share-meta" }, [
-                              _c("li", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "post-meta-like",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.likeUnlike(post.id)
-                                      }
+                                "button",
+                                {
+                                  staticClass: "post-meta-like",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.likeUnlike(post.id)
                                     }
-                                  },
-                                  [_c("i", { staticClass: "fa fa-star" })]
-                                ),
-                                _vm._v(" "),
-                                _vm._m(3, true)
-                              ])
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-star" })]
+                              ),
+                              _vm._v(" "),
+                              _vm._m(1, true)
                             ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(4, true)
-                        ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(2, true)
                       ])
                     ])
-                  : _c("div", { staticClass: "card" }, [_vm._m(5)])
-              })
-            ],
-            2
+                  ])
+                : _c("div", { staticClass: "card" }, [_vm._m(3)])
+            }),
+            0
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3 order-3" }, [
@@ -77255,94 +77996,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "share-content-box w-100" }, [
-      _c("form", { staticClass: "share-text-box" }, [
-        _c("textarea", {
-          staticClass: "share-text-field",
-          attrs: {
-            name: "share",
-            "aria-disabled": "true",
-            placeholder: "Say Something",
-            "data-toggle": "modal",
-            "data-target": "#textbox",
-            id: "email"
-          }
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn-share", attrs: { type: "submit" } }, [
-          _vm._v("share")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { id: "textbox", "aria-labelledby": "textbox" }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header" }, [
-              _c("h5", { staticClass: "modal-title" }, [
-                _vm._v("Share Your Mood")
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "close",
-                  attrs: {
-                    type: "button",
-                    "data-dismiss": "modal",
-                    "aria-label": "Close"
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("×")
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-body custom-scroll" }, [
-              _c("textarea", {
-                staticClass: "share-field-big custom-scroll",
-                attrs: { name: "share", placeholder: "Say Something" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "post-share-btn",
-                  attrs: { type: "button", "data-dismiss": "modal" }
-                },
-                [_vm._v("cancel\n                                            ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "post-share-btn", attrs: { type: "button" } },
-                [_vm._v("post")]
-              )
-            ])
-          ])
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -77540,9 +78193,7 @@ var render = function() {
                             )
                           ],
                           1
-                        ),
-                        _vm._v(" "),
-                        _vm._m(0)
+                        )
                       ])
                     ])
                   ]
@@ -77551,45 +78202,61 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-2 col-md-3 d-none d-md-block" }, [
-              _c("div", { staticClass: "profile-edit-panel" }, [
-                !_vm.isFollowing
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "edit-btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.followUser(_vm.user.id)
-                          }
+              !_vm.self_profile
+                ? _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.self_profile,
+                          expression: "!self_profile"
                         }
-                      },
-                      [
-                        _vm._v(
-                          "Follow\n                                " +
-                            _vm._s(_vm.user.name) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  : _c(
-                      "button",
-                      {
-                        staticClass: "edit-btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.unfollowUser(_vm.user.id)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "Un-follow " +
-                            _vm._s(_vm.user.name) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-              ])
+                      ],
+                      staticClass: "profile-edit-panel"
+                    },
+                    [
+                      !_vm.isFollowing
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "edit-btn",
+                              on: {
+                                click: function($event) {
+                                  return _vm.followUser(_vm.user.id)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "Follow\n                                " +
+                                  _vm._s(_vm.user.name) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                        : _c(
+                            "button",
+                            {
+                              staticClass: "edit-btn",
+                              on: {
+                                click: function($event) {
+                                  return _vm.unfollowUser(_vm.user.id)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "Un-follow " +
+                                  _vm._s(_vm.user.name) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
+                    ]
+                  )
+                : _vm._e()
             ])
           ])
         ])
@@ -77620,7 +78287,7 @@ var render = function() {
                         _c("a", { attrs: { href: "#" } }, [
                           _c("i", { staticClass: "fa fa-brain" }),
                           _vm._v(
-                            "Thoughts (" +
+                            "Thoughts\n                                            (" +
                               _vm._s(_vm.user.thoughts.length) +
                               ")"
                           )
@@ -77672,26 +78339,13 @@ var render = function() {
             "div",
             { staticClass: "col-lg-6 order-1 order-lg-2" },
             [
-              _c("div", { staticClass: "card card-small" }, [
-                _c("div", { staticClass: "share-box-inner" }, [
-                  _c("div", { staticClass: "profile-thumb" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("figure", { staticClass: "profile-thumb-middle" }, [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.getUserImage(_vm.user.display_image),
-                            alt: "profile picture"
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ])
-              ]),
+              _vm.self_profile
+                ? _c(
+                    "div",
+                    { staticClass: "card card-small alert alert-primary" },
+                    [_vm._m(0)]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.thoughts, function(thought) {
                 return _c("div", { staticClass: "card" }, [
@@ -77734,7 +78388,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(3, true)
+                      _vm._m(1, true)
                     ]
                   ),
                   _vm._v(" "),
@@ -77781,7 +78435,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(4, true)
+                    _vm._m(2, true)
                   ])
                 ])
               })
@@ -77798,134 +78452,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Settings")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "share-content-box w-100" }, [
-      _c("form", { staticClass: "share-text-box" }, [
-        _c("textarea", {
-          staticClass: "share-text-field",
-          attrs: {
-            name: "share",
-            "aria-disabled": "true",
-            placeholder: "Say Something",
-            "data-toggle": "modal",
-            "data-target": "#textbox",
-            id: "email"
-          }
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn-share", attrs: { type: "submit" } }, [
-          _vm._v("share")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "div",
-      {
-        staticClass: "modal fade",
-        attrs: { id: "textbox", "aria-labelledby": "textbox" }
-      },
+      { staticClass: "share-box-inner", attrs: { role: "alert" } },
       [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header" }, [
-              _c("h5", { staticClass: "modal-title" }, [
-                _vm._v("Share Your Mood")
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "close",
-                  attrs: {
-                    type: "button",
-                    "data-dismiss": "modal",
-                    "aria-label": "Close"
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("×")
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-body custom-scroll ps" }, [
-              _c(
-                "textarea",
-                {
-                  staticClass: "share-field-big custom-scroll ps",
-                  attrs: { name: "share", placeholder: "Say Something" }
-                },
-                [
-                  _vm._v(
-                    '<div class="ps__rail-x"\n                                                                                       style="left: 0px; bottom: 3px;"><div\n                                                    class="ps__thumb-x" tabindex="0"\n                                                    style="left: 0px; width: 0px;"></div></div><div\n                                                    class="ps__rail-y" style="top: 0px; right: 2px;"><div\n                                                    class="ps__thumb-y" tabindex="0"\n                                                    style="top: 0px; height: 0px;"></div></div>'
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "ps__rail-x",
-                  staticStyle: { left: "0px", bottom: "3px" }
-                },
-                [
-                  _c("div", {
-                    staticClass: "ps__thumb-x",
-                    staticStyle: { left: "0px", width: "0px" },
-                    attrs: { tabindex: "0" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "ps__rail-y",
-                  staticStyle: { top: "0px", right: "2px" }
-                },
-                [
-                  _c("div", {
-                    staticClass: "ps__thumb-y",
-                    staticStyle: { top: "0px", height: "0px" },
-                    attrs: { tabindex: "0" }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "post-share-btn",
-                  attrs: { type: "button", "data-dismiss": "modal" }
-                },
-                [
-                  _vm._v(
-                    "\n                                                cancel\n                                            "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "post-share-btn", attrs: { type: "button" } },
-                [_vm._v("post")]
-              )
-            ])
-          ])
+        _c("i", { staticClass: "fa fa-info" }, [
+          _vm._v(
+            "\n                            ) To manage your profile please visit Your dashboard !\n                        "
+          )
         ])
       ]
     )
@@ -93475,6 +94009,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('notification', __webpack_require__(/*! ./components/NotificationMarkup/notification.vue */ "./resources/js/components/NotificationMarkup/notification.vue")["default"]);
 Vue.component('userDetails', __webpack_require__(/*! ./components/Backend/User/masterUserDetail.vue */ "./resources/js/components/Backend/User/masterUserDetail.vue")["default"]);
+Vue.component('frontendRegister', __webpack_require__(/*! ./components/FrontEnd/SignUpMarkup/register.vue */ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue")["default"]);
 Vue.component('homeIndex', __webpack_require__(/*! ./components/FrontEnd/index.vue */ "./resources/js/components/FrontEnd/index.vue")["default"]);
 /*New Vue Instance for data transmission*/
 
@@ -94302,6 +94837,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/SignUpMarkup/register.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./register.vue?vue&type=template&id=57945480&scoped=true& */ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&");
+/* harmony import */ var _register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./register.vue?vue&type=script&lang=js& */ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "57945480",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FrontEnd/SignUpMarkup/register.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./register.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./register.vue?vue&type=template&id=57945480&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BrowseByTag_vue_vue_type_template_id_50343798_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BrowseByTag.vue?vue&type=template&id=50343798&scoped=true& */ "./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=template&id=50343798&scoped=true&");
+/* harmony import */ var _BrowseByTag_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BrowseByTag.vue?vue&type=script&lang=js& */ "./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BrowseByTag_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BrowseByTag_vue_vue_type_template_id_50343798_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BrowseByTag_vue_vue_type_template_id_50343798_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "50343798",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BrowseByTag_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BrowseByTag.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BrowseByTag_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=template&id=50343798&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=template&id=50343798&scoped=true& ***!
+  \**************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrowseByTag_vue_vue_type_template_id_50343798_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BrowseByTag.vue?vue&type=template&id=50343798&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue?vue&type=template&id=50343798&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrowseByTag_vue_vue_type_template_id_50343798_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrowseByTag_vue_vue_type_template_id_50343798_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/FrontEnd/authProfile.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/components/FrontEnd/authProfile.vue ***!
@@ -94835,6 +95508,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_FrontEnd_index_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/FrontEnd/index.vue */ "./resources/js/components/FrontEnd/index.vue");
 /* harmony import */ var _components_FrontEnd_Followings_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/FrontEnd/Followings.vue */ "./resources/js/components/FrontEnd/Followings.vue");
 /* harmony import */ var _components_FrontEnd_Followers_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/FrontEnd/Followers.vue */ "./resources/js/components/FrontEnd/Followers.vue");
+/* harmony import */ var _components_FrontEnd_TagsPage_BrowseByTag_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/FrontEnd/TagsPage/BrowseByTag.vue */ "./resources/js/components/FrontEnd/TagsPage/BrowseByTag.vue");
+
 
 
 
@@ -94860,6 +95535,10 @@ __webpack_require__.r(__webpack_exports__);
   path: '/user_followers',
   component: _components_FrontEnd_Followers_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   name: 'UserFollowers'
+}, {
+  path: '/tags',
+  component: _components_FrontEnd_TagsPage_BrowseByTag_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  name: 'ViewByTags'
 }]);
 
 /***/ }),
