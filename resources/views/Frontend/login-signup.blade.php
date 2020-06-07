@@ -140,7 +140,54 @@
                                 <h1 class="create-acc text-center">Create An Account</h1>
                                 <div class="signup-inner text-center">
                                     <h3 class="title">Welcome to {{ config('app.name', 'Mild Thoughts') }}</h3>
-                                    <frontend-register></frontend-register>
+                                    <form class="signup-inner--form" method="POST" action="{{ route('register') }}">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input id="email" type="email" placeholder="Email"
+                                                       class="single-field @error('email') is-invalid @enderror"
+                                                       name="email"
+                                                       value="{{ old('email') }}" required>
+
+                                                @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-12">
+                                                <input id="name" placeholder="Username" type="text"
+                                                       class="single-field @error('name') is-invalid @enderror"
+                                                       name="name" value="{{ old('name') }}">
+                                                @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input id="password" type="password" placeholder="Password"
+                                                       class="single-field @error('password') is-invalid @enderror"
+                                                       name="password"
+                                                       required>
+
+                                                @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input id="password-confirm" placeholder="Confirm Password"
+                                                       type="password" class="single-field"
+                                                       name="password_confirmation" required>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <button class="submit-btn" type="submit">Create My Account</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

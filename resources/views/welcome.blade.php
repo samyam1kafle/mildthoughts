@@ -150,7 +150,7 @@
         <div class="header-top sticky bg-white d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <!-- header top navigation start -->
                         <div class="header-top-navigation">
                             <nav>
@@ -160,10 +160,26 @@
                                                       :allnotifications="{{auth()->user()->notifications->sortByDesc('created_at')->take(5)}}"
                                                       :unreads="{{count(auth()->user()->unreadNotifications)}}"></notification>
                                         </li>
-                                        <li><a href="{{route('admin')}}">Dashboard</a></li>
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                <i class="fas fa-sign-out-alt red"></i>
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                  style="
+                                                  display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                        <li><a href="{{route('admin')}}"><i class="fas fa-tachometer-alt cyan"></i>
+                                                Dashboard</a></li>
                                     @endif
                                     <li class="active">
-                                        <router-link :to="{name: 'Index'}" tag="a" active-class="active">home
+                                        <router-link :to="{name: 'Index'}" tag="a" active-class="active">
+                                            <i class="fas fa-home green"></i> home
                                         </router-link>
                                     </li>
                                 </ul>
@@ -182,7 +198,7 @@
                         <!-- brand logo end -->
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="header-top-right d-flex align-items-center justify-content-end">
 
                             <!-- profile picture start -->
@@ -197,42 +213,6 @@
                                 </div>
 
                                 <!-- header top search end -->
-
-                                <!-- profile picture start -->
-                                <div class="profile-setting-box">
-                                    <div class="profile-thumb-small">
-                                        <a href="javascript:void(0)" class="profile-triger">
-                                            <figure>
-                                                <img src="{{asset('Frontend/assets/images/profile/profile-small-1.jpg')}}"
-                                                     alt="profile picture">
-                                            </figure>
-                                        </a>
-                                        <div class="profile-dropdown">
-                                            <div class="profile-head">
-                                                <h5 class="name"><a href="#">Madison Howard</a></h5>
-                                                <a class="mail" href="#">mailnam@mail.com</a>
-                                            </div>
-                                            <div class="profile-body">
-                                                <ul>
-                                                    <li><a href="profile.html"><i class="flaticon-user"></i>Profile</a>
-                                                    </li>
-                                                    <li><a href="#"><i class="flaticon-message"></i>Inbox</a>
-                                                    </li>
-                                                    <li><a href="#"><i
-                                                                    class="flaticon-document"></i>Activity</a>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li><a href="#"><i class="flaticon-settings"></i>Setting</a>
-                                                    </li>
-                                                    <li><a href="signup.html"><i class="flaticon-unlock"></i>Sing
-                                                            out</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- profile picture end -->
 
                             @else
                                 <div class="header-top-navigation">

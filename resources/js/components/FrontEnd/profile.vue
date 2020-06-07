@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <!-- post status start -->
-                        <div class="card" v-for="thought in thoughts">
+                        <div class="card" v-if="thoughts.length > 0" v-for="thought in thoughts">
                             <!-- post title start -->
                             <div class="post-title d-flex align-items-center">
                                 <!-- profile picture end -->
@@ -191,6 +191,16 @@
 
                             </div>
                         </div>
+                        <div class="card callout callout-info" v-if="!self_profile" v-show="thoughts.length == 0">
+                            <div class="post-content">
+                                <p class="post-desc">
+                                    User have not posted any
+                                    Thoughts.
+
+                                </p>
+
+                            </div>
+                        </div>
                         <!-- post status end -->
 
                     </div>
@@ -253,8 +263,13 @@
                 return photo;
             },
             getUserImage(image) {
-                let photo = 'Backend/ProfileImages/' + image;
-                return photo;
+                if(image == null || image == undefined){
+                    let photo = 'images/user.png';
+                    return photo;
+                }else{
+                    let photo = 'Backend/ProfileImages/' + image;
+                    return photo;
+                }
             },
             viewProfile() {
                 axios.get('profile/' + this.id).then((response) => {

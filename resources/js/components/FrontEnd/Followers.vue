@@ -74,11 +74,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="card card-small alert alert-primary" v-if="self_profile">
+                            <div class="card card-small callout callout-info" v-if="self_profile"
+                                 v-show="(user.followers.length) == 0">
+                                <div class="share-box-inner" role="alert">
+                                    <i class="fa fa-info"> )
+                                        You have no followers yet. Publish your thoughts and let them know about you.
+                                    </i></div>
+                            </div>
+                            <div class="card card-small callout callout-info" v-if="!self_profile"
+                                 v-show="(user.followers.length) == 0">
+                                <div class="share-box-inner" role="alert">
+                                    <i class="fa fa-info"> )
+                                        {{user.name}} have no followers yet.
+                                    </i></div>
+                            </div>
+
+                            <div class="card card-small callout callout-info" v-if="self_profile">
                                 <div class="share-box-inner" role="alert">
                                     <i class="fa fa-info">
                                         ) To manage your profile please visit Your dashboard !
-                                    </i>                                </div>
+                                    </i></div>
                             </div>
                         </div>
                     </div>
@@ -128,7 +143,8 @@
                                                     </button>
                                                 </div>
                                                 <div v-show="self_profile">
-                                                    <router-link :to="{name: 'FrontProfile' , query: {id: followers.id}}"
+                                                    <router-link
+                                                            :to="{name: 'FrontProfile' , query: {id: followers.id}}"
                                                             tag="button"
                                                             active-class="active"
                                                             class="add-frnd"><strong>Visit Profile</strong>
@@ -203,8 +219,13 @@
                 return photo;
             },
             getUserImage(image) {
-                let photo = 'Backend/ProfileImages/' + image;
-                return photo;
+                if (image == null || image == undefined) {
+                    let photo = 'images/user.png';
+                    return photo;
+                } else {
+                    let photo = 'Backend/ProfileImages/' + image;
+                    return photo;
+                }
             },
             viewProfile() {
                 axios.get('profile/' + this.id).then((response) => {

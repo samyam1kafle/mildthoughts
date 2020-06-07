@@ -196,7 +196,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Express your feelings
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2020 <a href="https://adminlte.io">Mild-Thoughts</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2020 <a href="">Mild-Thoughts</a>.</strong> All rights reserved.
     </footer>
 </div>
 <!-- ./wrapper -->
