@@ -2979,7 +2979,7 @@ __webpack_require__.r(__webpack_exports__);
 
       Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        text: "Thoughts will be deleted along with the user and you won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -3138,8 +3138,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getUserImage: function getUserImage(image) {
-      var photo = 'Backend/ProfileImages/' + image;
-      return photo;
+      if (image == null || image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = 'Backend/ProfileImages/' + image;
+
+        return _photo;
+      }
     }
   },
   created: function created() {
@@ -3639,8 +3645,14 @@ __webpack_require__.r(__webpack_exports__);
       return photo;
     },
     getProfileImage: function getProfileImage() {
-      var photo = this.form.display_image.length > 200 ? this.form.display_image : 'Backend/ProfileImages/' + this.form.display_image;
-      return photo;
+      if (this.form.display_image == null || this.form.display_image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = this.form.display_image.length > 200 ? this.form.display_image : 'Backend/ProfileImages/' + this.form.display_image;
+
+        return _photo;
+      }
     },
     updateInfo: function updateInfo() {
       var _this3 = this;
@@ -3662,8 +3674,6 @@ __webpack_require__.r(__webpack_exports__);
         _app_js__WEBPACK_IMPORTED_MODULE_0__["userEvent"].$emit('userUpdated', userData);
 
         _this3.$Progress.finish();
-
-        s;
       })["catch"](function () {
         _this3.$Progress.fail();
       });
@@ -3910,6 +3920,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3970,8 +3996,14 @@ __webpack_require__.r(__webpack_exports__);
       return photo;
     },
     getUserImage: function getUserImage(image) {
-      var photo = 'Backend/ProfileImages/' + image;
-      return photo;
+      if (image == null || image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = 'Backend/ProfileImages/' + image;
+
+        return _photo;
+      }
     },
     viewProfile: function viewProfile() {
       var _this3 = this;
@@ -4172,6 +4204,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4232,8 +4278,14 @@ __webpack_require__.r(__webpack_exports__);
       return photo;
     },
     getUserImage: function getUserImage(image) {
-      var photo = 'Backend/ProfileImages/' + image;
-      return photo;
+      if (image == null || image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = 'Backend/ProfileImages/' + image;
+
+        return _photo;
+      }
     },
     viewProfile: function viewProfile() {
       var _this3 = this;
@@ -4264,85 +4316,6 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on('ProfileEvent', function () {
       _this4.viewProfile();
     });
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      form: new Form({
-        email: '',
-        name: '',
-        password: '',
-        password_confirmation: ''
-      })
-    };
-  },
-  methods: {
-    createUser: function createUser() {
-      this.form.post('register').then(function () {
-        Toast.fire({
-          icon: 'success',
-          title: 'Welcome To Our Site. Please login to continue.'
-        });
-      })["catch"](function () {
-        Toast.fire({
-          icon: 'info',
-          title: 'There occurred some problem while creating your account.'
-        });
-      });
-    }
-  },
-  mounted: function mounted() {
-    this.form.clear();
   }
 });
 
@@ -4769,6 +4742,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4782,8 +4765,14 @@ __webpack_require__.r(__webpack_exports__);
       return photo;
     },
     getUserImage: function getUserImage(image) {
-      var photo = 'Backend/ProfileImages/' + image;
-      return photo;
+      if (image == null || image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = 'Backend/ProfileImages/' + image;
+
+        return _photo;
+      }
     },
     viewProfile: function viewProfile() {
       var _this = this;
@@ -5071,8 +5060,14 @@ __webpack_require__.r(__webpack_exports__);
       return photo;
     },
     getUserImage: function getUserImage(image) {
-      var photo = 'Backend/ProfileImages/' + image;
-      return photo;
+      if (image == null || image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = 'Backend/ProfileImages/' + image;
+
+        return _photo;
+      }
     },
     getCoverImage: function getCoverImage() {
       var cp = 'images/cover.jpg';
@@ -5353,6 +5348,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5412,8 +5417,14 @@ __webpack_require__.r(__webpack_exports__);
       return photo;
     },
     getUserImage: function getUserImage(image) {
-      var photo = 'Backend/ProfileImages/' + image;
-      return photo;
+      if (image == null || image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = 'Backend/ProfileImages/' + image;
+
+        return _photo;
+      }
     },
     viewProfile: function viewProfile() {
       var _this3 = this;
@@ -74876,13 +74887,11 @@ var render = function() {
             "div",
             { staticClass: "widget-user-image", staticStyle: { top: "47px" } },
             [
-              _vm.user.display_image != null
-                ? _c("img", {
-                    staticClass: "img-circle elevation-5",
-                    staticStyle: { width: "104px", height: "100px" },
-                    attrs: { src: _vm.getProfileImage(), alt: "User Avatar" }
-                  })
-                : _vm._e()
+              _c("img", {
+                staticClass: "img-circle elevation-5",
+                staticStyle: { width: "104px", height: "100px" },
+                attrs: { src: _vm.getProfileImage(), alt: "User Avatar" }
+              })
             ]
           ),
           _vm._v(" "),
@@ -75938,8 +75947,61 @@ var render = function() {
               _vm.self_profile
                 ? _c(
                     "div",
-                    { staticClass: "card card-small alert alert-primary" },
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.user.followers.length == 0,
+                          expression: "(user.followers.length) == 0"
+                        }
+                      ],
+                      staticClass: "card card-small callout callout-info"
+                    },
                     [_vm._m(0)]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.self_profile
+                ? _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.user.followers.length == 0,
+                          expression: "(user.followers.length) == 0"
+                        }
+                      ],
+                      staticClass: "card card-small callout callout-info"
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "share-box-inner",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-info" }, [
+                            _vm._v(
+                              " )\n                                    " +
+                                _vm._s(_vm.user.name) +
+                                " have no followers yet.\n                                "
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.self_profile
+                ? _c(
+                    "div",
+                    { staticClass: "card card-small callout callout-info" },
+                    [_vm._m(1)]
                   )
                 : _vm._e()
             ])
@@ -76142,6 +76204,22 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "share-box-inner", attrs: { role: "alert" } },
+      [
+        _c("i", { staticClass: "fa fa-info" }, [
+          _vm._v(
+            " )\n                                    You have no followers yet. Publish your thoughts and let them know about you.\n                                "
+          )
+        ])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -76395,8 +76473,61 @@ var render = function() {
               _vm.self_profile
                 ? _c(
                     "div",
-                    { staticClass: "card card-small alert alert-primary" },
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.user.followings.length == 0,
+                          expression: "(user.followings.length) == 0"
+                        }
+                      ],
+                      staticClass: "card card-small callout callout-info"
+                    },
                     [_vm._m(0)]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.self_profile
+                ? _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.user.followings.length == 0,
+                          expression: "(user.followings.length) == 0"
+                        }
+                      ],
+                      staticClass: "card card-small callout callout-info"
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "share-box-inner",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-info" }, [
+                            _vm._v(
+                              " )\n                                    " +
+                                _vm._s(_vm.user.name) +
+                                " is not following anyone yet.\n                                "
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.self_profile
+                ? _c(
+                    "div",
+                    { staticClass: "card card-small callout callout-info" },
+                    [_vm._m(1)]
                   )
                 : _vm._e()
             ])
@@ -76609,202 +76740,27 @@ var staticRenderFns = [
       [
         _c("i", { staticClass: "fa fa-info" }, [
           _vm._v(
+            " )\n                                    You are not following anyone yet. Follow users now and see what they are upto.\n                                "
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "share-box-inner", attrs: { role: "alert" } },
+      [
+        _c("i", { staticClass: "fa fa-info" }, [
+          _vm._v(
             "\n                                    ) To manage your profile please visit Your dashboard !\n                                "
           )
         ])
       ]
     )
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      staticClass: "signup-inner--form",
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.createUser($event)
-        }
-      }
-    },
-    [
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-12" },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.email,
-                  expression: "form.email"
-                }
-              ],
-              staticClass: "single-field",
-              class: { "is-invalid": _vm.form.errors.has("email") },
-              attrs: { placeholder: "Email", type: "email", name: "email" },
-              domProps: { value: _vm.form.email },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "email", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("has-error", { attrs: { form: _vm.form, field: "email" } })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-12" },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.name,
-                  expression: "form.name"
-                }
-              ],
-              staticClass: "single-field",
-              class: { "is-invalid": _vm.form.errors.has("name") },
-              attrs: { placeholder: "Username", type: "text", name: "name" },
-              domProps: { value: _vm.form.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "name", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("has-error", { attrs: { form: _vm.form, field: "name" } })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-6" },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.password,
-                  expression: "form.password"
-                }
-              ],
-              staticClass: "single-field",
-              class: { "is-invalid": _vm.form.errors.has("password") },
-              attrs: {
-                type: "password",
-                name: "password",
-                placeholder: "Password"
-              },
-              domProps: { value: _vm.form.password },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.form, "password", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("has-error", { attrs: { form: _vm.form, field: "password" } })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-6" },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.password_confirmation,
-                  expression: "form.password_confirmation"
-                }
-              ],
-              staticClass: "single-field",
-              class: { "is-invalid": _vm.form.errors.has("password") },
-              attrs: {
-                type: "password",
-                name: "password_confirmation",
-                placeholder: "Confirm Password"
-              },
-              domProps: { value: _vm.form.password_confirmation },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.form,
-                    "password_confirmation",
-                    $event.target.value
-                  )
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("has-error", { attrs: { form: _vm.form, field: "password" } })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("button", { staticClass: "submit-btn", attrs: { type: "submit" } }, [
-        _vm._v("Create My Account")
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -77385,97 +77341,121 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _vm._l(_vm.thoughts, function(thought) {
-                return _c("div", { staticClass: "card" }, [
-                  _c(
-                    "div",
-                    { staticClass: "post-title d-flex align-items-center" },
-                    [
-                      _c("div", { staticClass: "profile-thumb" }, [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _c(
-                            "figure",
-                            { staticClass: "profile-thumb-middle" },
-                            [
-                              _c("img", {
-                                attrs: {
-                                  src: _vm.getUserImage(
-                                    thought.user.display_image
-                                  ),
-                                  alt: "profile picture"
-                                }
-                              })
-                            ]
-                          )
-                        ])
-                      ]),
+                return _vm.thoughts.length > 0
+                  ? _c("div", { staticClass: "card mt-2" }, [
+                      _c(
+                        "div",
+                        { staticClass: "post-title d-flex align-items-center" },
+                        [
+                          _c("div", { staticClass: "profile-thumb" }, [
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c(
+                                "figure",
+                                { staticClass: "profile-thumb-middle" },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: _vm.getUserImage(
+                                        thought.user.display_image
+                                      ),
+                                      alt: "profile picture"
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "posted-author" }, [
+                            _c("h6", { staticClass: "author" }, [
+                              _c("a", { attrs: { href: "" } }, [
+                                _vm._v(_vm._s(thought.user.name))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "post-time" }, [
+                              _vm._v(
+                                _vm._s(
+                                  _vm._f("notificationTime")(thought.created_at)
+                                )
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(1, true)
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "posted-author" }, [
-                        _c("h6", { staticClass: "author" }, [
-                          _c("a", { attrs: { href: "" } }, [
-                            _vm._v(_vm._s(thought.user.name))
-                          ])
+                      _c("div", { staticClass: "post-content" }, [
+                        _c("p", { staticClass: "post-desc" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(thought.thought) +
+                              "\n                            "
+                          )
                         ]),
                         _vm._v(" "),
-                        _c("span", { staticClass: "post-time" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("notificationTime")(thought.created_at)
-                            )
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1, true)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post-content" }, [
-                    _c("p", { staticClass: "post-desc" }, [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(thought.thought) +
-                          "\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "post-thumb-gallery img-gallery" },
-                      [
-                        thought.image != null
-                          ? _c("div", { staticClass: "row no-gutters" }, [
-                              _c("div", { staticClass: "col-12" }, [
-                                _c("figure", { staticClass: "post-thumb" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "gallery-selector",
-                                      attrs: {
-                                        href: _vm.getThoughtImage(thought.image)
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        attrs: {
-                                          src: _vm.getThoughtImage(
-                                            thought.image
-                                          ),
-                                          alt: "post image"
-                                        }
-                                      })
-                                    ]
-                                  )
+                        _c(
+                          "div",
+                          { staticClass: "post-thumb-gallery img-gallery" },
+                          [
+                            thought.image != null
+                              ? _c("div", { staticClass: "row no-gutters" }, [
+                                  _c("div", { staticClass: "col-12" }, [
+                                    _c(
+                                      "figure",
+                                      { staticClass: "post-thumb" },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "gallery-selector",
+                                            attrs: {
+                                              href: _vm.getThoughtImage(
+                                                thought.image
+                                              )
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              attrs: {
+                                                src: _vm.getThoughtImage(
+                                                  thought.image
+                                                ),
+                                                alt: "post image"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ])
-                              ])
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(2, true)
-                  ])
-                ])
-              })
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(2, true)
+                      ])
+                    ])
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.thoughts.length == 0,
+                      expression: "thoughts.length == 0"
+                    }
+                  ],
+                  staticClass: "card callout callout-info"
+                },
+                [_vm._m(3)]
+              )
             ],
             2
           )
@@ -77489,7 +77469,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card card-small alert alert-primary" }, [
+    return _c("div", { staticClass: "card card-small callout callout-info" }, [
       _c("div", { staticClass: "share-box-inner", attrs: { role: "alert" } }, [
         _vm._v(
           "\n                            To post or update your profile please visit Your dashboard !\n                        "
@@ -77547,6 +77527,21 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("span", [_vm._v("07")])
           ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-content" }, [
+      _c("p", { staticClass: "post-desc" }, [
+        _vm._v(
+          "\n                                You have not posted any\n                                Thoughts.\n                                "
+        ),
+        _c("strong", [
+          _vm._v("Visit your dashboard now to post what is on your mind.")
         ])
       ])
     ])
@@ -77733,144 +77728,162 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-lg-6 order-1 order-lg-2" },
-            _vm._l(_vm.thoughts, function(post) {
-              return _vm.user.followings.length > 0
-                ? _c("div", { key: post.id, staticClass: "card mt-1" }, [
-                    _c(
-                      "div",
-                      { staticClass: "post-title d-flex align-items-center" },
-                      [
-                        _c("div", { staticClass: "profile-thumb" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c(
-                              "figure",
-                              { staticClass: "profile-thumb-middle" },
-                              [
-                                _c("img", {
-                                  attrs: {
-                                    src: _vm.getUserImage(
-                                      post.user.display_image
-                                    ),
-                                    alt: "profile picture"
-                                  }
-                                })
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "posted-author" }, [
-                          _c(
-                            "h6",
-                            { staticClass: "author" },
-                            [
+            [
+              _vm._l(_vm.thoughts, function(post) {
+                return _vm.thoughts.length > 0
+                  ? _c("div", { key: post.id, staticClass: "card mt-1" }, [
+                      _c(
+                        "div",
+                        { staticClass: "post-title d-flex align-items-center" },
+                        [
+                          _c("div", { staticClass: "profile-thumb" }, [
+                            _c("a", { attrs: { href: "#" } }, [
                               _c(
-                                "router-link",
-                                {
-                                  attrs: {
-                                    to: {
-                                      name: "FrontProfile",
-                                      query: { id: post.user.id }
-                                    },
-                                    tag: "a",
-                                    "active-class": "active"
-                                  }
-                                },
+                                "figure",
+                                { staticClass: "profile-thumb-middle" },
                                 [
-                                  _vm._v(
-                                    _vm._s(post.user.name) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "post-time" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("notificationTime")(post.created_at)
-                              )
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0, true)
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "post-content" }, [
-                      _c("strong", [
-                        _c("i", { staticClass: "fas fa-pen" }),
-                        _vm._v(" Title: " + _vm._s(post.title))
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("strong", [
-                        _c("i", { staticClass: "fa fa-tag" }),
-                        _vm._v(" Tag: " + _vm._s(post.category.category_name))
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "post-desc" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(post.thought) +
-                            "\n                            "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      post.image != null
-                        ? _c("div", { staticClass: "post-thumb-gallery" }, [
-                            _c(
-                              "figure",
-                              { staticClass: "post-thumb img-popup" },
-                              [
-                                _c("a", { attrs: { href: "" } }, [
                                   _c("img", {
                                     attrs: {
-                                      src: _vm.getPostImage(post.image),
-                                      alt: "post image"
+                                      src: _vm.getUserImage(
+                                        post.user.display_image
+                                      ),
+                                      alt: "profile picture"
                                     }
                                   })
-                                ])
-                              ]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "post-meta col-lg-12" }, [
-                        _c("div", { staticClass: "col-sm-8" }, [
-                          _c("ul", { staticClass: "comment-share-meta" }, [
-                            _c("li", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "post-meta-like",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.likeUnlike(post.id)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "fa fa-star" })]
-                              ),
-                              _vm._v(" "),
-                              _vm._m(1, true)
+                                ]
+                              )
                             ])
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "posted-author" }, [
+                            _c(
+                              "h6",
+                              { staticClass: "author" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "FrontProfile",
+                                        query: { id: post.user.id }
+                                      },
+                                      tag: "a",
+                                      "active-class": "active"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(post.user.name) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "post-time" }, [
+                              _vm._v(
+                                _vm._s(
+                                  _vm._f("notificationTime")(post.created_at)
+                                )
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0, true)
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "post-content" }, [
+                        _c("strong", [
+                          _c("i", { staticClass: "fas fa-pen" }),
+                          _vm._v(" Title: " + _vm._s(post.title))
                         ]),
                         _vm._v(" "),
-                        _vm._m(2, true)
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c("strong", [
+                          _c("i", { staticClass: "fa fa-tag" }),
+                          _vm._v(" Tag: " + _vm._s(post.category.category_name))
+                        ]),
+                        _vm._v(" "),
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "post-desc" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(post.thought) +
+                              "\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        post.image != null
+                          ? _c("div", { staticClass: "post-thumb-gallery" }, [
+                              _c(
+                                "figure",
+                                { staticClass: "post-thumb img-popup" },
+                                [
+                                  _c("a", { attrs: { href: "" } }, [
+                                    _c("img", {
+                                      attrs: {
+                                        src: _vm.getPostImage(post.image),
+                                        alt: "post image"
+                                      }
+                                    })
+                                  ])
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "post-meta col-lg-12" }, [
+                          _c("div", { staticClass: "col-sm-8" }, [
+                            _c("ul", { staticClass: "comment-share-meta" }, [
+                              _c("li", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "post-meta-like",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.likeUnlike(post.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-star" })]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(1, true)
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2, true)
+                        ])
                       ])
                     ])
-                  ])
-                : _c("div", { staticClass: "card" }, [_vm._m(3)])
-            }),
-            0
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.thoughts.length == 0,
+                      expression: "thoughts.length == 0"
+                    }
+                  ],
+                  staticClass: "card mt-2"
+                },
+                [_vm._m(3)]
+              )
+            ],
+            2
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-3 order-3" }, [
@@ -78055,7 +78068,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "post-content" }, [
       _c("p", { staticClass: "post-desc" }, [
         _vm._v(
-          "\n                                You have not followed any user please follow some user to see their\n                                post.\n                                "
+          "\n                                You have not followed any user please follow some user to see their\n                                Thoughts.\n                                "
         ),
         _c("strong", [_vm._v("Feel Free To Explore The World Of thoughts.")])
       ])
@@ -78348,97 +78361,123 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm._l(_vm.thoughts, function(thought) {
-                return _c("div", { staticClass: "card" }, [
-                  _c(
-                    "div",
-                    { staticClass: "post-title d-flex align-items-center" },
-                    [
-                      _c("div", { staticClass: "profile-thumb" }, [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _c(
-                            "figure",
-                            { staticClass: "profile-thumb-middle" },
-                            [
-                              _c("img", {
-                                attrs: {
-                                  src: _vm.getUserImage(
-                                    thought.user.display_image
-                                  ),
-                                  alt: "profile picture"
-                                }
-                              })
-                            ]
-                          )
-                        ])
-                      ]),
+                return _vm.thoughts.length > 0
+                  ? _c("div", { staticClass: "card" }, [
+                      _c(
+                        "div",
+                        { staticClass: "post-title d-flex align-items-center" },
+                        [
+                          _c("div", { staticClass: "profile-thumb" }, [
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c(
+                                "figure",
+                                { staticClass: "profile-thumb-middle" },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: _vm.getUserImage(
+                                        thought.user.display_image
+                                      ),
+                                      alt: "profile picture"
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "posted-author" }, [
+                            _c("h6", { staticClass: "author" }, [
+                              _c("a", { attrs: { href: "" } }, [
+                                _vm._v(_vm._s(thought.user.name))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "post-time" }, [
+                              _vm._v(
+                                _vm._s(
+                                  _vm._f("notificationTime")(thought.created_at)
+                                )
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(1, true)
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "posted-author" }, [
-                        _c("h6", { staticClass: "author" }, [
-                          _c("a", { attrs: { href: "" } }, [
-                            _vm._v(_vm._s(thought.user.name))
-                          ])
+                      _c("div", { staticClass: "post-content" }, [
+                        _c("p", { staticClass: "post-desc" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(thought.thought) +
+                              "\n                            "
+                          )
                         ]),
                         _vm._v(" "),
-                        _c("span", { staticClass: "post-time" }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("notificationTime")(thought.created_at)
-                            )
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1, true)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "post-content" }, [
-                    _c("p", { staticClass: "post-desc" }, [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(thought.thought) +
-                          "\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "post-thumb-gallery img-gallery" },
-                      [
-                        thought.image != null
-                          ? _c("div", { staticClass: "row no-gutters" }, [
-                              _c("div", { staticClass: "col-12" }, [
-                                _c("figure", { staticClass: "post-thumb" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "gallery-selector",
-                                      attrs: {
-                                        href: _vm.getThoughtImage(thought.image)
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        attrs: {
-                                          src: _vm.getThoughtImage(
-                                            thought.image
-                                          ),
-                                          alt: "post image"
-                                        }
-                                      })
-                                    ]
-                                  )
+                        _c(
+                          "div",
+                          { staticClass: "post-thumb-gallery img-gallery" },
+                          [
+                            thought.image != null
+                              ? _c("div", { staticClass: "row no-gutters" }, [
+                                  _c("div", { staticClass: "col-12" }, [
+                                    _c(
+                                      "figure",
+                                      { staticClass: "post-thumb" },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "gallery-selector",
+                                            attrs: {
+                                              href: _vm.getThoughtImage(
+                                                thought.image
+                                              )
+                                            }
+                                          },
+                                          [
+                                            _c("img", {
+                                              attrs: {
+                                                src: _vm.getThoughtImage(
+                                                  thought.image
+                                                ),
+                                                alt: "post image"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ])
-                              ])
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(2, true)
-                  ])
-                ])
-              })
+                              : _vm._e()
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(2, true)
+                      ])
+                    ])
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              !_vm.self_profile
+                ? _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.thoughts.length == 0,
+                          expression: "thoughts.length == 0"
+                        }
+                      ],
+                      staticClass: "card callout callout-info"
+                    },
+                    [_vm._m(3)]
+                  )
+                : _vm._e()
             ],
             2
           )
@@ -78521,6 +78560,18 @@ var staticRenderFns = [
             _c("span", [_vm._v("07")])
           ])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-content" }, [
+      _c("p", { staticClass: "post-desc" }, [
+        _vm._v(
+          "\n                                User have not posted any\n                                Thoughts.\n\n                            "
+        )
       ])
     ])
   }
@@ -94009,7 +94060,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('notification', __webpack_require__(/*! ./components/NotificationMarkup/notification.vue */ "./resources/js/components/NotificationMarkup/notification.vue")["default"]);
 Vue.component('userDetails', __webpack_require__(/*! ./components/Backend/User/masterUserDetail.vue */ "./resources/js/components/Backend/User/masterUserDetail.vue")["default"]);
-Vue.component('frontendRegister', __webpack_require__(/*! ./components/FrontEnd/SignUpMarkup/register.vue */ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue")["default"]);
 Vue.component('homeIndex', __webpack_require__(/*! ./components/FrontEnd/index.vue */ "./resources/js/components/FrontEnd/index.vue")["default"]);
 /*New Vue Instance for data transmission*/
 
@@ -94832,75 +94882,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Followings_vue_vue_type_template_id_5e6e42c4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Followings_vue_vue_type_template_id_5e6e42c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue":
-/*!********************************************************************!*\
-  !*** ./resources/js/components/FrontEnd/SignUpMarkup/register.vue ***!
-  \********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./register.vue?vue&type=template&id=57945480&scoped=true& */ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&");
-/* harmony import */ var _register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./register.vue?vue&type=script&lang=js& */ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "57945480",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/FrontEnd/SignUpMarkup/register.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./register.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&":
-/*!***************************************************************************************************************!*\
-  !*** ./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true& ***!
-  \***************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./register.vue?vue&type=template&id=57945480&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/SignUpMarkup/register.vue?vue&type=template&id=57945480&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_register_vue_vue_type_template_id_57945480_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

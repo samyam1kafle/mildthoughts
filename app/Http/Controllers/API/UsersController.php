@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
+use App\Models\Thoughts;
 use App\Notifications\follower;
 use App\Notifications\unfollower;
 use App\User;
@@ -219,6 +220,16 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        if(count($user->thoughts)>0){
+            foreach ($user->thoughts as $thought){
+               $thoug =  Thoughts::find($thought->id);
+               $post_image = $thoug->image;
+                if ($post_image != null) {
+                    unlink(public_path('Backend/ThoughtsImages/') . $post_image);
+                }
+               $thoug->delete();
+            }
+        }
         $image = $user->display_image;
         if ($image != null) {
             unlink(public_path('Backend/ProfileImages/') . $image);

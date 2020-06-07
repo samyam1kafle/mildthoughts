@@ -71,7 +71,7 @@
                     <div class="col-lg-6 order-1 order-lg-2">
 
                         <!-- post status start -->
-                        <div class="card mt-1" v-if="((user.followings.length) > 0)" v-for="post in thoughts"
+                        <div class="card mt-1" v-if="(thoughts.length > 0)" v-for="post in thoughts"
                              :key="post.id">
                             <!-- post title start -->
                             <div class="post-title d-flex align-items-center">
@@ -173,11 +173,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" v-else>
+                        <div class="card mt-2" v-show="thoughts.length == 0">
                             <div class="post-content">
                                 <p class="post-desc">
                                     You have not followed any user please follow some user to see their
-                                    post.
+                                    Thoughts.
                                     <strong>Feel Free To Explore The World Of thoughts.</strong>
                                 </p>
 
@@ -260,8 +260,13 @@
                 return photo;
             },
             getUserImage(image) {
-                let photo = 'Backend/ProfileImages/' + image;
-                return photo;
+                if(image == null || image == undefined){
+                    let photo = 'images/user.png';
+                    return photo;
+                }else{
+                    let photo = 'Backend/ProfileImages/' + image;
+                    return photo;
+                }
             },
             getCoverImage() {
                 let cp = 'images/cover.jpg';

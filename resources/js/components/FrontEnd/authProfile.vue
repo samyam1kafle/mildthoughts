@@ -83,14 +83,14 @@
 
                     <div class="col-lg-6 order-1 order-lg-2">
 
-                        <div class="card card-small alert alert-primary">
+                        <div class="card card-small callout callout-info">
                             <div class="share-box-inner" role="alert">
                                 To post or update your profile please visit Your dashboard !
                             </div>
                         </div>
 
                         <!-- post status start -->
-                        <div class="card" v-for="thought in thoughts">
+                        <div v-if="thoughts.length > 0" class="card mt-2" v-for="thought in thoughts">
                             <!-- post title start -->
                             <div class="post-title d-flex align-items-center">
                                 <!-- profile picture end -->
@@ -166,6 +166,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card callout callout-info" v-show="thoughts.length == 0">
+                            <div class="post-content">
+                                <p class="post-desc">
+                                    You have not posted any
+                                    Thoughts.
+                                    <strong>Visit your dashboard now to post what is on your mind.</strong>
+                                </p>
+
+                            </div>
+                        </div>
                         <!-- post status end -->
 
                     </div>
@@ -191,8 +201,13 @@
                 return photo;
             },
             getUserImage(image) {
-                let photo = 'Backend/ProfileImages/' + image;
-                return photo;
+                if(image == null || image == undefined){
+                    let photo = 'images/user.png';
+                    return photo;
+                }else{
+                    let photo = 'Backend/ProfileImages/' + image;
+                    return photo;
+                }
             },
             viewProfile() {
                 axios.get('Auth_profile').then((response) => {

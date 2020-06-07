@@ -23,8 +23,13 @@
         },
         methods:{
             getUserImage(image){
-                let photo = 'Backend/ProfileImages/' + image;
-                return photo;
+                if(image == null || image == undefined){
+                    let photo = 'images/user.png';
+                    return photo;
+                }else{
+                    let photo = 'Backend/ProfileImages/' + image;
+                    return photo;
+                }
             }
         },
 

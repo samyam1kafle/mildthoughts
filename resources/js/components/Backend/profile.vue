@@ -10,7 +10,7 @@
                         <h5 class="widget-user-desc">{{user.roles.role}}</h5>
                     </div>
                     <div class="widget-user-image" style="top: 47px;">
-                        <img v-if="user.display_image != null" class="img-circle elevation-5" :src="getProfileImage()"
+                        <img class="img-circle elevation-5" :src="getProfileImage()"
                              alt="User Avatar" style="width: 104px; height:100px">
 
                     </div>
@@ -413,8 +413,14 @@
                 return photo;
             },
             getProfileImage() {
-                let photo = (this.form.display_image.length > 200) ? this.form.display_image : 'Backend/ProfileImages/' + this.form.display_image;
-                return photo;
+                if (this.form.display_image == null || this.form.display_image == undefined) {
+                    let photo = 'images/user.png';
+                    return photo;
+                } else {
+                    let photo = (this.form.display_image.length > 200) ? this.form.display_image : 'Backend/ProfileImages/' + this.form.display_image;
+                    return photo;
+                }
+
             },
             updateInfo() {
                 this.$Progress.start();
@@ -431,7 +437,6 @@
                     });
                     userEvent.$emit('userUpdated', userData);
                     this.$Progress.finish();
-                    s
                 }).catch(() => {
                     this.$Progress.fail();
                 });

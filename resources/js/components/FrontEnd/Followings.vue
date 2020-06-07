@@ -77,7 +77,21 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="card card-small alert alert-primary" v-if="self_profile">
+                            <div class="card card-small callout callout-info" v-if="self_profile"
+                                 v-show="(user.followings.length) == 0">
+                                <div class="share-box-inner" role="alert">
+                                    <i class="fa fa-info"> )
+                                        You are not following anyone yet. Follow users now and see what they are upto.
+                                    </i></div>
+                            </div>
+                            <div class="card card-small callout callout-info" v-if="!self_profile"
+                                 v-show="(user.followings.length) == 0">
+                                <div class="share-box-inner" role="alert">
+                                    <i class="fa fa-info"> )
+                                        {{user.name}} is not following anyone yet.
+                                    </i></div>
+                            </div>
+                            <div class="card card-small callout callout-info" v-if="self_profile">
                                 <div class="share-box-inner" role="alert">
                                     <i class="fa fa-info">
                                         ) To manage your profile please visit Your dashboard !
@@ -206,8 +220,13 @@
                 return photo;
             },
             getUserImage(image) {
-                let photo = 'Backend/ProfileImages/' + image;
-                return photo;
+                if(image == null || image == undefined){
+                    let photo = 'images/user.png';
+                    return photo;
+                }else{
+                    let photo = 'Backend/ProfileImages/' + image;
+                    return photo;
+                }
             },
             viewProfile() {
                 axios.get('profile/' + this.id).then((response) => {
