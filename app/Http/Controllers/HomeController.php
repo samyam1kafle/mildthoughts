@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thoughts;
+use App\Models\ThoughtsCategory;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,7 @@ class HomeController extends Controller
         $data = User::with('thoughts', 'roles', 'followers', 'followings')->withCount(['followers', 'followings'])->find($id);
         $own_profile = false;
         $logged_user_id = auth()->id();
+        $tags = ThoughtsCategory::all();
         $followingOrNot = null;
         if ($userLogged->id == $id) {
             $own_profile = true;
@@ -56,7 +58,7 @@ class HomeController extends Controller
             $Thought_in_order = $indThought->sortByDesc('created_at');
             $Thought_in_order = $Thought_in_order->values()->all();
         }
-        return response()->json(['user_data' => $data, 'thoughts' => $Thought_in_order, 'isFollowing' => $followingOrNot, 'own_profile' => $own_profile, 'auth_id' => $logged_user_id]);
+        return response()->json(['tags' => $tags, 'user_data' => $data, 'thoughts' => $Thought_in_order, 'isFollowing' => $followingOrNot, 'own_profile' => $own_profile, 'auth_id' => $logged_user_id]);
     }
 
     public function authProfileInfo()
@@ -64,6 +66,7 @@ class HomeController extends Controller
         $user_id = auth()->id();
         $user = User::with('thoughts', 'roles', 'followers', 'followings')->withCount(['followers', 'followings'])->find($user_id);
         $thoughts = $user->thoughts;
+        $tags = ThoughtsCategory::all();
         if (count($thoughts) > 0) {
             foreach ($thoughts as $thought) {
                 $indThought[] = Thoughts::with('user', 'category')->find($thought->id);
@@ -73,6 +76,6 @@ class HomeController extends Controller
             $thoughts = $thoughts_sorted->values()->all();
         }
 
-        return response()->json(['user_data' => $user, 'thoughts' => $thoughts], 200);
+        return response()->json(['user_data' => $user, 'thoughts' => $thoughts,'tags'=>$tags], 200);
     }
 }

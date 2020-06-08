@@ -161,7 +161,7 @@
 
 // profile page banner
 .profile-banner-large {
-    height: 370px;
+    height: 240px;
     //responsive
     @media #{$md-device} {
         height: 270px;
@@ -201,7 +201,7 @@
 .profile-picture-box {
     position: absolute; 
     transform: translateY(calc(-50% - 10px));
-    background-color: $white;
+    //background-color: $white;
     z-index: 1;
     //responsive
     @media #{$lg-device} {

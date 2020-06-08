@@ -2,8 +2,8 @@
     <main>
 
         <div class="main-wrapper">
-            <div class="profile-banner-large bg-img" data-bg="assets/images/banner/profile-banner.jpg"
-                 style="background-image: url('../../../../public/Frontend/assets/images/banner/profile-banner.jpg');">
+            <div class="profile-banner-large bg-img" :data-bg="getUserCoverImage(user.cover_image)">
+                <img :src="getUserCoverImage(user.cover_image)" alt="Cover Image">
             </div>
             <div class="profile-menu-area bg-white">
                 <div class="container">
@@ -74,7 +74,10 @@
                                             </li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="fa fa-envelope"></i>{{user.email}}</a></li>
+                                            <li v-if="user.email.length < 15"><a href="#"><i class="fa fa-envelope"></i>{{user.email}}</a>
+                                            </li>
+                                            <li v-else><a href="#"><i class="fa fa-envelope"></i>{{user.email.slice(0,15)+'..'}}</a>
+                                            </li>
                                         </ul>
                                         <ul class="author-into-list">
                                             <li><a href="#"><i class="fa fa-heart"></i>
@@ -94,11 +97,11 @@
                     </div>
 
                     <div class="col-lg-6 order-1 order-lg-2">
-                        <div class="card card-small alert alert-primary" v-if="self_profile">
+                        <div class="card card-small callout callout-danger" v-if="self_profile">
                             <div class="share-box-inner" role="alert">
                                 <i class="fa fa-info">
-                                ) To manage your profile please visit Your dashboard !
-                            </i>
+                                    ) To manage your profile please visit Your dashboard !
+                                </i>
 
                             </div>
                         </div>
@@ -109,9 +112,9 @@
                                 <!-- profile picture end -->
                                 <div class="profile-thumb">
                                     <a href="#">
-                                        <figure class="profile-thumb-middle">
+                                        <div class="profile-thumb-middle">
                                             <img :src="getUserImage(thought.user.display_image)" alt="profile picture">
-                                        </figure>
+                                        </div>
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
@@ -121,24 +124,6 @@
                                     <span class="post-time">{{thought.created_at | notificationTime}}</span>
                                 </div>
 
-                                <div class="post-settings-bar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <div class="post-settings arrow-shape">
-                                        <ul>
-                                            <li>
-                                                <button>copy link to adda</button>
-                                            </li>
-                                            <li>
-                                                <button>edit post</button>
-                                            </li>
-                                            <li>
-                                                <button>embed adda</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                             <!-- post title start -->
                             <div class="post-content">
@@ -148,16 +133,16 @@
                                 <div class="post-thumb-gallery img-gallery">
                                     <div class="row no-gutters" v-if="thought.image != null">
                                         <div class="col-12">
-                                            <figure class="post-thumb">
+                                            <div class="post-thumb">
                                                 <a class="gallery-selector" :href="getThoughtImage(thought.image)">
                                                     <img :src="getThoughtImage(thought.image)" alt="post image">
                                                 </a>
-                                            </figure>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="post-meta col-lg-12">
-                                    <div class="col-sm-8">
+                                <div class="post-meta col-md-0">
+                                    <div class="col-xs-8">
                                         <ul class="comment-share-meta">
                                             <li>
                                                 <button class="post-meta-like">
@@ -205,6 +190,35 @@
 
                     </div>
 
+                    <div class="col-lg-3 order-3">
+                        <aside class="widget-area">
+                            <!-- By Tags start -->
+                            <div class="card widget-item">
+                                <h4 class="widget-title">Browse By thoughts tags</h4>
+                                <div class="widget-body">
+                                    <ul class="like-page-list-wrapper">
+                                        <li class="unorder-list" v-for="tag in tags" :key="tag.id">
+                                            <!-- profile picture end -->
+                                            <div class="profile-thumb">
+                                                <i class="fa fa-tags"></i>
+                                            </div>
+                                            <!-- profile picture end -->
+
+                                            <div class="unorder-list-info">
+                                                <h3 class="list-title">
+                                                    <router-link tag="a" :to="{name: 'ViewByTags',query: {id: tag.id}}">
+                                                        {{tag.category_name}}
+                                                    </router-link>
+                                                </h3>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- By tags end -->
+                        </aside>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -220,6 +234,7 @@
                 thoughts: {},
                 isFollowing: false,
                 self_profile: false,
+                tags: {}
             }
         },
         methods: {
@@ -262,11 +277,20 @@
                 let photo = 'Backend/ThoughtsImages/' + image;
                 return photo;
             },
+            getUserCoverImage(image) {
+                if (image == null || image == undefined) {
+                    let photo = 'images/cover.jpg';
+                    return photo;
+                } else {
+                    let photo = 'Backend/UserCoverImages/' + image;
+                    return photo;
+                }
+            },
             getUserImage(image) {
-                if(image == null || image == undefined){
+                if (image == null || image == undefined) {
                     let photo = 'images/user.png';
                     return photo;
-                }else{
+                } else {
                     let photo = 'Backend/ProfileImages/' + image;
                     return photo;
                 }
@@ -277,6 +301,7 @@
                     this.thoughts = response.data.thoughts;
                     this.isFollowing = response.data.isFollowing;
                     this.self_profile = response.data.own_profile;
+                    this.tags = response.data.tags;
                 }).catch(() => {
                     Toast.fire({
                         icon: 'error',

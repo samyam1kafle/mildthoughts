@@ -25,11 +25,10 @@ class ThoughtsController extends Controller
             $user = auth()->user();
 
             /*Author you may know*/
-
+            $arr = [];
             $author = Roles::where('role', '=', 'Author')->first()->users;
-
             $writters = $author->where('id', '!=', auth()->id());
-            if (count($followings) > 0) {
+            if (count($followings) > 0 && count($writters) > 0) {
                 foreach ($writters as $author) {
                     if (!$user->isFollowing($author)) {
                         $arr[] = $author;
@@ -37,11 +36,14 @@ class ThoughtsController extends Controller
                 }
                 $arr = array_slice($arr, 0, 5);
             } else {
-                foreach ($writters as $authors){
-                    $arr[] = $authors;
+                if (count($writters) > 0) {
+                    foreach ($writters as $authors) {
+                        $arr[] = $authors;
+                    }
+                    $arr = array_slice($arr, 0, 5);
                 }
-                $arr = array_slice($arr, 0, 5);
             }
+
             /*Author you may know*/
             return response()->json(['userdetail' => $userdetail, 'followings' => $followings, 'Author' => $arr], 200);
         }
@@ -118,13 +120,20 @@ class ThoughtsController extends Controller
         $author = Roles::where('role', '=', 'Author')->first()->users;
 
         $writters = $author->where('id', '!=', auth()->id());
-        if (count($followings) > 0) {
+        if (count($followings) > 0 && count($writters) > 0) {
             foreach ($writters as $author) {
                 if (!$user->isFollowing($author)) {
                     $arr[] = $author;
                 }
             }
             $arr = array_slice($arr, 0, 5);
+        } else {
+            if (count($writters) > 0) {
+                foreach ($writters as $authors) {
+                    $arr[] = $authors;
+                }
+                $arr = array_slice($arr, 0, 5);
+            }
         }
 
         /*Author you may know*/

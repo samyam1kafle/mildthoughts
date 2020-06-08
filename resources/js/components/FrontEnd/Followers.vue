@@ -2,8 +2,8 @@
     <main>
 
         <div class="main-wrapper">
-            <div class="profile-banner-large bg-img" data-bg="assets/images/banner/profile-banner.jpg"
-                 style="background-image: url('../../../../public/Frontend/assets/images/banner/profile-banner.jpg');">
+            <div class="profile-banner-large bg-img" :data-bg="getUserCoverImage(user.cover_image)">
+                <img :src="getUserCoverImage(user.cover_image)" alt="Cover Image">
             </div>
             <div class="profile-menu-area bg-white">
                 <div class="container">
@@ -115,10 +115,10 @@
                                                 <router-link :to="{name: 'FrontProfile' , query: {id: followers.id}}"
                                                              tag="a"
                                                              active-class="active">
-                                                    <figure class="profile-thumb-middle">
+                                                    <div class="profile-thumb-middle">
                                                         <img :src="getUserImage(followers.display_image)"
                                                              alt="profile picture">
-                                                    </figure>
+                                                    </div>
                                                 </router-link>
                                             </div>
                                             <!-- profile picture end -->
@@ -213,7 +213,15 @@
                     this.$Progress.fail();
                 });
             },
-
+            getUserCoverImage(image) {
+                if (image == null || image == undefined) {
+                    let photo = 'images/cover.jpg';
+                    return photo;
+                } else {
+                    let photo = 'Backend/UserCoverImages/' + image;
+                    return photo;
+                }
+            },
             getThoughtImage(image) {
                 let photo = 'Backend/ThoughtsImages/' + image;
                 return photo;

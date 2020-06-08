@@ -42,10 +42,10 @@
                                 <div class="profile-thumb">
                                     <router-link tag="a" :to="{name: 'FrontProfile' , query: {id: post.user.id}}"
                                                  active-class="active">
-                                        <figure class="profile-thumb-middle">
+                                        <div class="profile-thumb-middle">
                                             <img :src="getUserImage(post.user.display_image)"
                                                  alt="profile picture">
-                                        </figure>
+                                        </div>
                                     </router-link>
                                 </div>
                                 <!-- profile picture end -->
@@ -60,10 +60,10 @@
 
                                     <span class="post-time">{{post.created_at | notificationTime}}</span>
                                 </div>
-
                             </div>
+
                             <!-- Browse By Tags start -->
-                            <div class="post-content">
+                            <div class="post-content mt-1">
                                 <strong><i class="fas fa-pen"> </i> Title: {{post.title}}</strong>
 
                                 <hr>
@@ -72,15 +72,15 @@
                                     {{post.thought}}
                                 </p>
                                 <div class="post-thumb-gallery" v-if="post.image != null">
-                                    <figure class="post-thumb img-popup">
+                                    <div class="post-thumb img-popup">
                                         <a href="">
                                             <img :src="getPostImage(post.image)"
                                                  alt="post image">
                                         </a>
-                                    </figure>
+                                    </div>
                                 </div>
-                                <div class="post-meta col-lg-12">
-                                    <div class="col-sm-8">
+                                <div class="post-meta col-md-0">
+                                    <div class="col-xs-8">
                                         <ul class="comment-share-meta">
                                             <li>
                                                 <button class="post-meta-like">
@@ -113,6 +113,19 @@
                             </div>
                         </div>
 
+                        <div class="card mt-2 callout callout-danger" v-show="thoughts.length == 0">
+                            <div class="post-content">
+                                <p class="post-desc">
+                                    There are currently no any thoughts posted under {{Tagscategory.category_name}}
+                                    tags.
+                                    <br>
+                                    <strong>Come back later to see what are posted under
+                                        {{Tagscategory.category_name}}.</strong>
+                                </p>
+
+                            </div>
+                        </div>
+
 
                         <!-- Browse By Tags end -->
 
@@ -133,10 +146,10 @@
                                                 <router-link :to="{name: 'FrontProfile' , query: {id: author.id}}"
                                                              tag="a"
                                                              active-class="active">
-                                                    <figure class="profile-thumb-small">
+                                                    <div class="profile-thumb-small">
                                                         <img :src="getUserImage(author.display_image)"
                                                              alt="profile picture">
-                                                    </figure>
+                                                    </div>
                                                 </router-link>
                                             </div>
                                             <!-- profile picture end -->
@@ -157,6 +170,9 @@
                                                 </p>
                                             </div>
 
+                                        </li>
+                                        <li v-show="authorYouMayKnow.length == 0"
+                                            class="unorder-list callout callout-info"> No Authors available right now.
                                         </li>
                                     </ul>
                                 </div>

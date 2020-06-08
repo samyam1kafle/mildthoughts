@@ -2,8 +2,8 @@
     <main>
 
         <div class="main-wrapper">
-            <div class="profile-banner-large bg-img" data-bg="assets/images/banner/profile-banner.jpg"
-                 style="background-image: url('../../../../public/Frontend/assets/images/banner/profile-banner.jpg');">
+            <div class="profile-banner-large bg-img" :data-bg="getUserCoverImage(user.cover_image)">
+                <img :src="getUserCoverImage(user.cover_image)" alt="Cover Image">
             </div>
             <div class="profile-menu-area bg-white">
                 <div class="container">
@@ -59,18 +59,22 @@
                                 <div class="widget-body">
                                     <div class="about-author">
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-heart-beat"></i>{{user.roles.role}}</a></li>
+                                            <li><a href="#"><i class="fas fa-pen"></i> {{user.roles.role}}</a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-envelop"></i>{{user.email}}</a></li>
+                                            <li v-if="user.email.length < 15"><a href="#"><i class="fa fa-envelope"></i>{{user.email}}</a>
+                                            </li>
+                                            <li v-else><a href="#"><i class="fa fa-envelope"></i>{{user.email.slice(0,15)+'..'}}</a>
+                                            </li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-heart-beat"></i>Follower :
-                                                {{user.followers_count}}</a></li>
+                                            <li><a href="#"><i class="fa fa-heart"></i> Followers
+                                                ({{user.followers_count}})
+                                            </a></li>
                                         </ul>
                                         <ul class="author-into-list">
-                                            <li><a href="#"><i class="bi bi-heart-beat"></i>Following:
-                                                {{user.followings_count}}</a></li>
+                                            <li><a href="#"><i class="fa fa-heartbeat"></i> Followings
+                                                ({{user.followings_count}})</a></li>
                                         </ul>
 
                                     </div>
@@ -96,9 +100,9 @@
                                 <!-- profile picture end -->
                                 <div class="profile-thumb">
                                     <a href="#">
-                                        <figure class="profile-thumb-middle">
+                                        <div class="profile-thumb-middle">
                                             <img :src="getUserImage(thought.user.display_image)" alt="profile picture">
-                                        </figure>
+                                        </div>
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
@@ -106,25 +110,6 @@
                                 <div class="posted-author">
                                     <h6 class="author"><a href="">{{thought.user.name}}</a></h6>
                                     <span class="post-time">{{thought.created_at | notificationTime}}</span>
-                                </div>
-
-                                <div class="post-settings-bar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <div class="post-settings arrow-shape">
-                                        <ul>
-                                            <li>
-                                                <button>copy link to adda</button>
-                                            </li>
-                                            <li>
-                                                <button>edit post</button>
-                                            </li>
-                                            <li>
-                                                <button>embed adda</button>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                             <!-- post title start -->
@@ -135,20 +120,30 @@
                                 <div class="post-thumb-gallery img-gallery">
                                     <div class="row no-gutters" v-if="thought.image != null">
                                         <div class="col-12">
-                                            <figure class="post-thumb">
+                                            <div class="post-thumb">
                                                 <a class="gallery-selector" :href="getThoughtImage(thought.image)">
                                                     <img :src="getThoughtImage(thought.image)" alt="post image">
                                                 </a>
-                                            </figure>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="post-meta">
-                                    <button class="post-meta-like">
-                                        <i class="bi bi-heart-beat"></i>
-                                        <span>You and 207 people like this</span>
-                                        <strong>207</strong>
-                                    </button>
+                                <div class="post-meta col-md-0">
+                                    <div class="col-xs-8">
+                                        <ul class="comment-share-meta">
+                                            <li>
+                                                <button class="post-meta-like">
+                                                    <i class="fa fa-star"></i>
+
+                                                </button>
+                                                <button class="post-share">
+                                                    <span>201 people like this</span>
+                                                </button>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
                                     <ul class="comment-share-meta">
                                         <li>
                                             <button class="post-comment">
@@ -163,6 +158,7 @@
                                             </button>
                                         </li>
                                     </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -179,6 +175,34 @@
                         <!-- post status end -->
 
                     </div>
+                    <div class="col-lg-3 order-3">
+                        <aside class="widget-area">
+                            <!-- By Tags start -->
+                            <div class="card widget-item">
+                                <h4 class="widget-title">Browse By thoughts tags</h4>
+                                <div class="widget-body">
+                                    <ul class="like-page-list-wrapper">
+                                        <li class="unorder-list" v-for="tag in tags" :key="tag.id">
+                                            <!-- profile picture end -->
+                                            <div class="profile-thumb">
+                                                <i class="fa fa-tags"></i>
+                                            </div>
+                                            <!-- profile picture end -->
+
+                                            <div class="unorder-list-info">
+                                                <h3 class="list-title">
+                                                    <router-link tag="a" :to="{name: 'ViewByTags',query: {id: tag.id}}">
+                                                        {{tag.category_name}}
+                                                    </router-link>
+                                                </h3>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- By tags end -->
+                        </aside>
+                    </div>
 
                 </div>
             </div>
@@ -192,7 +216,8 @@
         data() {
             return {
                 user: {},
-                thoughts: {}
+                thoughts: {},
+                tags: {}
             }
         },
         methods: {
@@ -201,11 +226,19 @@
                 return photo;
             },
             getUserImage(image) {
-                if(image == null || image == undefined){
+                if (image == null || image == undefined) {
                     let photo = 'images/user.png';
                     return photo;
-                }else{
+                } else {
                     let photo = 'Backend/ProfileImages/' + image;
+                    return photo;
+                }
+            }, getUserCoverImage(image) {
+                if (image == null || image == undefined) {
+                    let photo = 'images/cover.jpg';
+                    return photo;
+                } else {
+                    let photo = 'Backend/UserCoverImages/' + image;
                     return photo;
                 }
             },
@@ -213,8 +246,12 @@
                 axios.get('Auth_profile').then((response) => {
                     this.user = response.data.user_data;
                     this.thoughts = response.data.thoughts;
+                    this.tags = response.data.tags;
                 }).catch(() => {
-
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'There occurred an error while loading your profile.'
+                    });
                 });
             },
         },
@@ -223,3 +260,35 @@
         }
     }
 </script>
+
+<style>
+    .profile-banner-large {
+        height: 150px;
+        margin: 70px;
+        padding: 1px;
+    }
+
+    .profile-picture-box {
+        position: absolute;
+        transform: translateY(calc(-50% - 10px));
+        background-color: #f7f3f300;
+        z-index: 1;
+    }
+
+    figure {
+        margin: 0 33px -1rem;
+    }
+
+    .profile-picture:before {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        border: 3px solid currentColor;
+    }
+</style>
+
+

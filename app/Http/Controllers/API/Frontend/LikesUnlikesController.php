@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Thoughts;
+use App\User;
 use Illuminate\Http\Request;
 
 class LikesUnlikesController extends Controller
@@ -15,10 +16,10 @@ class LikesUnlikesController extends Controller
 
     public function likeUnlike($id)
     {
-        $user = auth('api')->user();
+        $user_id = auth()->id();
+        $user = User::find($user_id);
         $thought = Thoughts::find($id);
-
-      dd($thought);
+        dd($user->hasLiked($thought));
 
 
     }
@@ -36,7 +37,7 @@ class LikesUnlikesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +48,7 @@ class LikesUnlikesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,8 +59,8 @@ class LikesUnlikesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -70,7 +71,7 @@ class LikesUnlikesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

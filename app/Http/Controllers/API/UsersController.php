@@ -29,7 +29,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::with('roles')->where('id', '!=', auth('api')->id())
-            ->with(['followings', 'followers'])->withCount(['followings', 'followers','thoughts'])->orderBy('created_at', 'desc')->get();
+            ->with(['followings', 'followers'])->withCount(['followings', 'followers', 'thoughts'])->orderBy('created_at', 'desc')->get();
         $roles = Roles::all();
 
         return response()->json(['users' => $users, 'roles' => $roles]);
@@ -82,7 +82,7 @@ class UsersController extends Controller
     {
         $user_id = auth('api')->id();
 
-        $user = User::with('roles', 'followings', 'followers')->withCount(['followings', 'followers','thoughts'])->findOrFail($user_id);
+        $user = User::with('roles', 'followings', 'followers')->withCount(['followings', 'followers', 'thoughts'])->findOrFail($user_id);
 
         return $user;
     }
@@ -99,7 +99,16 @@ class UsersController extends Controller
         ]);
 
         $old_img = $user->display_image;
+        $old_cover = $user->cover_image;
+        if ($request->cover_image != $old_cover) {
+            if ($old_cover != null) {
+                unlink(public_path('Backend/UserCoverImages/') . $old_cover);
+            }
+            $name = time() . '.' . explode('/', mime_content_type($request->cover_image))[1];
 
+            Image::make($request->cover_image)->resize('1200', '250')->save(public_path('Backend/UserCoverImages/') . $name);
+            $request->merge(['cover_image' => $name]);
+        }
         if ($request->display_image != $old_img) {
             if ($old_img != null) {
                 unlink(public_path('Backend/ProfileImages/') . $old_img);
@@ -220,19 +229,23 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        if(count($user->thoughts)>0){
-            foreach ($user->thoughts as $thought){
-               $thoug =  Thoughts::find($thought->id);
-               $post_image = $thoug->image;
+        if (count($user->thoughts) > 0) {
+            foreach ($user->thoughts as $thought) {
+                $thoug = Thoughts::find($thought->id);
+                $post_image = $thoug->image;
                 if ($post_image != null) {
                     unlink(public_path('Backend/ThoughtsImages/') . $post_image);
                 }
-               $thoug->delete();
+                $thoug->delete();
             }
         }
         $image = $user->display_image;
+        $coverImage = $user->cover_image;
         if ($image != null) {
             unlink(public_path('Backend/ProfileImages/') . $image);
+        }
+        if($coverImage != null){
+            unlink(public_path('Backend/UserCoverImages/') . $coverImage);
         }
         $user->delete();
         return response()->json(['message' => 'successful'], 200);
