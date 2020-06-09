@@ -7,11 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Overtrue\LaravelFollow\Followable;
 use Laravel\Passport\HasApiTokens;
-
+use Jcc\LaravelVote\Vote;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable, HasApiTokens;
+    use Notifiable, Followable, HasApiTokens, Vote;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'display_image', 'role_id'
+        'name', 'email', 'password', 'display_image', 'role_id','cover_image'
     ];
 
     /**

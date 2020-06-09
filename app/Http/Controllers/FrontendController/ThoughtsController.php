@@ -25,11 +25,10 @@ class ThoughtsController extends Controller
             $user = auth()->user();
 
             /*Author you may know*/
-
+            $arr = [];
             $author = Roles::where('role', '=', 'Author')->first()->users;
-
             $writters = $author->where('id', '!=', auth()->id());
-            if (count($followings) > 0) {
+            if (count($followings) > 0 && count($writters) > 0) {
                 foreach ($writters as $author) {
                     if (!$user->isFollowing($author)) {
                         $arr[] = $author;
@@ -37,11 +36,14 @@ class ThoughtsController extends Controller
                 }
                 $arr = array_slice($arr, 0, 5);
             } else {
-                foreach ($writters as $authors){
-                    $arr[] = $authors;
+                if (count($writters) > 0) {
+                    foreach ($writters as $authors) {
+                        $arr[] = $authors;
+                    }
+                    $arr = array_slice($arr, 0, 5);
                 }
-                $arr = array_slice($arr, 0, 5);
             }
+
             /*Author you may know*/
             return response()->json(['userdetail' => $userdetail, 'followings' => $followings, 'Author' => $arr], 200);
         }
@@ -51,7 +53,6 @@ class ThoughtsController extends Controller
 
     public function thoughts(Request $request)
     {
-
         $following = $request->query->all();
         $followingThoughts = [];
         $followingUserData = [];
@@ -73,14 +74,13 @@ class ThoughtsController extends Controller
                         $latestThoughts[] = $sort;
                     }
                 }
-
             }
             if (count($latestThoughts) > 0) {
                 $collection = collect($latestThoughts);
                 $latest_thought_sorting = $collection->sortByDesc('created_at');
                 $latest_thought_sorting = $latest_thought_sorting->values()->all();
                 foreach ($latest_thought_sorting as $withRelation) {
-                    $thoughts = Thoughts::with('user', 'category')->find($withRelation->id);
+                    $thoughts = Thoughts::with('user', 'category', 'voters')->withCount(['voters'])->find($withRelation->id);
                     $thoughtData[] = $thoughts;
                 }
             }
@@ -118,13 +118,20 @@ class ThoughtsController extends Controller
         $author = Roles::where('role', '=', 'Author')->first()->users;
 
         $writters = $author->where('id', '!=', auth()->id());
-        if (count($followings) > 0) {
+        if (count($followings) > 0 && count($writters) > 0) {
             foreach ($writters as $author) {
                 if (!$user->isFollowing($author)) {
                     $arr[] = $author;
                 }
             }
             $arr = array_slice($arr, 0, 5);
+        } else {
+            if (count($writters) > 0) {
+                foreach ($writters as $authors) {
+                    $arr[] = $authors;
+                }
+                $arr = array_slice($arr, 0, 5);
+            }
         }
 
         /*Author you may know*/

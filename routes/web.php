@@ -41,6 +41,7 @@ Route::get('Auth_profile', 'HomeController@authProfileInfo');
 Route::get('/login-signup', 'FrontendController\ThoughtsController@loginSignup')->name('login-signup');
 
 Route::get('/thoughts', 'FrontendController\ThoughtsController@thoughts');
+
 Route::get('/user', 'FrontendController\ThoughtsController@user');
 
 Route::get('/', 'HomeController@index')->name('home');

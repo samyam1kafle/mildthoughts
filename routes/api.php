@@ -30,6 +30,7 @@ Route::apiResources([
 /*Like Unlike /Follow unfollow Routes*/
 
 Route::put('/like_unlike/{id}','API\Frontend\LikesUnlikesController@likeUnlike');
+Route::get('/like_unlike_count/{id}','API\Frontend\LikesUnlikesController@likeUnlikeCount');
 
 Route::put('follow/{id}', 'API\UsersController@followUser');
 Route::put('unfollow/{id}', 'API\UsersController@unfollowUser');

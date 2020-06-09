@@ -6,8 +6,8 @@
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-info" style="height: 162px;">
-                        <h3 class="widget-user-username">{{form.name}}</h3>
-                        <h5 class="widget-user-desc">{{user.roles.role}}</h5>
+                        <h3 class="widget-user-username">UserName: {{form.name | capitilize}}</h3>
+                        <h5 class="widget-user-desc">Role: {{user.roles.role | capitilize}}</h5>
                     </div>
                     <div class="widget-user-image" style="top: 47px;">
                         <img class="img-circle elevation-5" :src="getProfileImage()"
@@ -243,6 +243,18 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group row">
+                                        <label for="inputcoverSkills" class="col-sm-2 col-form-label">Cover Picture</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" @change="updateCoverPhoto"
+                                                   class="form-control" id="inputcoverSkills"
+                                                   placeholder="Cover Picture"
+                                                   :class="{ 'is-invalid': form.errors.has('cover_image') }">
+                                            <has-error :form="form" field="cover_image"></has-error>
+
+                                        </div>
+                                    </div>
+
 
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
@@ -352,7 +364,8 @@
                     'email': '',
                     'display_image': '',
                     'password': '',
-                    'role_id': ''
+                    'role_id': '',
+                    'cover_image': '',
                 }),
                 user: {},
                 followers: {},
@@ -447,6 +460,23 @@
                 if (profile['size'] < 2111775) {
                     reader.onloadend = (profile) => {
                         this.form.display_image = reader.result;
+                    };
+                    reader.readAsDataURL(profile);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'File Size cannot exceed 2 MB!',
+                    });
+                }
+
+            },
+            updateCoverPhoto(event) {
+                let profile = event.target.files[0];
+                let reader = new FileReader();
+                if (profile['size'] < 2111775) {
+                    reader.onloadend = (profile) => {
+                        this.form.cover_image = reader.result;
                     };
                     reader.readAsDataURL(profile);
                 } else {

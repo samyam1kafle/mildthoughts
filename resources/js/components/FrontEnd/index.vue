@@ -9,11 +9,6 @@
                             <div class="card card-profile widget-item p-0">
                                 <div class="profile-banner">
                                     <figure class="profile-banner-small">
-                                        <a href="profile.html">
-                                            <img :src="getCoverImage()"
-                                                 alt="">
-                                        </a>
-
                                         <router-link tag="a" :to="{name: 'UserProfile'}"
                                                      active-class="active" v-if=" user !='null'
                                       " class="profile-thumb-2">
@@ -78,10 +73,10 @@
                                 <!-- profile picture end -->
                                 <div class="profile-thumb">
                                     <a href="#">
-                                        <figure class="profile-thumb-middle">
+                                        <div class="profile-thumb-middle">
                                             <img :src="getUserImage(post.user.display_image)"
                                                  alt="profile picture">
-                                        </figure>
+                                        </div>
                                     </a>
                                 </div>
                                 <!-- profile picture end -->
@@ -97,24 +92,6 @@
                                     <span class="post-time">{{post.created_at | notificationTime}}</span>
                                 </div>
 
-                                <div class="post-settings-bar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <div class="post-settings arrow-shape">
-                                        <ul>
-                                            <li>
-                                                <button>copy link to adda</button>
-                                            </li>
-                                            <li>
-                                                <button>edit post</button>
-                                            </li>
-                                            <li>
-                                                <button>embed adda</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                             <!-- post title start -->
                             <div class="post-content">
@@ -129,27 +106,16 @@
                                     {{post.thought}}
                                 </p>
                                 <div class="post-thumb-gallery" v-if="post.image != null">
-                                    <figure class="post-thumb img-popup">
+                                    <div class="post-thumb img-popup">
                                         <a href="">
                                             <img :src="getPostImage(post.image)"
                                                  alt="post image">
                                         </a>
-                                    </figure>
-                                </div>
-                                <div class="post-meta col-lg-12">
-                                    <div class="col-sm-8">
-                                        <ul class="comment-share-meta">
-                                            <li>
-                                                <button @click="likeUnlike(post.id)" class="post-meta-like">
-                                                    <i class="fa fa-star"></i>
-                                                </button>
-                                                <button class="post-share">
-                                                    <span>201 people like this</span>
-                                                </button>
-                                            </li>
-
-                                        </ul>
                                     </div>
+                                </div>
+                                <div class="post-meta col-md-0">
+                                    <like-comment :key="post.id" :post_id="post.id"
+                                    ></like-comment>
 
                                     <ul class="comment-share-meta">
                                         <li>
@@ -173,7 +139,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-2" v-show="thoughts.length == 0">
+                        <div class="card mt-2 callout callout-danger" v-show="thoughts.length == 0">
                             <div class="post-content">
                                 <p class="post-desc">
                                     You have not followed any user please follow some user to see their
@@ -229,6 +195,9 @@
                                             </div>
 
                                         </li>
+                                        <li v-show="authorYouMayKnow.length == 0"
+                                            class="unorder-list callout callout-info"> No Authors available right now.
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -260,17 +229,13 @@
                 return photo;
             },
             getUserImage(image) {
-                if(image == null || image == undefined){
+                if (image == null || image == undefined) {
                     let photo = 'images/user.png';
                     return photo;
-                }else{
+                } else {
                     let photo = 'Backend/ProfileImages/' + image;
                     return photo;
                 }
-            },
-            getCoverImage() {
-                let cp = 'images/cover.jpg';
-                return cp;
             },
             getAnonymousImage() {
                 let anonypp = 'images/user.png';
@@ -311,23 +276,52 @@
                     });
                 });
             },
-            likeUnlike(postId) {
-                axios.put('api/like_unlike/' + postId).then((response) => {
-                    console.log(response);
-                }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There occurred an error while liking the Thought.'
-                    });
-                });
-            }
+
         },
         mounted() {
             this.authUser();
+            setInterval(() => {
+                this.authUser();
+            }, 50000);
         }
     }
 </script>
 
 <style scoped>
+    figure {
+        margin: 0 0 1rem;
+    }
 
+    .p-0 {
+        padding: 2px !important;
+    }
+
+    .profile-desc {
+        padding: 30px;
+        margin-top: 59px;
+    }
+
+    .profile-thumb-2 {
+        width: 80px;
+        height: 80px;
+        display: block;
+        border-radius: 50%;
+        overflow: hidden;
+        bottom: -83px;
+        left: 0;
+        right: 0;
+        position: absolute;
+        margin: auto;
+    }
+
+    .profile-banner-small:before {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        border: 10px solid rgba(251, 251, 251, 0.3);
+    }
 </style>
