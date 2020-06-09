@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Frontend;
 
+use App\Events\likeUnlike;
 use App\Http\Controllers\Controller;
 use App\Models\Thoughts;
 use App\User;
@@ -19,9 +20,29 @@ class LikesUnlikesController extends Controller
         $user_id = auth()->id();
         $user = User::find($user_id);
         $thought = Thoughts::find($id);
-        dd($user->hasLiked($thought));
+        $liked = $user->hasVoted($thought);
+        if (!$liked) {
+            $user->upVote($thought);
+            $liked = true;
+        } else {
+            $user->cancelVote($thought);
+            $liked = false;
+        }
+        $voters_count = $thought->countVoters();
+        $voters = $thought->voters;
+        broadcast(new likeUnlike($voters, $voters_count));
+        broadcast(new likeUnlike($voters, $voters_count))->toOthers();
 
+        return response()->json(['liked' => $liked], 200);
 
+    }
+
+    public function likeUnlikeCount($id)
+    {
+        $user = auth()->user();
+        $thought = Thoughts::with('voters')->withCount(['voters'])->find($id);
+        $liked = $user->hasVoted($thought);
+        return response()->json(['liked' => $liked, 'voters' => $thought->voters, 'count' => $thought->countVoters()]);
     }
 
     /**

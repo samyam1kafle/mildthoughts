@@ -47,7 +47,7 @@
 
                                             <div class="unorder-list-info">
                                                 <h3 class="list-title">
-                                                    <i class="fa fa-tags indigo"></i>
+                                                    <i class="fa fa-tags"></i>
                                                     <router-link tag="a" :to="{name: 'ViewByTags',query: {id: tag.id}}">
                                                         {{tag.category_name}}
                                                     </router-link>
@@ -114,19 +114,8 @@
                                     </div>
                                 </div>
                                 <div class="post-meta col-md-0">
-                                    <div class="col-xs-8">
-                                        <ul class="comment-share-meta">
-                                            <li>
-                                                <button @click="likeUnlike(post.id)" class="post-meta-like">
-                                                    <i class="fa fa-star purple"></i>
-                                                </button>
-                                                <button class="post-share">
-                                                    <span>201 people like this</span>
-                                                </button>
-                                            </li>
-
-                                        </ul>
-                                    </div>
+                                    <like-comment :key="post.id" :post_id="post.id"
+                                    ></like-comment>
 
                                     <ul class="comment-share-meta">
                                         <li>
@@ -206,7 +195,9 @@
                                             </div>
 
                                         </li>
-                                        <li v-show="authorYouMayKnow.length == 0" class="unorder-list callout callout-info"> No Authors available right now. </li>
+                                        <li v-show="authorYouMayKnow.length == 0"
+                                            class="unorder-list callout callout-info"> No Authors available right now.
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -238,20 +229,11 @@
                 return photo;
             },
             getUserImage(image) {
-                if(image == null || image == undefined){
+                if (image == null || image == undefined) {
                     let photo = 'images/user.png';
                     return photo;
-                }else{
-                    let photo = 'Backend/ProfileImages/' + image;
-                    return photo;
-                }
-            },
-            getCoverImage(image) {
-                if (image == null || image == undefined) {
-                    let photo = 'images/cover.jpg';
-                    return photo;
                 } else {
-                    let photo = 'Backend/UserCoverImages/' + image;
+                    let photo = 'Backend/ProfileImages/' + image;
                     return photo;
                 }
             },
@@ -294,55 +276,52 @@
                     });
                 });
             },
-            likeUnlike(postId) {
-                axios.put('api/like_unlike/' + postId).then((response) => {
-                    console.log(response);
-                }).catch(() => {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'There occurred an error while liking the Thought.'
-                    });
-                });
-            }
+
         },
         mounted() {
             this.authUser();
+            setInterval(() => {
+                this.authUser();
+            }, 50000);
         }
     }
 </script>
 
 <style scoped>
-        figure{
-            margin: 0 0 1rem;
-        }
-        .p-0 {
-            padding: 2px !important;
-        }
-        .profile-desc {
-            padding: 30px;
-            margin-top: 59px;
-        }
-        .profile-thumb-2 {
-            width: 80px;
-            height: 80px;
-            display: block;
-            border-radius: 50%;
-            overflow: hidden;
-            bottom: -83px;
-            left: 0;
-            right: 0;
-            position: absolute;
-            margin: auto;
-        }
+    figure {
+        margin: 0 0 1rem;
+    }
 
-        .profile-banner-small:before {
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            content: '';
-            position: absolute;
-            pointer-events: none;
-            border: 10px solid rgba(251, 251, 251, 0.3);
-        }
+    .p-0 {
+        padding: 2px !important;
+    }
+
+    .profile-desc {
+        padding: 30px;
+        margin-top: 59px;
+    }
+
+    .profile-thumb-2 {
+        width: 80px;
+        height: 80px;
+        display: block;
+        border-radius: 50%;
+        overflow: hidden;
+        bottom: -83px;
+        left: 0;
+        right: 0;
+        position: absolute;
+        margin: auto;
+    }
+
+    .profile-banner-small:before {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        border: 10px solid rgba(251, 251, 251, 0.3);
+    }
 </style>

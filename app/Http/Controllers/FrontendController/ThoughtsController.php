@@ -53,7 +53,6 @@ class ThoughtsController extends Controller
 
     public function thoughts(Request $request)
     {
-
         $following = $request->query->all();
         $followingThoughts = [];
         $followingUserData = [];
@@ -75,14 +74,13 @@ class ThoughtsController extends Controller
                         $latestThoughts[] = $sort;
                     }
                 }
-
             }
             if (count($latestThoughts) > 0) {
                 $collection = collect($latestThoughts);
                 $latest_thought_sorting = $collection->sortByDesc('created_at');
                 $latest_thought_sorting = $latest_thought_sorting->values()->all();
                 foreach ($latest_thought_sorting as $withRelation) {
-                    $thoughts = Thoughts::with('user', 'category')->find($withRelation->id);
+                    $thoughts = Thoughts::with('user', 'category', 'voters')->withCount(['voters'])->find($withRelation->id);
                     $thoughtData[] = $thoughts;
                 }
             }

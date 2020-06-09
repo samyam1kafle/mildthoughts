@@ -4561,17 +4561,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4632,18 +4621,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5122,15 +5099,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5155,16 +5123,6 @@ __webpack_require__.r(__webpack_exports__);
         var _photo = 'Backend/ProfileImages/' + image;
 
         return _photo;
-      }
-    },
-    getCoverImage: function getCoverImage(image) {
-      if (image == null || image == undefined) {
-        var photo = 'images/cover.jpg';
-        return photo;
-      } else {
-        var _photo2 = 'Backend/UserCoverImages/' + image;
-
-        return _photo2;
       }
     },
     getAnonymousImage: function getAnonymousImage() {
@@ -5210,29 +5168,24 @@ __webpack_require__.r(__webpack_exports__);
           title: 'There occurred an error while loading the feed.'
         });
       });
-    },
-    likeUnlike: function likeUnlike(postId) {
-      axios.put('api/like_unlike/' + postId).then(function (response) {
-        console.log(response);
-      })["catch"](function () {
-        Toast.fire({
-          icon: 'error',
-          title: 'There occurred an error while liking the Thought.'
-        });
-      });
     }
   },
   mounted: function mounted() {
+    var _this3 = this;
+
     this.authUser();
+    setInterval(function () {
+      _this3.authUser();
+    }, 50000);
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/profile.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/profile.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5250,6 +5203,137 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['post_id'],
+  data: function data() {
+    return {
+      postId: this.post_id,
+      allVoters: {},
+      postVotersCount: {},
+      liked: false
+    };
+  },
+  methods: {
+    likeUnlike: function likeUnlike(postId) {
+      var _this = this;
+
+      axios.put('api/like_unlike/' + postId).then(function (response) {
+        Echo.channel('like-unlike').listen('likeUnlike', function (event) {
+          _this.postVotersCount = event.voters_count;
+          _this.allVoters = event.voters;
+        });
+        _this.liked = response.data.liked;
+      })["catch"](function () {
+        Toast.fire({
+          icon: 'error',
+          title: 'There occurred an error while liking the Thought.'
+        });
+      });
+    },
+    loadLikes: function loadLikes() {
+      var _this2 = this;
+
+      axios.get('api/like_unlike_count/' + this.postId).then(function (response) {
+        _this2.liked = response.data.liked;
+        _this2.allVoters = response.data.voters;
+        _this2.postVotersCount = response.data.count;
+      })["catch"](function () {
+        Toast.fire({
+          icon: 'error',
+          title: 'There occurred an error while fetching the data.'
+        });
+      });
+    },
+    openModel: function openModel() {
+      $('#exampleModalCenter').modal('show');
+    },
+    getUserImage: function getUserImage(image) {
+      if (image == null || image == undefined) {
+        var photo = 'images/user.png';
+        return photo;
+      } else {
+        var _photo = 'Backend/ProfileImages/' + image;
+
+        return _photo;
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.loadLikes();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/profile.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/profile.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -10305,7 +10389,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nfigure[data-v-dc7d21c0]{\n    margin: 0 0 1rem;\n}\n.p-0[data-v-dc7d21c0] {\n    padding: 2px !important;\n}\n.profile-desc[data-v-dc7d21c0] {\n    padding: 30px;\n    margin-top: 59px;\n}\n.profile-thumb-2[data-v-dc7d21c0] {\n    width: 80px;\n    height: 80px;\n    display: block;\n    border-radius: 50%;\n    overflow: hidden;\n    bottom: -83px;\n    left: 0;\n    right: 0;\n    position: absolute;\n    margin: auto;\n}\n.profile-banner-small[data-v-dc7d21c0]:before {\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    content: '';\n    position: absolute;\n    pointer-events: none;\n    border: 10px solid rgba(251, 251, 251, 0.3);\n}\n", ""]);
+exports.push([module.i, "\nfigure[data-v-dc7d21c0] {\n    margin: 0 0 1rem;\n}\n.p-0[data-v-dc7d21c0] {\n    padding: 2px !important;\n}\n.profile-desc[data-v-dc7d21c0] {\n    padding: 30px;\n    margin-top: 59px;\n}\n.profile-thumb-2[data-v-dc7d21c0] {\n    width: 80px;\n    height: 80px;\n    display: block;\n    border-radius: 50%;\n    overflow: hidden;\n    bottom: -83px;\n    left: 0;\n    right: 0;\n    position: absolute;\n    margin: auto;\n}\n.profile-banner-small[data-v-dc7d21c0]:before {\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    content: '';\n    position: absolute;\n    pointer-events: none;\n    border: 10px solid rgba(251, 251, 251, 0.3);\n}\n", ""]);
 
 // exports
 
@@ -77237,7 +77321,19 @@ var render = function() {
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm._m(0, true)
+                    _c(
+                      "div",
+                      { staticClass: "post-meta col-md-0" },
+                      [
+                        _c("like-comment", {
+                          key: post.id,
+                          attrs: { post_id: post.id }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(0, true)
+                      ],
+                      1
+                    )
                   ])
                 ])
               }),
@@ -77429,36 +77525,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-meta col-md-0" }, [
-      _c("div", { staticClass: "col-xs-8" }, [
-        _c("ul", { staticClass: "comment-share-meta" }, [
-          _c("li", [
-            _c("button", { staticClass: "post-meta-like" }, [
-              _c("i", { staticClass: "fa fa-star" })
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "post-share" }, [
-              _c("span", [_vm._v("201 people like this")])
-            ])
-          ])
+    return _c("ul", { staticClass: "comment-share-meta" }, [
+      _c("li", [
+        _c("button", { staticClass: "post-comment" }, [
+          _c("i", { staticClass: "bi bi-chat-bubble" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("41")])
         ])
       ]),
       _vm._v(" "),
-      _c("ul", { staticClass: "comment-share-meta" }, [
-        _c("li", [
-          _c("button", { staticClass: "post-comment" }, [
-            _c("i", { staticClass: "bi bi-chat-bubble" }),
-            _vm._v(" "),
-            _c("span", [_vm._v("41")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("button", { staticClass: "post-share" }, [
-            _c("i", { staticClass: "bi bi-share" }),
-            _vm._v(" "),
-            _c("span", [_vm._v("07")])
-          ])
+      _c("li", [
+        _c("button", { staticClass: "post-share" }, [
+          _c("i", { staticClass: "bi bi-share" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("07")])
         ])
       ])
     ])
@@ -77688,7 +77768,7 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.thoughts, function(thought) {
                 return _vm.thoughts.length > 0
-                  ? _c("div", { staticClass: "card mt-2" }, [
+                  ? _c("div", { key: thought.id, staticClass: "card mt-2" }, [
                       _c(
                         "div",
                         { staticClass: "post-title d-flex align-items-center" },
@@ -77775,7 +77855,19 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(1, true)
+                        _c(
+                          "div",
+                          { staticClass: "post-meta col-md-0" },
+                          [
+                            _c("like-comment", {
+                              key: thought.id,
+                              attrs: { post_id: thought.id }
+                            }),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ],
+                          1
+                        )
                       ])
                     ])
                   : _vm._e()
@@ -77877,36 +77969,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-meta col-md-0" }, [
-      _c("div", { staticClass: "col-xs-8" }, [
-        _c("ul", { staticClass: "comment-share-meta" }, [
-          _c("li", [
-            _c("button", { staticClass: "post-meta-like" }, [
-              _c("i", { staticClass: "fa fa-star" })
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "post-share" }, [
-              _c("span", [_vm._v("201 people like this")])
-            ])
-          ])
+    return _c("ul", { staticClass: "comment-share-meta" }, [
+      _c("li", [
+        _c("button", { staticClass: "post-comment" }, [
+          _c("i", { staticClass: "bi bi-chat-bubble" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("41")])
         ])
       ]),
       _vm._v(" "),
-      _c("ul", { staticClass: "comment-share-meta" }, [
-        _c("li", [
-          _c("button", { staticClass: "post-comment" }, [
-            _c("i", { staticClass: "bi bi-chat-bubble" }),
-            _vm._v(" "),
-            _c("span", [_vm._v("41")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("button", { staticClass: "post-share" }, [
-            _c("i", { staticClass: "bi bi-share" }),
-            _vm._v(" "),
-            _c("span", [_vm._v("07")])
-          ])
+      _c("li", [
+        _c("button", { staticClass: "post-share" }, [
+          _c("i", { staticClass: "bi bi-share" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("07")])
         ])
       ])
     ])
@@ -78073,7 +78149,7 @@ var render = function() {
                             "h3",
                             { staticClass: "list-title" },
                             [
-                              _c("i", { staticClass: "fa fa-tags indigo" }),
+                              _c("i", { staticClass: "fa fa-tags" }),
                               _vm._v(" "),
                               _c(
                                 "router-link",
@@ -78218,34 +78294,19 @@ var render = function() {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("div", { staticClass: "post-meta col-md-0" }, [
-                          _c("div", { staticClass: "col-xs-8" }, [
-                            _c("ul", { staticClass: "comment-share-meta" }, [
-                              _c("li", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "post-meta-like",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.likeUnlike(post.id)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-star purple"
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _vm._m(0, true)
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(1, true)
-                        ])
+                        _c(
+                          "div",
+                          { staticClass: "post-meta col-md-0" },
+                          [
+                            _c("like-comment", {
+                              key: post.id,
+                              attrs: { post_id: post.id }
+                            }),
+                            _vm._v(" "),
+                            _vm._m(0, true)
+                          ],
+                          1
+                        )
                       ])
                     ])
                   : _vm._e()
@@ -78264,7 +78325,7 @@ var render = function() {
                   ],
                   staticClass: "card mt-2 callout callout-danger"
                 },
-                [_vm._m(2)]
+                [_vm._m(1)]
               )
             ],
             2
@@ -78396,7 +78457,11 @@ var render = function() {
                           ],
                           staticClass: "unorder-list callout callout-info"
                         },
-                        [_vm._v(" No Authors available right now. ")]
+                        [
+                          _vm._v(
+                            " No Authors available right now.\n                                    "
+                          )
+                        ]
                       )
                     ],
                     2
@@ -78411,14 +78476,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "post-share" }, [
-      _c("span", [_vm._v("201 people like this")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -78452,6 +78509,235 @@ var staticRenderFns = [
         ),
         _c("strong", [_vm._v("Feel Free To Explore The World Of thoughts.")])
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-xs-8" }, [
+    _c("ul", { staticClass: "comment-share-meta" }, [
+      _c("li", [
+        _c(
+          "a",
+          {
+            staticClass: "post-meta-like",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.likeUnlike(_vm.postId)
+              }
+            }
+          },
+          [
+            _vm.liked
+              ? _c("i", {
+                  staticClass: "fa fa-heartbeat",
+                  staticStyle: { color: "#e25050" }
+                })
+              : _c("i", {
+                  staticClass: "fa fa-heartbeat",
+                  staticStyle: { color: "#ab9595" }
+                })
+          ]
+        ),
+        _vm._v(" "),
+        _c("button", { staticClass: "post-share" }, [
+          _vm.postVotersCount == 0
+            ? _c("span", [_vm._v("No likes yet.")])
+            : _vm.liked && _vm.postVotersCount <= 1
+            ? _c("span", [
+                _c("strong", { on: { click: _vm.openModel } }, [
+                  _vm._v("You liked the thought")
+                ])
+              ])
+            : !_vm.liked && _vm.postVotersCount > 0
+            ? _c("span", [
+                _c("strong", { on: { click: _vm.openModel } }, [
+                  _vm._v("Likes :" + _vm._s(_vm.postVotersCount))
+                ])
+              ])
+            : _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.liked && _vm.postVotersCount > 1,
+                      expression: "liked && postVotersCount > 1"
+                    }
+                  ]
+                },
+                [
+                  _c("strong", { on: { click: _vm.openModel } }, [
+                    _vm._v(
+                      "You and " +
+                        _vm._s(_vm.postVotersCount - 1) +
+                        " others like the thought."
+                    )
+                  ])
+                ]
+              )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModalCenter",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-body table-responsive p-0",
+                    staticStyle: { height: "300px" }
+                  },
+                  [
+                    _c("table", { staticClass: "table table-head-fixed" }, [
+                      _c("th", [
+                        _vm._v("all(" + _vm._s(_vm.postVotersCount) + ")")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.allVoters, function(voter) {
+                          return _c("tr", { key: voter.id }, [
+                            _c("td", [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "post-title d-flex align-items-center"
+                                },
+                                [
+                                  _c("div", { staticClass: "profile-thumb" }, [
+                                    _c("a", { attrs: { href: "#" } }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "profile-thumb-middle" },
+                                        [
+                                          _c("img", {
+                                            attrs: {
+                                              src: _vm.getUserImage(
+                                                voter.display_image
+                                              ),
+                                              alt: "profile picture"
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "posted-author" }, [
+                                    _c("h6", { staticClass: "author" }, [
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v(
+                                          _vm._s(voter.name) +
+                                            "\n                                                "
+                                        )
+                                      ])
+                                    ])
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [_vm._v("Liked By")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
     ])
   }
 ]
@@ -78756,7 +79042,7 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.thoughts, function(thought) {
                 return _vm.thoughts.length > 0
-                  ? _c("div", { staticClass: "card" }, [
+                  ? _c("div", { key: thought.id, staticClass: "card" }, [
                       _c(
                         "div",
                         { staticClass: "post-title d-flex align-items-center" },
@@ -78843,7 +79129,19 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(1, true)
+                        _c(
+                          "div",
+                          { staticClass: "post-meta col-md-0" },
+                          [
+                            _c("like-comment", {
+                              key: thought.id,
+                              attrs: { post_id: thought.id }
+                            }),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ],
+                          1
+                        )
                       ])
                     ])
                   : _vm._e()
@@ -78951,36 +79249,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "post-meta col-md-0" }, [
-      _c("div", { staticClass: "col-xs-8" }, [
-        _c("ul", { staticClass: "comment-share-meta" }, [
-          _c("li", [
-            _c("button", { staticClass: "post-meta-like" }, [
-              _c("i", { staticClass: "fa fa-star" })
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "post-share" }, [
-              _c("span", [_vm._v("201 people like this")])
-            ])
-          ])
+    return _c("ul", { staticClass: "comment-share-meta" }, [
+      _c("li", [
+        _c("button", { staticClass: "post-comment" }, [
+          _c("i", { staticClass: "bi bi-chat-bubble" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("41")])
         ])
       ]),
       _vm._v(" "),
-      _c("ul", { staticClass: "comment-share-meta" }, [
-        _c("li", [
-          _c("button", { staticClass: "post-comment" }, [
-            _c("i", { staticClass: "bi bi-chat-bubble" }),
-            _vm._v(" "),
-            _c("span", [_vm._v("41")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("button", { staticClass: "post-share" }, [
-            _c("i", { staticClass: "bi bi-share" }),
-            _vm._v(" "),
-            _c("span", [_vm._v("07")])
-          ])
+      _c("li", [
+        _c("button", { staticClass: "post-share" }, [
+          _c("i", { staticClass: "bi bi-share" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("07")])
         ])
       ])
     ])
@@ -94490,6 +94772,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('notification', __webpack_require__(/*! ./components/NotificationMarkup/notification.vue */ "./resources/js/components/NotificationMarkup/notification.vue")["default"]);
 Vue.component('userDetails', __webpack_require__(/*! ./components/Backend/User/masterUserDetail.vue */ "./resources/js/components/Backend/User/masterUserDetail.vue")["default"]);
+Vue.component('likeComment', __webpack_require__(/*! ./components/FrontEnd/likesComment/likesCommentTemplate.vue */ "./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue")["default"]);
 Vue.component('homeIndex', __webpack_require__(/*! ./components/FrontEnd/index.vue */ "./resources/js/components/FrontEnd/index.vue")["default"]);
 /*New Vue Instance for data transmission*/
 
@@ -95555,6 +95838,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_dc7d21c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_dc7d21c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _likesCommentTemplate_vue_vue_type_template_id_31c55412_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true& */ "./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true&");
+/* harmony import */ var _likesCommentTemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./likesCommentTemplate.vue?vue&type=script&lang=js& */ "./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _likesCommentTemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _likesCommentTemplate_vue_vue_type_template_id_31c55412_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _likesCommentTemplate_vue_vue_type_template_id_31c55412_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "31c55412",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_likesCommentTemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./likesCommentTemplate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_likesCommentTemplate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true&":
+/*!***************************************************************************************************************************!*\
+  !*** ./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true& ***!
+  \***************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_likesCommentTemplate_vue_vue_type_template_id_31c55412_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FrontEnd/likesComment/likesCommentTemplate.vue?vue&type=template&id=31c55412&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_likesCommentTemplate_vue_vue_type_template_id_31c55412_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_likesCommentTemplate_vue_vue_type_template_id_31c55412_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

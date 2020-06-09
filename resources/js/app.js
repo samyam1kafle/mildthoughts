@@ -101,6 +101,7 @@ const router = new VueRouter({
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('notification', require('./components/NotificationMarkup/notification.vue').default);
 Vue.component('userDetails', require('./components/Backend/User/masterUserDetail.vue').default);
+Vue.component('likeComment', require('./components/FrontEnd/likesComment/likesCommentTemplate.vue').default);
 Vue.component('homeIndex', require('./components/FrontEnd/index.vue').default);
 
 /*New Vue Instance for data transmission*/

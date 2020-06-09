@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Jcc\LaravelVote\CanBeVoted;
 
 
 class Thoughts extends Model
 {
+    use CanBeVoted;
+
+    protected $vote = User::class;
 
     protected $fillable = [
         'title', 'thought', 'image', 'thoughtCategory_id', 'user_id'

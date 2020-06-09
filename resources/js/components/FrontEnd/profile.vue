@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <!-- post status start -->
-                        <div class="card" v-if="thoughts.length > 0" v-for="thought in thoughts">
+                        <div class="card" v-if="thoughts.length > 0" v-for="thought in thoughts" :key="thought.id">
                             <!-- post title start -->
                             <div class="post-title d-flex align-items-center">
                                 <!-- profile picture end -->
@@ -142,20 +142,8 @@
                                     </div>
                                 </div>
                                 <div class="post-meta col-md-0">
-                                    <div class="col-xs-8">
-                                        <ul class="comment-share-meta">
-                                            <li>
-                                                <button class="post-meta-like">
-                                                    <i class="fa fa-star"></i>
-
-                                                </button>
-                                                <button class="post-share">
-                                                    <span>201 people like this</span>
-                                                </button>
-                                            </li>
-
-                                        </ul>
-                                    </div>
+                                    <like-comment :key="thought.id" :post_id="thought.id"
+                                    ></like-comment>
 
                                     <ul class="comment-share-meta">
                                         <li>

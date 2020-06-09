@@ -7,10 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Overtrue\LaravelFollow\Followable;
 use Laravel\Passport\HasApiTokens;
+use Jcc\LaravelVote\Vote;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable, HasApiTokens ;
+    use Notifiable, Followable, HasApiTokens, Vote;
 
     /**
      * The attributes that are mass assignable.
