@@ -4,6 +4,7 @@ import Home from '../components/FrontEnd/index.vue'
 import Followings from '../components/FrontEnd/Followings.vue'
 import Followers from '../components/FrontEnd/Followers.vue'
 import BrowseByTag from '../components/FrontEnd/TagsPage/BrowseByTag.vue'
+import ThoughtDetail from '../components/FrontEnd/thought/Thoughtdetail.vue'
 
 
 export default [
@@ -13,4 +14,5 @@ export default [
     {path: '/user_followings', component: Followings, name: 'UserFollowings'},
     {path: '/user_followers', component: Followers, name: 'UserFollowers'},
     {path: '/tags', component: BrowseByTag, name: 'ViewByTags'},
+    {path: '/thought', component: ThoughtDetail, name: 'ThoughtDetail'},
 ];

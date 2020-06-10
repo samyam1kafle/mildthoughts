@@ -111,12 +111,33 @@
                                     <h6 class="author"><a href="">{{thought.user.name}}</a></h6>
                                     <span class="post-time">{{thought.created_at | notificationTime}}</span>
                                 </div>
+
+                                <div class="post-settings-bar">
+                                    <ul>
+                                        <li>
+                                            <router-link :to="{name: 'ThoughtDetail',query: {thought_id: thought.id}}"
+                                                         active-class="active" tag="a"><i class="fa fa-eye red"></i>
+
+                                            </router-link>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
                             </div>
                             <!-- post title start -->
                             <div class="post-content">
-                                <p class="post-desc">
-                                    {{thought.thought}}
-                                </p>
+
+                                <div class="container-fluid" style="margin-top: 1px">
+                                    <strong class="col-xs-12">
+                                        <i class="fa fa-pen blue"> Title: </i> <u>{{thought.title}}</u>
+                                    </strong>
+                                    <div class="col-xs-1"><br></div>
+                                    <strong class="col-xs-12">
+                                        <i class="fa fa-tag indigo"> Tag: </i> <u>{{thought.category.category_name}}</u>
+                                    </strong>
+                                </div>
+
                                 <div class="post-thumb-gallery img-gallery">
                                     <div class="row no-gutters" v-if="thought.image != null">
                                         <div class="col-12">
@@ -128,6 +149,18 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="container-fluid">
+                                    <strong>
+                                        <p>
+                                            {{thought.thought}}
+                                        </p>
+
+                                    </strong>
+
+
+                                </div>
+
                                 <div class="post-meta col-md-0">
                                     <like-comment :key="thought.id" :post_id="thought.id"
                                     ></like-comment>
@@ -276,6 +309,18 @@
         position: absolute;
         pointer-events: none;
         border: 3px solid currentColor;
+    }
+</style>
+
+<style scoped>
+    .container-fluid {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 5px;
+        margin-right: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        margin-left: auto;
     }
 </style>
 

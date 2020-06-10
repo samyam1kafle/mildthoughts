@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Frontend;
 use App\Events\likeUnlike;
 use App\Http\Controllers\Controller;
 use App\Models\Thoughts;
+use App\Notifications\postLiked;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,13 @@ class LikesUnlikesController extends Controller
         $user = User::find($user_id);
         $thought = Thoughts::find($id);
         $liked = $user->hasVoted($thought);
+        $author_id = $thought->user_id;
+        $author = User::find($author_id);
         if (!$liked) {
             $user->upVote($thought);
+            if($user_id != $author_id){
+                $author->notify(new postLiked($user,$thought));
+            }
             $liked = true;
         } else {
             $user->cancelVote($thought);

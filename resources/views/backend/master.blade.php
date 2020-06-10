@@ -25,31 +25,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{url('/')}}" class="nav-link">Home</a>
+            <?php
+            $notifications = auth()->user()->notifications;
+            $arrangement = collect($notifications);
+            $inOrder = $arrangement->sortByDesc('created_at');
+            $ordered_notification = $inOrder->values()->all();
+            $notifications = collect(array_slice($ordered_notification,0,5));
+            ?>
+            <li class="nav-item">
+                <notification :userid="{{auth()->id()}}"
+                              :allnotifications="{{$notifications}}"
+                              :unreads="{{count(auth()->user()->unreadNotifications)}}"></notification>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{url('/')}}" class="nav-link">Home</a>
+            </li>
         </ul>
 
-        <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <notification :userid="{{auth()->id()}}"
-                          :allnotifications="{{auth()->user()->notifications->sortByDesc('created_at')->take(5)}}"
-                          :unreads="{{count(auth()->user()->unreadNotifications)}}"></notification>
+            <!-- SEARCH FORM -->
+            <form class="form-inline ml-3">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                           aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </ul>
     </nav>
     <!-- /.navbar -->
