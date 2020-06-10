@@ -139,4 +139,13 @@ class ThoughtsController extends Controller
         return response()->json(['thoughts' => $ThoughtsInOrder, 'tags' => $tags, 'authorYouMayKnow' => $arr, 'tagscategory' => $thoughtCat]);
 
     }
+
+    public function individualThought($id)
+    {
+        $thought = Thoughts::with('category', 'user', 'voters')->withCount(['voters'])->find($id);
+        $user = auth()->user();
+        $tags = ThoughtsCategory::all();
+        $liked = $user->hasVoted($thought);
+        return response()->json(['thought' => $thought, 'liked' => $liked, 'tags' => $tags]);
+    }
 }

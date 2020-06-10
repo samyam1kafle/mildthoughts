@@ -3,24 +3,27 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class follower extends Notification
+class postLiked extends Notification
 {
     use Queueable;
 
-    public $follower;
+    public $voter;
+    public $post;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($follower)
+    public function __construct($voter, $post)
     {
-        $this->follower = $follower;
+        $this->voter = $voter;
+        $this->post = $post;
     }
 
     /**
@@ -48,6 +51,7 @@ class follower extends Notification
             ->line('Thank you for using our application!');
     }
 
+
     /**
      * Get the array representation of the notification.
      *
@@ -57,8 +61,9 @@ class follower extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'follower' => $this->follower,
-            'following' => $notifiable
+            'voter' => $this->voter,
+            'post' => $this->post,
+            'notified' => $notifiable
         ];
     }
 
@@ -71,8 +76,9 @@ class follower extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'follower' => $this->follower,
-            'following' => $notifiable
+            'voter' => $this->voter,
+            'post' => $this->post,
+            'notified' => $notifiable
         ]);
     }
 

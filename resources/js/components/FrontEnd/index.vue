@@ -92,19 +92,32 @@
                                     <span class="post-time">{{post.created_at | notificationTime}}</span>
                                 </div>
 
+                                <div class="post-settings-bar">
+                                    <ul>
+                                        <li>
+                                            <router-link :to="{name: 'ThoughtDetail',query: {thought_id: post.id}}"
+                                                         active-class="active" tag="a"><i class="fa fa-eye red"></i>
+
+                                            </router-link>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
                             </div>
                             <!-- post title start -->
                             <div class="post-content">
-                                <strong><i class="fas fa-pen"> </i> Title: {{post.title}}</strong>
-                                <hr>
-                                <strong><i class="fa fa-tag"> </i> Tag: {{post.category.category_name}}</strong>
+                                <div class="container-fluid" style="margin-top: 1px">
+                                    <strong class="col-xs-12">
+                                        <i class="fa fa-pen blue"> Title: </i> <u>{{post.title}}</u>
+                                    </strong>
+                                    <div class="col-xs-1"><br></div>
+                                    <strong class="col-xs-12">
+                                        <i class="fa fa-tag indigo"> Tag: </i> <u>{{post.category.category_name}}</u>
+                                    </strong>
+                                </div>
 
 
-                                <hr>
-
-                                <p class="post-desc">
-                                    {{post.thought}}
-                                </p>
                                 <div class="post-thumb-gallery" v-if="post.image != null">
                                     <div class="post-thumb img-popup">
                                         <a href="">
@@ -113,6 +126,17 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div class="container-fluid">
+                                    <strong>
+                                        <p>
+                                            {{post.thought}}
+                                        </p>
+
+                                    </strong>
+
+
+                                </div>
+
                                 <div class="post-meta col-md-0">
                                     <like-comment :key="post.id" :post_id="post.id"
                                     ></like-comment>
@@ -323,5 +347,15 @@
         position: absolute;
         pointer-events: none;
         border: 10px solid rgba(251, 251, 251, 0.3);
+    }
+
+    .container-fluid {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 5px;
+        margin-right: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        margin-left: auto;
     }
 </style>

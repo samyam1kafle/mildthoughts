@@ -105,6 +105,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Mild Thoughts') }}</title>
     <meta name="robots" content="noindex, follow"/>
     <meta name="description" content="">

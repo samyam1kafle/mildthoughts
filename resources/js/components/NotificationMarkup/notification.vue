@@ -58,7 +58,8 @@
                                     created_at: notification.created_at
                                 };
                                 this.unreadNotifications++;
-                                this.allNotifications.push(newUnreadNotifications);
+                                this.allNotifications.pop();
+                                this.allNotifications.unshift(newUnreadNotifications);
                                 Fire.$emit('notificationEvent');
                             } else if (type == 'unfollower') {
                                 let newUnreadNotifications = {
@@ -69,11 +70,26 @@
                                     }
                                 };
                                 this.unreadNotifications++;
-                                this.allNotifications.push(newUnreadNotifications);
+                                this.allNotifications.pop();
+                                this.allNotifications.unshift(newUnreadNotifications);
                                 Fire.$emit('notificationEvent');
 
-                            } else {
-                                console.log('Fuck There is a Mistake Dude');
+                            } else if (type == 'postLiked') {
+                                let newUnreadNotifications = {
+                                    type: notification.type,
+                                    data: {
+                                        voter: notification.voter,
+                                        post: notification.post,
+                                        notified: notification.notified
+                                    }
+                                };
+                                this.unreadNotifications++;
+                                this.allNotifications.pop();
+                                this.allNotifications.unshift(newUnreadNotifications);
+                                Fire.$emit('notificationEvent');
+                            }
+                            else {
+                                console.log('Error');
                             }
                         }
                     );
@@ -110,3 +126,25 @@
         }
     }
 </script>
+
+<style>
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 21rem;
+        padding: 0.5rem 0;
+        margin: 0.125rem 0 0;
+        font-size: 0.9rem;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0.25rem;
+    }
+</style>

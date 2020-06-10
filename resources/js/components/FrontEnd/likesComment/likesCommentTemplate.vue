@@ -10,13 +10,13 @@
                     <span v-if="(postVotersCount == 0)">No likes yet.</span>
                     <span v-else-if="liked && (postVotersCount <= 1)"><strong
                             @click="openModel">You liked the thought</strong></span>
-                    <span v-else-if="!liked && (postVotersCount > 0)"><strong @click="openModel">Likes :{{postVotersCount}}</strong></span>
-                    <span v-else v-show="liked && postVotersCount > 1"><strong @click="openModel">You and {{postVotersCount - 1}} others like the thought.</strong></span>
+                    <span v-else-if="!liked && (postVotersCount > 0)"><strong @click="openModel(postId)">Likes :{{postVotersCount}}</strong></span>
+                    <span v-else v-show="liked && postVotersCount > 1"><strong @click="openModel(postId)">You and {{postVotersCount - 1}} others like the thought.</strong></span>
                 </button>
             </li>
 
         </ul>
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        <div class="modal fade" :id="modelId" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -78,7 +78,8 @@
                 postId: this.post_id,
                 allVoters: {},
                 postVotersCount: {},
-                liked: false
+                liked: false,
+                modelId: ''
             }
         },
         methods: {
@@ -109,8 +110,9 @@
                     });
                 });
             },
-            openModel() {
-                $('#exampleModalCenter').modal('show');
+            openModel($id) {
+                this.modelId = $id;
+                $('#' + this.modelId).modal('show');
             },
 
             getUserImage(image) {

@@ -37,6 +37,7 @@
                         <!-- Browse By Tags start -->
                         <div class="card mt-1" v-for="post in thoughts" :key="post.id">
 
+
                             <div class="post-title d-flex align-items-center">
                                 <!-- profile picture end -->
                                 <div class="profile-thumb">
@@ -53,24 +54,34 @@
                                 <div class="posted-author">
                                     <h6 class="author">
                                         <router-link :to="{name: 'FrontProfile' , query: {id: post.user.id}}" tag="a"
-                                                     active-class="active"><u>{{post.user.name}}</u>
+                                                     active-class="active">{{post.user.name}}
                                         </router-link>
 
                                     </h6>
 
                                     <span class="post-time">{{post.created_at | notificationTime}}</span>
                                 </div>
+                                <div class="post-settings-bar">
+                                    <ul>
+                                        <li>
+                                            <router-link :to="{name: 'ThoughtDetail',query: {thought_id: post.id}}"
+                                                         active-class="active" tag="a"><i class="fa fa-eye red"></i>
+
+                                            </router-link>
+                                        </li>
+                                    </ul>
+
+                                </div>
                             </div>
 
                             <!-- Browse By Tags start -->
                             <div class="post-content mt-1">
-                                <strong><i class="fas fa-pen"> </i> Title: {{post.title}}</strong>
+                                <strong class="col-xs-12">
+                                    <i class="fa fa-pen blue"> Title: </i> <u>{{post.title}}</u>
+                                </strong>
 
                                 <hr>
 
-                                <p class="post-desc">
-                                    {{post.thought}}
-                                </p>
                                 <div class="post-thumb-gallery" v-if="post.image != null">
                                     <div class="post-thumb img-popup">
                                         <a href="">
@@ -78,6 +89,17 @@
                                                  alt="post image">
                                         </a>
                                     </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <strong>
+                                        <p>
+                                            {{post.thought}}
+                                        </p>
+
+                                    </strong>
+
+
                                 </div>
                                 <div class="post-meta col-md-0">
                                     <like-comment :key="post.id" :post_id="post.id"
@@ -100,6 +122,7 @@
 
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="card mt-2 callout callout-danger" v-show="thoughts.length == 0">
@@ -226,5 +249,13 @@
 </script>
 
 <style scoped>
-
+    .container-fluid {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 5px;
+        margin-right: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        margin-left: auto;
+    }
 </style>
