@@ -141,26 +141,11 @@
                                     <like-comment :key="post.id" :post_id="post.id"
                                     ></like-comment>
 
-                                    <ul class="comment-share-meta">
-                                        <li>
-                                            <button class="post-comment">
-                                                <i class="bi bi-chat-bubble"></i>
-                                                <span>41</span>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="post-share">
-                                                <i class="bi bi-share"></i>
-                                                <span>07</span>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                    <!--<button class="post-meta-like">-->
-                                    <!--<i class="bi bi-heart-beat"></i>-->
-                                    <!--<span>201 people like this</span>-->
-                                    <!--</button>-->
+                                    <comment-page :id="post.id"
+                                                  :comment_count="post.comment_count"></comment-page>
 
                                 </div>
+                                <add-comment-page :post="post"></add-comment-page>
                             </div>
                         </div>
                         <div class="card mt-2 callout callout-danger" v-show="thoughts.length == 0">
@@ -245,6 +230,7 @@
                 thoughts: {},
                 authorYouMayKnow: {},
                 tags: {},
+
             }
         },
         methods: {
@@ -357,5 +343,12 @@
         margin-top: 25px;
         margin-bottom: 25px;
         margin-left: auto;
+    }
+
+</style>
+
+<style>
+    .card-comments {
+        background: #ffffff00;
     }
 </style>

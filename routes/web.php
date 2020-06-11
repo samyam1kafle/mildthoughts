@@ -27,7 +27,7 @@ Auth::routes();
 /*Main Routes For index of frontend and backend*/
 
 /*Browse By Tags Routes*/
-Route::get('tags/{id}','FrontendController\ThoughtsController@DataByTags');
+Route::get('tags/{id}', 'FrontendController\ThoughtsController@DataByTags');
 /*Browse By Tags Routes*/
 
 /*Profile Routes*/
@@ -42,6 +42,8 @@ Route::get('/login-signup', 'FrontendController\ThoughtsController@loginSignup')
 
 Route::get('/thoughts', 'FrontendController\ThoughtsController@thoughts');
 Route::get('/thoughts/{id}', 'FrontendController\ThoughtsController@individualThought');
+Route::post('comment/{id}', 'FrontendController\CommentController@addComment');
+
 
 Route::get('/user', 'FrontendController\ThoughtsController@user');
 

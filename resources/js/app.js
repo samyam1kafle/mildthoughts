@@ -102,6 +102,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('notification', require('./components/NotificationMarkup/notification.vue').default);
 Vue.component('userDetails', require('./components/Backend/User/masterUserDetail.vue').default);
 Vue.component('likeComment', require('./components/FrontEnd/likesComment/likesCommentTemplate.vue').default);
+Vue.component('commentPage', require('./components/FrontEnd/likesComment/Comment.vue').default);
+Vue.component('addCommentPage', require('./components/FrontEnd/likesComment/addComment.vue').default);
 Vue.component('homeIndex', require('./components/FrontEnd/index.vue').default);
 
 /*New Vue Instance for data transmission*/

@@ -36,6 +36,7 @@ Route::put('follow/{id}', 'API\UsersController@followUser');
 Route::put('unfollow/{id}', 'API\UsersController@unfollowUser');
 Route::get('followed/{id}', 'API\UsersController@followedUser');
 
+
 /*Like Unlike /Follow unfollow Routes*/
 
 Route::get('profile', 'API\UsersController@profile');

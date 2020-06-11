@@ -80,7 +80,7 @@ class ThoughtsController extends Controller
                 $latest_thought_sorting = $collection->sortByDesc('created_at');
                 $latest_thought_sorting = $latest_thought_sorting->values()->all();
                 foreach ($latest_thought_sorting as $withRelation) {
-                    $thoughts = Thoughts::with('user', 'category', 'voters')->withCount(['voters'])->find($withRelation->id);
+                    $thoughts = Thoughts::with('user', 'category', 'voters','comment')->withCount(['voters','comment'])->find($withRelation->id);
                     $thoughtData[] = $thoughts;
                 }
             }

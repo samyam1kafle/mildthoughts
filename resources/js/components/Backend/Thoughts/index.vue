@@ -59,7 +59,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label>Thought Type</label>
+                                <label>Thought Tag</label>
                                 <select v-model="form.thoughtCategory_id" name="thoughtCategory_id" class="form-control"
                                         :class="{ 'is-invalid': form.errors.has('thoughtCategory_id') }">
                                     <option :value="thought.id" v-for="thought in thoughtCategories"

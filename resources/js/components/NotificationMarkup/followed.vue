@@ -1,5 +1,5 @@
 <template>
-    <router-link @click="()=>{this.$router.go(0)}" :to="{name: 'FrontProfile' , query: {id: follower.id}}" tag="a"
+    <router-link :to="{name: 'FrontProfile' , query: {id: follower.id}}" tag="a"
                  active-class="active" class="dropdown-item">
         <div class="widget-user-image" style="top: 21px;">
             <img
